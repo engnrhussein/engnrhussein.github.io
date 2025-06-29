@@ -209,7 +209,7 @@
             color: var(--gold);
         }
         
-        /* Language Switcher */
+        /* Language Switcher - FIXED for mobile */
         .language-switcher {
             position: relative;
             display: inline-block;
@@ -249,6 +249,16 @@
             margin-top: 10px;
             display: none;
             z-index: 1000;
+        }
+        
+        /* FIX: Prevent dropdown cutoff on mobile */
+        @media (max-width: 768px) {
+            .language-dropdown {
+                left: 50%;
+                transform: translateX(-50%);
+                width: max-content;
+                min-width: 140px;
+            }
         }
         
         .language-dropdown.show {
@@ -799,11 +809,6 @@
                 width: 100%;
                 text-align: center;
             }
-            
-            .language-dropdown {
-                left: 50%;
-                transform: translateX(-50%);
-            }
         }
 
         @media (max-width: 480px) {
@@ -831,10 +836,10 @@
         <div class="container">
             <a href="#" class="logo">Portfolio<span>.</span></a>
             <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#home" id="nav-home">Home</a></li>
+                <li><a href="#projects" id="nav-projects">Projects</a></li>
+                <li><a href="#skills" id="nav-skills">Skills</a></li>
+                <li><a href="#contact" id="nav-contact">Contact</a></li>
                 <li class="language-switcher">
                     <div class="language-button">
                         <i class="fas fa-globe"></i>
@@ -1020,9 +1025,13 @@
     </footer>
 
     <script>
-        // Translation dictionary
+        // Enhanced translation dictionary with navigation items
         const translations = {
             en: {
+                "nav-home": "Home",
+                "nav-projects": "Projects",
+                "nav-skills": "Skills",
+                "nav-contact": "Contact",
                 "hero-line1": "Hello, I'm <span class='text-gold'>Abdullahi Hussein Mohamed</span>",
                 "hero-line2": "Rising <span class='text-burgundy'>Chemical</span> Engineer",
                 "hero-subtitle": "Chemical engineering graduate committed to applying analytical thinking and technical expertise to solve complex challenges across diverse sectors.",
@@ -1073,6 +1082,10 @@
                 "current-language": "English"
             },
             tr: {
+                "nav-home": "Ana Sayfa",
+                "nav-projects": "Projeler",
+                "nav-skills": "Yetenekler",
+                "nav-contact": "İletişim",
                 "hero-line1": "Merhaba, ben <span class='text-gold'>Abdullahi Hussein Mohamed</span>",
                 "hero-line2": "Yükselen <span class='text-burgundy'>Kimya</span> Mühendisi",
                 "hero-subtitle": "Kimya mühendisliği mezunu olarak, analitik düşünme ve teknik uzmanlığımı çeşitli sektörlerdeki karmaşık sorunları çözmek için uyguluyorum.",
