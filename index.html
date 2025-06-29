@@ -254,10 +254,14 @@
         /* FIX: Prevent dropdown cutoff on mobile */
         @media (max-width: 768px) {
             .language-dropdown {
-                left: 50%;
-                transform: translateX(-50%);
-                width: max-content;
-                min-width: 140px;
+                position: fixed;    /* Positions relative to viewport */
+                top: 60px;          /* Adjust based on header height */
+                left: 10px;         /* Margin from left edge */
+                right: 10px;        /* Margin from right edge */
+                width: auto;        /* Flexible width */
+                max-width: calc(100vw - 20px); /* Fits within screen */
+                max-height: 50vh;   /* Limits height to half the viewport */
+                overflow-y: auto;   /* Scrollbar for overflow */
             }
         }
         
