@@ -1194,7 +1194,8 @@
             const languageButton = document.querySelector('.language-button');
             const languageDropdown = document.getElementById('language-dropdown');
             
-            languageButton.addEventListener('click', function() {
+            languageButton.addEventListener('click', function(e) {
+                e.stopPropagation();
                 languageDropdown.classList.toggle('show');
             });
             
