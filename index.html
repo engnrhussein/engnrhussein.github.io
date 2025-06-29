@@ -828,24 +828,6 @@
                 max-width: 90%;
             }
         }
-
-        @media (max-width: 992px) {
-            nav ul li {
-                margin-left: 20px;
-            }
-            .language-switcher {
-                margin-left: 10px;
-            }
-        }
-        @media (max-width: 768px) {
-            .language-dropdown {
-                left: 50%;
-                transform: translateX(-50%);
-                width: max-content;
-                min-width: 140px;
-                z-index: 1001;
-            }
-        }
     </style>
 </head>
 <body>
@@ -1203,8 +1185,7 @@
             const languageButton = document.querySelector('.language-button');
             const languageDropdown = document.getElementById('language-dropdown');
             
-            languageButton.addEventListener('click', function(e) {
-                e.stopPropagation();
+            languageButton.addEventListener('click', function() {
                 languageDropdown.classList.toggle('show');
             });
             
