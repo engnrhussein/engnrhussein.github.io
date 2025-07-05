@@ -249,10 +249,10 @@
         }
         
         .flag-tr {
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30"><path d="M0 0h60v30H0z" fill="%23e30a17"/><circle cx="30" cy="15" r="10" fill="%23fff" /><path d="M38 15a8 8 0 11-16 0 8 8 0 0116 0z" fill="%23e30a17"/><g transform="translate(30,15)"><circle r="1.8" fill="%23fff" transform="rotate(18) translate(9)"/></g></svg>');
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30"><rect width="60" height="30" fill="%23E30A17"/><circle cx="30" cy="15" r="8" fill="%23fff"/><circle cx="36" cy="15" r="4" fill="%23E30A17"/><circle cx="38.5" cy="15" r="1.5" fill="%23fff"/></svg>');
         }
 
-        /* Hero Section - Adjusted for desktop */
+        /* Hero Section */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -731,11 +731,9 @@
                 flex-direction: column;
             }
             
-            /* Tablet language positioning */
+            /* Tablet positioning - in navigation row */
             .language-switcher {
-                position: absolute;
-                top: 25px;
-                right: 20px;
+                position: static;
                 margin-left: 0;
             }
         }
@@ -743,6 +741,7 @@
         @media (max-width: 768px) {
             .menu-toggle {
                 display: block;
+                order: 3; /* Place menu toggle on the far right */
             }
             
             nav ul {
@@ -780,12 +779,13 @@
                 grid-template-columns: 1fr;
             }
             
-            /* Mobile positioning for language switcher */
+            /* Mobile positioning - below menu toggle */
             .language-switcher {
-                position: fixed;
+                position: absolute;
                 top: 25px;
                 right: 70px;
                 margin-left: 0;
+                z-index: 1001;
             }
             
             .language-button {
@@ -815,17 +815,6 @@
                 top: 25px;
                 right: 60px;
             }
-        }
-
-        /* Fix for flags */
-        .flag-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 25px;
-            height: 16px;
-            overflow: hidden;
-            border-radius: 2px;
         }
     </style>
 </head>
