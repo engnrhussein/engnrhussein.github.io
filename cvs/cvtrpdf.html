@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* --- STYLES FOR SCREEN VIEW --- */
         body {
             font-family: 'Inter', sans-serif;
             background: linear-gradient(135deg, #f0f9ff 0%, #e6f7ff 100%);
@@ -35,51 +36,60 @@
             border: 4px solid white;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
-        .contact-badge {
-            transition: all 0.3s ease;
-        }
-        .contact-badge:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3);
-        }
-        .skill-bar {
-            height: 6px;
-            background-color: #e2e8f0;
-            border-radius: 3px;
-            overflow: hidden;
-        }
-        .skill-progress {
-            height: 100%;
-            background-color: #3b82f6;
-            border-radius: 3px;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in {
-            animation: fadeIn 0.8s ease-out forwards;
-        }
     </style>
 
     <style>
         @media print {
-            body {
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
+            /* Set base font size to shrink everything proportionally */
+            html {
+                font-size: 9.5pt;
             }
+
+            /* Remove browser default margins and background for a clean PDF */
+            body {
+                background: none !important;
+                margin: 0;
+                padding: 0;
+            }
+            
+            /* Define the A4 page size */
             @page {
                 size: A4;
                 margin: 0;
             }
-            .cv-container, .profile-photo, .contact-badge {
+
+            /* Remove shadows and animation scripts from the print version */
+            .cv-container, .profile-photo {
                 box-shadow: none !important;
+                animation: none !important;
             }
             script {
                 display: none !important;
             }
-            .md\:col-span-2 {
-                break-before: page;
+
+            /* Force the main container to have no extra padding or rounding */
+             main.cv-container {
+                max-width: 100% !important;
+                width: 100% !important;
+                margin: 0 !important;
+                border-radius: 0 !important;
+                overflow: visible !important;
+            }
+            
+            /* Reduce padding on the header to save space */
+            .bg-gradient-to-r {
+                padding-top: 1cm !important;
+                padding-bottom: 1cm !important;
+            }
+
+            /* ** THE MOST IMPORTANT PART: FORCE THE TWO-COLUMN LAYOUT **
+            This overrides Tailwind's responsive classes for printing.
+            */
+            #cv-grid-container {
+                display: grid !important;
+                grid-template-columns: 34% 1fr !important; /* Force a 1/3 and 2/3 column layout */
+                gap: 1rem !important; /* Reduce the gap between columns */
+                padding: 1.5cm !important; /* This acts as the A4 page margin */
             }
         }
     </style>
@@ -121,7 +131,7 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-x-8 p-6 md:p-8">
+        <div id="cv-grid-container" class="grid grid-cols-1 md:grid-cols-3 gap-x-8 p-6 md:p-8">
 
             <aside class="md:col-span-1 mb-8 md:mb-0">
                 
@@ -167,56 +177,24 @@
                         <div>
                             <h3 class="font-semibold text-slate-700 mb-2">Temel Mühendislik</h3>
                             <div class="space-y-3">
-                                <div>
-                                    <div class="flex justify-between mb-1">
-                                        <span class="text-sm text-slate-600">Proses Tasarımı</span>
-                                        <span class="text-sm text-slate-500"></span>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-progress" style="width: 100%"></div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="flex justify-between mb-1">
-                                        <span class="text-sm text-slate-600">Simülasyon</span>
-                                        <span class="text-sm text-slate-500"></span>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-progress" style="width: 100%"></div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="flex justify-between mb-1">
-                                        <span class="text-sm text-slate-600">Optimizasyon</span>
-                                        <span class="text-sm text-slate-500"></span>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-progress" style="width: 100%"></div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="flex justify-between mb-1">
-                                        <span class="text-sm text-slate-600">Reaktör/Isı Değiştirici Tasarımı</span>
-                                        <span class="text-sm text-slate-500"></span>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-progress" style="width: 100%"></div>
-                                    </div>
-                                </div>
+                                <span class="inline-block bg-slate-200 text-slate-800 px-3 py-1 rounded-full text-sm">Proses Tasarımı</span>
+                                <span class="inline-block bg-slate-200 text-slate-800 px-3 py-1 rounded-full text-sm">Simülasyon</span>
+                                <span class="inline-block bg-slate-200 text-slate-800 px-3 py-1 rounded-full text-sm">Optimizasyon</span>
+                                <span class="inline-block bg-slate-200 text-slate-800 px-3 py-1 rounded-full text-sm">Reaktör/Isı Değiştirici Tasarımı</span>
                             </div>
                         </div>
                         <div class="pt-4">
                             <h3 class="font-semibold text-slate-700 mb-2">Yazılım ve Simülasyon</h3>
                             <div class="flex flex-wrap gap-2">
-                                <span class="contact-badge bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">MATLAB</span>
-                                <span class="contact-badge bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Simulink</span>
-                                <span class="contact-badge bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Python</span>
-                                <span class="contact-badge bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">HTML</span>
-                                <span class="contact-badge bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">OpenFOAM</span>
-                                <span class="contact-badge bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">DWSIM</span>
-                                <span class="contact-badge bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Blender</span>
-                                <span class="contact-badge bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Excel</span>
-                                <span class="contact-badge bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Visio</span>
+                                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">MATLAB</span>
+                                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Simulink</span>
+                                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Python</span>
+                                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">HTML</span>
+                                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">OpenFOAM</span>
+                                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">DWSIM</span>
+                                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Blender</span>
+                                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Excel</span>
+                                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Visio</span>
                             </div>
                         </div>
                     </div>
@@ -237,17 +215,13 @@
                     <div class="space-y-6 text-slate-600">
                         <div>
                             <p><strong class="font-semibold">Dr. Musa BÜYÜKADA:</strong></p>
-                            <p>Telefon:</p>
-                            <p>0374 254 10 00 / 4869</p>
-                            <p>E-posta:</p>
-                            <p><a href="mailto:musabuyukada@ibu.edu.tr" class="text-blue-600 hover:underline">musabuyukada@ibu.edu.tr</a></p>
+                            <p>Telefon: 0374 254 10 00 / 4869</p>
+                            <p>E-posta: <a href="mailto:musabuyukada@ibu.edu.tr" class="text-blue-600 hover:underline">musabuyukada@ibu.edu.tr</a></p>
                         </div>
                         <div>
                             <p><strong class="font-semibold">Dr. Özlem ATEŞ DURU:</strong></p>
-                            <p>Telefon:</p>
-                            <p>0374 254 10 00 / 5869</p>
-                            <p>E-posta:</p>
-                            <p><a href="mailto:ozlem.atesduru@ibu.edu.tr" class="text-blue-600 hover:underline">ozlem.atesduru@ibu.edu.tr</a></p>
+                            <p>Telefon: 0374 254 10 00 / 5869</p>
+                            <p>E-posta: <a href="mailto:ozlem.atesduru@ibu.edu.tr" class="text-blue-600 hover:underline">ozlem.atesduru@ibu.edu.tr</a></p>
                         </div>
                     </div>
                 </section>
@@ -271,14 +245,7 @@
                                 <li>Proses verimliliği ve ekonomik uygulanabilirliğe odaklanarak bir sentez gazı üretim tesisinin kavramsal tasarımına liderlik ettim.</li>
                                 <li>Reaksiyon kinetiğini modellemek ve maksimum verim için çalışma koşullarını optimize etmek için simülasyon yazılımı kullandım.</li>
                                 <li>Projenin karlılığını ve geri ödeme süresini değerlendirmek için tekno-ekonomik bir analiz yaptım.</li>
-                                <li>
-                                    Bağlantı: 
-                                    <a href="https://tinyurl.com/syngasproject" 
-                                       class="text-blue-600 hover:underline" 
-                                       target="_blank">
-                                       https://tinyurl.com/syngasproject
-                                    </a>
-                                </li>
+                                <li>Bağlantı: <a href="https://tinyurl.com/syngasproject" class="text-blue-600 hover:underline" target="_blank">https://tinyurl.com/syngasproject</a></li>
                             </ul>
                         </div>
                         <div class="border-l-4 border-blue-500 pl-4 py-1">
@@ -287,14 +254,7 @@
                                 <li>Polilaktik Asit'ten (PLA) biyobozunur polimerlerin sentezi için yeni yöntemleri araştırdım.</li>
                                 <li>Malzeme özelliklerini geliştirmek ve antimikrobiyal işlevsellik eklemek için uçucu yağların dahil edilmesiyle deneyler yaptım.</li>
                                 <li>Performansı değerlendirmek için sentezlenen malzemeleri çeşitli analitik teknikler kullanarak karakterize ettim.</li>
-                                <li>
-                                    Bağlantı: 
-                                    <a href="https://tinyurl.com/biofilmsynthesis" 
-                                       class="text-blue-600 hover:underline" 
-                                       target="_blank">
-                                       https://tinyurl.com/biofilmsynthesis
-                                    </a>
-                                </li>
+                                <li>Bağlantı: <a href="https://tinyurl.com/biofilmsynthesis" class="text-blue-600 hover:underline" target="_blank">https://tinyurl.com/biofilmsynthesis</a></li>
                             </ul>
                         </div>
                          <div class="border-l-4 border-blue-500 pl-4 py-1">
@@ -326,7 +286,6 @@
 
                 <section class="mb-8">
                     <h2 class="text-2xl font-bold text-slate-800 section-title">İş Deneyimi</h2>
-                    
                     <div class="mb-6">
                         <h3 class="text-xl font-semibold text-blue-700">Lojistik Sorumlusu</h3>
                         <p class="text-slate-600 italic">Eagle Transport and Logistics, LLC, ABD</p>
@@ -337,7 +296,6 @@
                             <li>Sevkiyat durumunu izledim ve ortaya çıkan sorunları derhal çözdüm.</li>
                         </ul>
                     </div>
-
                     <div>
                         <h3 class="text-xl font-semibold text-blue-700">Çevirmen & Tercüman</h3>
                         <p class="text-slate-600 italic">Ankara Şehir Hastanesi & Diğer Özel Klinikler, Türkiye</p>
@@ -349,7 +307,6 @@
                     </div>
                 </section>
 
-                
                 <section class="mb-8">
                     <div>
                     <h2 class="text-2xl font-bold text-slate-800 section-title">Ek Roller</h2>
@@ -359,7 +316,6 @@
                         </ul>
                     </div>
                 </section>
-
                 
                 <section class="mb-8">
                     <div>
@@ -375,14 +331,11 @@
 
             </div>
         </div>
-        
-        <div class="bg-slate-50 py-4 px-6 border-t border-slate-200 text-center text-slate-500 text-sm">
-            <p>Abdullahi Hussein Mohamed | Kimya Mühendisi | Güncellenme: Temmuz 2025</p>
-        </div>
+
     </main>
     
     <script>
-        // Öğeler görünüm alanına girdiğinde animasyon için
+        // This script is for the live browser view only. It will be ignored during printing.
         document.addEventListener('DOMContentLoaded', function() {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
