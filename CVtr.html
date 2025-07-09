@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abdullahi Hussein Mohamed - Kimya Mühendisi CV</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e6f7ff 100%);
+        }
+        .section-title {
+            position: relative;
+            padding-bottom: 8px;
+            margin-bottom: 16px;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: #3b82f6;
+            border-radius: 2px;
+        }
+        .cv-container {
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+        }
+        .profile-photo {
+            border: 4px solid white;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .contact-badge {
+            transition: all 0.3s ease;
+        }
+        .contact-badge:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3);
+        }
+        .skill-bar {
+            height: 6px;
+            background-color: #e2e8f0;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .skill-progress {
+            height: 100%;
+            background-color: #3b82f6;
+            border-radius: 3px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center py-8 px-4">
+
+    <main class="cv-container max-w-5xl w-full mx-4 bg-white rounded-2xl overflow-hidden animate-fade-in">
+        
+        <div class="bg-gradient-to-r from-blue-600 to-blue-800 py-8 px-6 md:px-12 text-white">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="mb-6 md:mb-0 md:mr-8">
+                    <img src="https://raw.githubusercontent.com/engnrhussein/engnrhussein.github.io/main/pfp.jpg" 
+                         alt="Abdullahi Hussein Mohamed" 
+                         class="profile-photo w-40 h-40 md:w-44 md:h-44 rounded-full object-cover">
+                </div>
+                
+                <div class="text-center md:text-left">
+                    <h1 class="text-3xl md:text-4xl font-bold">Abdullahi Hussein Mohamed</h1>
+                    <p class="text-xl md:text-2xl font-medium mt-2 text-blue-100">Kimya Mühendisi</p>
+                    
+                    <div class="mt-3 flex flex-wrap justify-center md:justify-start gap-4">
+                        <div class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
+                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                            </svg>
+                            <span>GitHub: engrhussein</span>
+                        </div>
+                        <div class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                                <rect width="4" height="12" x="2" y="9"></rect>
+                                <circle cx="4" cy="4" r="2"></circle>
+                            </svg>
+                            <span>LinkedIn: Abdullahi Hussein Mohamed</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-x-8 p-6 md:p-8">
+
+            <aside class="md:col-span-1 mb-8 md:mb-0">
+                
+                <section class="mb-8">
+                    <h2 class="text-2xl font-bold text-slate-800 section-title">İletişim</h2>
+                    <ul class="space-y-3 text-slate-600">
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-blue-500"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            <span>Bolu, Türkiye</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-blue-500"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                            <a href="tel:+905013580340" class="hover:text-blue-600 transition-colors">+90 (501) 358-0340</a>
+                        </li>
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-blue-500"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+                            <a href="mailto:abdallahussein713@gmail.com" class="hover:text-blue-600 transition-colors break-all">abdallahussein713@gmail.com</a>
+                        </li>
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-blue-500"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                            <a href="https://www.linkedin.com/in/abdullahi-hussein-mohamed-99271020a/" target="_blank" class="hover:text-blue-600 transition-colors">LinkedIn Profili</a>
+                        </li>
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-blue-500"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                            <a href="https://engnrhussein.github.io" target="_blank" class="hover:text-blue-600 transition-colors">Proje Portföyü</a>
+                        </li>
+                    </ul>
+                </section>
+
+                <section class="mb-8">
+                    <h2 class="text-2xl font-bold text-slate-800 section-title">Eğitim</h2>
+                    <div class="bg-blue-50 p-4 rounded-lg border border-blue-100">
+                        <h3 class="text-lg font-semibold text-slate-800">Kimya Mühendisliği Lisans Derecesi</h3>
+                        <p class="text-slate-600">Bolu Abant İzzet Baysal Üniversitesi</p>
+                        <p class="text-slate-500 text-sm mt-1">Beklenen Mezuniyet: Haziran 2026</p>
+                        <p class="text-slate-500 text-sm">GANO: 3.35 / 4.00</p>
+                    </div>
+                </section>
+
+                <section class="mb-8">
+                    <h2 class="text-2xl font-bold text-slate-800 section-title">Yetenekler</h2>
+                    <div class="space-y-4">
+                        <div>
+                            <h3 class="font-semibold text-slate-700 mb-2">Temel Mühendislik</h3>
+                            <div class="space-y-3">
+                                <div>
+                                    <div class="flex justify-between mb-1">
+                                        <span class="text-sm text-slate-600">Proses Tasarımı</span>
+                                        <span class="text-sm text-slate-500"></span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" style="width: 100%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between mb-1">
+                                        <span class="text-sm text-slate-600">Simülasyon</span>
+                                        <span class="text-sm text-slate-500"></span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" style="width: 100%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between mb-1">
+                                        <span class="text-sm text-slate-600">Optimizasyon</span>
+                                        <span class="text-sm text-slate-500"></span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" style="width: 100%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between mb-1">
+                                        <span class="text-sm text-slate-600">Reaktör/Isı Değiştirici Tasarımı</span>
+                                        <span class="text-sm text-slate-500"></span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" style="width: 100%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pt-4">
+                            <h3 class="font-semibold text-slate-700 mb-2">Yazılım ve Simülasyon</h3>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="contact-badge bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">MATLAB</span>
+                                <span class="contact-badge bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Simulink</span>
+                                <span class="contact-badge bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Python</span>
+                                <span class="contact-badge bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">HTML</span>
+                                <span class="contact-badge bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">OpenFOAM</span>
+                                <span class="contact-badge bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">DWSIM</span>
+                                <span class="contact-badge bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Blender</span>
+                                <span class="contact-badge bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Excel</span>
+                                <span class="contact-badge bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Visio</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section>
+                    <h2 class="text-2xl font-bold text-slate-800 section-title">Diller</h2>
+                    <div class="space-y-2 text-slate-600">
+                        <p><span class="font-semibold">Somalice:</span> Anadil</p>
+                        <p><span class="font-semibold">İngilizce:</span> Akıcı</p>
+                        <p><span class="font-semibold">Türkçe:</span> İleri Düzey</p>
+                        <p><span class="font-semibold">Arapça:</span> İleri Düzey</p>
+                    </div>
+                </section>
+
+                <section class="mt-8">
+                    <h2 class="text-2xl font-bold text-slate-800 section-title">Referanslar</h2>
+                    <div class="space-y-6 text-slate-600">
+                        <div>
+                            <p><strong class="font-semibold">Dr. Musa BÜYÜKADA:</strong></p>
+                            <p>Telefon:</p>
+                            <p>0374 254 10 00 / 4869</p>
+                            <p>E-posta:</p>
+                            <p><a href="mailto:musabuyukada@ibu.edu.tr" class="text-blue-600 hover:underline">musabuyukada@ibu.edu.tr</a></p>
+                        </div>
+                        <div>
+                            <p><strong class="font-semibold">Dr. Özlem ATEŞ DURU:</strong></p>
+                            <p>Telefon:</p>
+                            <p>0374 254 10 00 / 5869</p>
+                            <p>E-posta:</p>
+                            <p><a href="mailto:ozlem.atesduru@ibu.edu.tr" class="text-blue-600 hover:underline">ozlem.atesduru@ibu.edu.tr</a></p>
+                        </div>
+                    </div>
+                </section>
+            </aside>
+
+            <div class="md:col-span-2">
+                
+                <section class="mb-8">
+                    <h2 class="text-2xl font-bold text-slate-800 section-title">Profesyonel Özet</h2>
+                    <p class="text-slate-600 leading-relaxed bg-blue-50 p-4 rounded-lg border border-blue-100">
+                        Detay odaklı ve motive, 3.35 GANO ile güçlü bir akademik geçmişe sahip 4. sınıf Kimya Mühendisliği öğrencisi. Kimyasal proses tasarımı, veri analizi ve problem çözme konularındaki sağlam temelimi, zorlu bir başlangıç seviyesi mühendislik rolüne katkıda bulunmak için kullanmayı hedefliyorum. Proses tasarımı, optimizasyon ve simülasyon konularındaki teorik bilgileri ve pratik becerileri gerçek dünya endüstriyel zorluklarına uygulamaya hevesliyim.
+                    </p>
+                </section>
+
+                <section class="mb-8">
+                    <h2 class="text-2xl font-bold text-slate-800 section-title">Önemli Projeler</h2>
+                    <div class="space-y-6">
+                        <div class="border-l-4 border-blue-500 pl-4 py-1">
+                            <h3 class="text-lg font-semibold text-slate-800">Sentez Gazı Tesisi Tasarımı ve Optimizasyonu</h3>
+                            <ul class="list-disc list-inside mt-2 space-y-1 text-slate-600">
+                                <li>Proses verimliliği ve ekonomik uygulanabilirliğe odaklanarak bir sentez gazı üretim tesisinin kavramsal tasarımına liderlik ettim.</li>
+                                <li>Reaksiyon kinetiğini modellemek ve maksimum verim için çalışma koşullarını optimize etmek için simülasyon yazılımı kullandım.</li>
+                                <li>Projenin karlılığını ve geri ödeme süresini değerlendirmek için tekno-ekonomik bir analiz yaptım.</li>
+                                <li>
+                                    Bağlantı: 
+                                    <a href="https://tinyurl.com/syngasproject" 
+                                       class="text-blue-600 hover:underline" 
+                                       target="_blank">
+                                       https://tinyurl.com/syngasproject
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="border-l-4 border-blue-500 pl-4 py-1">
+                            <h3 class="text-lg font-semibold text-slate-800">PLA'dan Uçucu Yağlar Eklenerek Biyopolimer Sentezi</h3>
+                             <ul class="list-disc list-inside mt-2 space-y-1 text-slate-600">
+                                <li>Polilaktik Asit'ten (PLA) biyobozunur polimerlerin sentezi için yeni yöntemleri araştırdım.</li>
+                                <li>Malzeme özelliklerini geliştirmek ve antimikrobiyal işlevsellik eklemek için uçucu yağların dahil edilmesiyle deneyler yaptım.</li>
+                                <li>Performansı değerlendirmek için sentezlenen malzemeleri çeşitli analitik teknikler kullanarak karakterize ettim.</li>
+                                <li>
+                                    Bağlantı: 
+                                    <a href="https://tinyurl.com/biofilmsynthesis" 
+                                       class="text-blue-600 hover:underline" 
+                                       target="_blank">
+                                       https://tinyurl.com/biofilmsynthesis
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                         <div class="border-l-4 border-blue-500 pl-4 py-1">
+                            <h3 class="text-lg font-semibold text-slate-800">Akışkanlar Mekaniği Projesi: Boru Hattı Tasarımı ve Optimizasyonu</h3>
+                             <ul class="list-disc list-inside mt-2 space-y-1 text-slate-600">
+                                <li>Boru boyutlandırması ve pompa gereksinimlerini belirlemek için hidrolik hesaplamalar yaparak bir akışkan taşıma boru hattı sistemi tasarladım.</li>
+                                <li>Akışkanlar dinamiği prensiplerini kullanarak basınç düşüşünü ve enerji tüketimini en aza indirmek için boru hattı düzenini optimize ettim.</li>
+                                <li>Operasyonel güvenilirlik ve emniyeti sağlamak için çeşitli akış koşulları altında sistem performansını analiz ettim.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="mb-8">
+                    <h2 class="text-2xl font-bold text-slate-800 section-title">Profesyonel Deneyim</h2>
+                     <div class="space-y-6">
+                        <div class="bg-blue-50 p-4 rounded-lg border border-blue-100">
+                            <h3 class="text-lg font-semibold text-slate-800">Yaklaşan Stajyer</h3>
+                            <p class="text-slate-600 font-medium">Nükleer Radyasyon Dedektörleri Uygulama ve Araştırma Merkezi | Bolu, Türkiye</p>
+                            <p class="text-slate-500 text-sm mt-1">Ağustos 2025</p>
+                            <ul class="list-disc list-inside mt-2 space-y-1 text-slate-600">
+                                <li>Nükleer algılama teknolojilerindeki devam eden araştırmaları desteklemek için rekabetçi bir staj programına seçildim.</li>
+                                <li>Araştırma personeline deneysel kurulum, veri toplama ve analiz konularında yardımcı olacağım.</li>
+                                <li>Radyasyon dedektörlerinin geliştirilmesine ve uygulanmasına katkıda bulunmak için mühendislik ilkelerini uygulamakla görevlendirildim.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="mb-8">
+                    <h2 class="text-2xl font-bold text-slate-800 section-title">İş Deneyimi</h2>
+                    
+                    <div class="mb-6">
+                        <h3 class="text-xl font-semibold text-blue-700">Lojistik Sorumlusu</h3>
+                        <p class="text-slate-600 italic">Eagle Transport and Logistics, LLC, ABD</p>
+                        <p class="text-slate-500 text-sm">Haziran 2021 – Mayıs 2023</p>
+                        <ul class="list-disc list-inside mt-2 text-slate-700">
+                            <li>Zamanında teslimatları sağlamak için bir kamyon filosunun lojistiğini ve sevkıyatını yönettim.</li>
+                            <li>Rota verimliliğini optimize etmek için sürücüler ve müşterilerle koordinasyon sağladım.</li>
+                            <li>Sevkiyat durumunu izledim ve ortaya çıkan sorunları derhal çözdüm.</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-semibold text-blue-700">Çevirmen & Tercüman</h3>
+                        <p class="text-slate-600 italic">Ankara Şehir Hastanesi & Diğer Özel Klinikler, Türkiye</p>
+                        <p class="text-slate-500 text-sm">Ocak 2020 – Günümüz</p>
+                        <ul class="list-disc list-inside mt-2 text-slate-700">
+                            <li>İngilizce, Türkçe, Arapça ve Somalice arasında çeviri ve tercümanlık hizmetleri sunuyorum.</li>
+                            <li>Tıbbi randevularda hastalara yardımcı olarak net iletişim sağlıyorum.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                
+                <section class="mb-8">
+                    <div>
+                    <h2 class="text-2xl font-bold text-slate-800 section-title">Ek Roller</h2>
+                        <ul class="list-disc list-inside text-slate-700">
+                            <li>Türkiye genelinde Bağımsız Turist Rehberi (2018 - Günümüz).</li>
+                            <li>Kültürel değişim ve eğitime odaklanmış aktif topluluk gönüllüsü.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                
+                <section class="mb-8">
+                    <div>
+                    <h2 class="text-2xl font-bold text-slate-800 section-title">Üyelikler & Sertifikalar</h2>
+                    <div class="bg-blue-50 p-4 rounded-lg border border-blue-100">
+                        <ul class="list-disc list-inside text-slate-600">
+                            <li>Üye, Kimya Mühendisliği Öğrenci Kulübü</li>
+                            <li>İleri Düzey Proses Simülasyonu Sertifikası</li>
+                            <li>İş Güvenliği Eğitimi Sertifikası</li>
+                        </ul>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+        
+        <div class="bg-slate-50 py-4 px-6 border-t border-slate-200 text-center text-slate-500 text-sm">
+            <p>Abdullahi Hussein Mohamed | Kimya Mühendisi | Güncellenme: Temmuz 2025</p>
+        </div>
+    </main>
+    
+    <script>
+        // Öğeler görünüm alanına girdiğinde animasyon için
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            document.querySelectorAll('.section-title, .border-l-4, .bg-blue-50').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
