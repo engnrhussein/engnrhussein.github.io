@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abdullahi Hussein Mohamed - Chemical Engineer CV</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -30,17 +30,10 @@
         }
         .cv-container {
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
-            max-width: 100%;       /* allow full width on small screens */
-            padding-left: 1rem;    /* padding for small screens */
-            padding-right: 1rem;
-            margin-left: auto;
-            margin-right: auto;
         }
         .profile-photo {
             border: 4px solid white;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            max-width: 100%;  /* responsive image */
-            height: auto;
         }
         .contact-badge {
             transition: all 0.3s ease;
@@ -67,28 +60,21 @@
         .animate-fade-in {
             animation: fadeIn 0.8s ease-out forwards;
         }
-
-        /* Add vertical gaps on small screens for grid stacking */
-        @media (max-width: 767px) {
-            .grid {
-                gap-y: 2rem; /* vertical gap between stacked items */
-            }
-        }
     </style>
 </head>
 <body class="min-h-screen flex items-center justify-center py-8 px-4">
 
     <!-- Main Container -->
-    <main class="cv-container max-w-5xl w-full bg-white rounded-2xl overflow-hidden animate-fade-in px-4">
+    <main class="cv-container max-w-5xl w-full mx-4 bg-white rounded-2xl overflow-hidden animate-fade-in">
         
         <!-- Header with Photo -->
         <div class="bg-gradient-to-r from-blue-600 to-blue-800 py-8 px-6 md:px-12 text-white">
             <div class="flex flex-col md:flex-row items-center">
                 <!-- Photo -->
-                <div class="mb-6 md:mb-0 md:mr-8 w-40 md:w-44 flex-shrink-0">
+                <div class="mb-6 md:mb-0 md:mr-8">
                     <img src="https://raw.githubusercontent.com/engnrhussein/engnrhussein.github.io/main/pfp.jpg" 
                          alt="Abdullahi Hussein Mohamed" 
-                         class="profile-photo w-full h-auto rounded-full object-cover" />
+                         class="profile-photo w-40 h-40 md:w-44 md:h-44 rounded-full object-cover">
                 </div>
                 
                 <!-- Name and Title -->
@@ -99,24 +85,14 @@
                     <!-- GitHub and LinkedIn -->
                     <div class="mt-3 flex flex-wrap justify-center md:justify-start gap-4">
                         <div class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" 
-                                viewBox="0 0 24 24" fill="none" stroke="currentColor" 
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
-                                class="mr-2">
-                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 
-                                6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 
-                                16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 
-                                5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
+                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
                             </svg>
                             <span>GitHub: engrhussein</span>
                         </div>
                         <div class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" 
-                                viewBox="0 0 24 24" fill="none" stroke="currentColor" 
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
-                                class="mr-2">
-                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 
-                                6 0 0 1 6-6z"></path>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
                                 <rect width="4" height="12" x="2" y="9"></rect>
                                 <circle cx="4" cy="4" r="2"></circle>
                             </svg>
@@ -127,7 +103,7 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-8 p-6 md:p-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-x-8 p-6 md:p-8">
 
             <!-- Left Column: Contact, Skills, Education -->
             <aside class="md:col-span-1 mb-8 md:mb-0">
@@ -137,60 +113,23 @@
                     <h2 class="text-2xl font-bold text-slate-800 section-title">Contact</h2>
                     <ul class="space-y-3 text-slate-600">
                         <li class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" 
-                                viewBox="0 0 24 24" fill="none" stroke="currentColor" 
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
-                                class="mr-3 text-blue-500">
-                                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
-                                <circle cx="12" cy="10" r="3"></circle>
-                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-blue-500"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                             <span>Bolu, Turkey</span>
                         </li>
                         <li class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" 
-                                viewBox="0 0 24 24" fill="none" stroke="currentColor" 
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
-                                class="mr-3 text-blue-500">
-                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 
-                                19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 
-                                0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 
-                                0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 
-                                22 16.92z"></path>
-                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-blue-500"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
                             <a href="tel:+905013580340" class="hover:text-blue-600 transition-colors">+90 (501) 358-0340</a>
                         </li>
                         <li class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" 
-                                viewBox="0 0 24 24" fill="none" stroke="currentColor" 
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
-                                class="mr-3 text-blue-500">
-                                <rect width="20" height="16" x="2" y="4" rx="2"></rect>
-                                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
-                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-blue-500"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
                             <a href="mailto:abdallahussein713@gmail.com" class="hover:text-blue-600 transition-colors break-all">abdallahussein713@gmail.com</a>
                         </li>
                         <li class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" 
-                                viewBox="0 0 24 24" fill="none" stroke="currentColor" 
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
-                                class="mr-3 text-blue-500">
-                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 
-                                6 0 0 1 6-6z"></path>
-                                <rect width="4" height="12" x="2" y="9"></rect>
-                                <circle cx="4" cy="4" r="2"></circle>
-                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-blue-500"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
                             <a href="https://www.linkedin.com/in/abdullahi-hussein-mohamed-99271020a/" target="_blank" class="hover:text-blue-600 transition-colors">LinkedIn Profile</a>
                         </li>
                         <li class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" 
-                                viewBox="0 0 24 24" fill="none" stroke="currentColor" 
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
-                                class="mr-3 text-blue-500">
-                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 
-                                6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 
-                                16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 
-                                5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-blue-500"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
                             <a href="https://engnrhussein.github.io" target="_blank" class="hover:text-blue-600 transition-colors">Project Portfolio</a>
                         </li>
                     </ul>
@@ -269,80 +208,124 @@
                 </section>
                 <section class="mt-8">
                     <h2 class="text-2xl font-bold text-slate-800 section-title">References</h2>
-                    <ul class="text-slate-600 space-y-2">
-                        <li>
-                            <p><strong>Dr. Musa BÜYÜKADA</strong></p>
-                            <p>Tel: 0374 254 10 00 / 4869</p>
-                            <p>Email: <a href="mailto:musabuyukada@ibu.edu.tr" class="hover:text-blue-600">musabuyukada@ibu.edu.tr</a></p>
-                        </li>
-                        <li>
-                            <p><strong>Dr. Özlem ATEŞ DURU</strong></p>
-                            <p>Tel: 0374 254 10 00 / 5869</p>
-                            <p>Email: <a href="mailto:ozlem.atesduru@ibu.edu.tr" class="hover:text-blue-600">ozlem.atesduru@ibu.edu.tr</a></p>
-                        </li>
-                    </ul>
+                    <div class="bg-blue-50 p-4 rounded-lg border border-blue-100 text-slate-600">
+                        <ul class="space-y-3">
+                            <li>
+                                <span class="font-semibold">Dr. Musa BÜYÜKADA</span><br>
+                                Phone: 0374 254 10 00 / 4869<br>
+                                Email: <a href="mailto:musabuyukada@ibu.edu.tr" class="text-blue-600 hover:underline">musabuyukada@ibu.edu.tr</a>
+                            </li>
+                            <li>
+                                <span class="font-semibold">Dr. Özlem ATEŞ DURU</span><br>
+                                Phone: 0374 254 10 00 / 5869<br>
+                                Email: <a href="mailto:ozlem.atesduru@ibu.edu.tr" class="text-blue-600 hover:underline">ozlem.atesduru@ibu.edu.tr</a>
+                            </li>
+                        </ul>
+                    </div>
                 </section>
             </aside>
 
-            <!-- Right Columns: Experience & Projects -->
-            <section class="md:col-span-2 space-y-10">
-
-                <!-- Experience Section -->
-                <section>
-                    <h2 class="text-2xl font-bold text-slate-800 section-title">Work Experience</h2>
-                    
-                    <!-- Job 1 -->
-                    <div class="mb-6">
-                        <h3 class="text-xl font-semibold text-blue-700">Dispatcher</h3>
-                        <p class="text-slate-600 italic">Eagle Transport and Logistics, LLC, USA</p>
-                        <p class="text-slate-500 text-sm">June 2019 – May 2021</p>
-                        <ul class="list-disc list-inside mt-2 text-slate-700">
-                            <li>Managed logistics and dispatching for a fleet of trucks ensuring timely deliveries.</li>
-                            <li>Coordinated with drivers and customers to optimize route efficiency.</li>
-                            <li>Monitored shipment status and resolved any issues promptly.</li>
-                        </ul>
-                    </div>
-
-                    <!-- Job 2 -->
-                    <div>
-                        <h3 class="text-xl font-semibold text-blue-700">Translator & Interpreter</h3>
-                        <p class="text-slate-600 italic">Ankara Sehir Hastanesi & Private Clinics, Turkey</p>
-                        <p class="text-slate-500 text-sm">Jan 2022 – Present</p>
-                        <ul class="list-disc list-inside mt-2 text-slate-700">
-                            <li>Provided translation and interpretation services between English, Turkish, Arabic, and Somali.</li>
-                            <li>Assisted patients in medical appointments, ensuring clear communication.</li>
-                        </ul>
-                    </div>
+            <!-- Right Column: Summary, Projects, Experience -->
+            <div class="md:col-span-2">
+                
+                <!-- Summary Section -->
+                <section class="mb-8">
+                    <h2 class="text-2xl font-bold text-slate-800 section-title">Professional Summary</h2>
+                    <p class="text-slate-600 leading-relaxed bg-blue-50 p-4 rounded-lg border border-blue-100">
+                        Detail-oriented and motivated 4th-year Chemical Engineering student with a strong academic record (3.22 GPA). Seeking to leverage a solid foundation in chemical process design, data analysis, and problem-solving to contribute to a challenging entry-level engineering role. Eager to apply theoretical knowledge and practical skills in process design, optimization, and simulation to real-world industrial challenges.
+                    </p>
                 </section>
 
                 <!-- Projects Section -->
+                <section class="mb-8">
+                    <h2 class="text-2xl font-bold text-slate-800 section-title">Key Projects</h2>
+                    <div class="space-y-6">
+                        <div class="border-l-4 border-blue-500 pl-4 py-1">
+                            <h3 class="text-lg font-semibold text-slate-800">Syngas Plant Design and Optimization</h3>
+                            <ul class="list-disc list-inside mt-2 space-y-1 text-slate-600">
+                                <li>Led the conceptual design of a syngas production facility, focusing on process efficiency and economic viability.</li>
+                                <li>Utilized simulation software to model reaction kinetics and optimize operating conditions for maximum yield.</li>
+                                <li>Conducted a techno-economic analysis to evaluate the project's profitability and payback period.</li>
+                            </ul>
+                        </div>
+                        <div class="border-l-4 border-blue-500 pl-4 py-1">
+                            <h3 class="text-lg font-semibold text-slate-800">Biopolymer Synthesis from PLA with Added Essential Oils</h3>
+                             <ul class="list-disc list-inside mt-2 space-y-1 text-slate-600">
+                                <li>Investigated novel methods for synthesizing biodegradable polymers from Polylactic Acid (PLA).</li>
+                                <li>Experimented with the incorporation of essential oils to enhance material properties and add antimicrobial functionality.</li>
+                                <li>Characterized synthesized materials using various analytical techniques to assess performance.</li>
+                            </ul>
+                        </div>
+                         <div class="border-l-4 border-blue-500 pl-4 py-1">
+                            <h3 class="text-lg font-semibold text-slate-800">Fluid Mechanics Project: Pipeline Design and Optimization</h3>
+                             <ul class="list-disc list-inside mt-2 space-y-1 text-slate-600">
+                                <li>Designed a fluid transportation pipeline system, performing hydraulic calculations to determine pipe sizing and pump requirements.</li>
+                                <li>Optimized the pipeline layout to minimize pressure drop and energy consumption using fluid dynamics principles.</li>
+                                <li>Analyzed system performance under various flow conditions to ensure operational reliability and safety.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Experience Section -->
+                <section class="mb-8">
+                    <h2 class="text-2xl font-bold text-slate-800 section-title">Professional Experience</h2>
+                     <div class="space-y-6">
+                        <div class="bg-blue-50 p-4 rounded-lg border border-blue-100">
+                            <h3 class="text-lg font-semibold text-slate-800">Upcoming Intern</h3>
+                            <p class="text-slate-600 font-medium">Center for Nuclear Radiation Detectors Application and Research | Bolu, Turkey</p>
+                            <p class="text-slate-500 text-sm mt-1">August 2025</p>
+                            <ul class="list-disc list-inside mt-2 space-y-1 text-slate-600">
+                                <li>Selected for a competitive internship to support ongoing research in nuclear detection technologies.</li>
+                                <li>Will assist research staff with experimental setup, data collection, and analysis.</li>
+                                <li>Tasked with applying engineering principles to contribute to the development and application of radiation detectors.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Certifications & Memberships Section -->
                 <section>
-                    <h2 class="text-2xl font-bold text-slate-800 section-title">Projects & Research</h2>
-                    <div>
-                        <h3 class="text-lg font-semibold">Graduation Research Project</h3>
-                        <p class="text-slate-600 italic">Biofilms synthesis from PLA with added safflower and grapeseed essential oils for sustainable food packaging applications</p>
-                        <ul class="list-disc list-inside mt-2 text-slate-700">
-                            <li>Developing bio-based packaging films using polylactic acid (PLA) combined with natural essential oils.</li>
-                            <li>Characterizing film mechanical, thermal, and antimicrobial properties.</li>
-                            <li>Evaluating biodegradability and potential for food preservation.</li>
+                    <h2 class="text-2xl font-bold text-slate-800 section-title">Memberships & Certifications</h2>
+                    <div class="bg-blue-50 p-4 rounded-lg border border-blue-100">
+                        <ul class="list-disc list-inside text-slate-600">
+                            <li>Member, Chemical Engineering Students Club</li>
+                            <li class="mt-2">Certificate in Advanced Process Simulation</li>
+                            <li>Safety Training Certification</li>
                         </ul>
                     </div>
                 </section>
 
-                <!-- Volunteer / Other -->
-                <section>
-                    <h2 class="text-2xl font-bold text-slate-800 section-title">Additional Roles</h2>
-                    <ul class="list-disc list-inside text-slate-700">
-                        <li>Tourist Guide for various agencies across Turkey (2018 - Present).</li>
-                        <li>Active community volunteer focused on cultural exchange and education.</li>
-                    </ul>
-                </section>
-
-            </section>
-
+            </div>
         </div>
-
+        
+        <!-- Footer -->
+        <div class="bg-slate-50 py-4 px-6 border-t border-slate-200 text-center text-slate-500 text-sm">
+            <p>Abdullahi Hussein Mohamed | Chemical Engineer | Updated: July 2025</p>
+        </div>
     </main>
-
+    
+    <script>
+        // Animation for elements when they come into view
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            document.querySelectorAll('.section-title, .border-l-4, .bg-blue-50').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+                observer.observe(el);
+            });
+        });
+    </script>
 </body>
 </html>
