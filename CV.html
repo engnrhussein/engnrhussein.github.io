@@ -12,7 +12,6 @@
         body {
             font-family: 'Inter', sans-serif;
         }
-        /* Simple animation for a professional touch */
         .section-title {
             position: relative;
             padding-bottom: 8px;
@@ -25,20 +24,70 @@
             left: 0;
             width: 40px;
             height: 3px;
-            background-color: #3b82f6; /* blue-500 */
+            background-color: #3b82f6;
             border-radius: 2px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+        .photo-frame {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .photo-frame:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
     </style>
 </head>
 <body class="bg-slate-100">
 
     <!-- Main Container -->
-    <main class="container mx-auto max-w-5xl my-8 p-4 sm:p-8 bg-white shadow-2xl rounded-2xl">
+    <main class="container mx-auto max-w-5xl my-8 p-4 sm:p-8 bg-white shadow-2xl rounded-2xl fade-in">
 
-        <!-- Header Section -->
-        <header class="text-center border-b-2 border-slate-200 pb-6 mb-8">
-            <h1 class="text-4xl md:text-5xl font-bold text-slate-800">Abdullahi Hussein Mohamed</h1>
-            <p class="text-xl md:text-2xl text-blue-600 font-medium mt-2">Chemical Engineer</p>
+        <!-- Header Section with Photo -->
+        <header class="border-b-2 border-slate-200 pb-8 mb-8 flex flex-col md:flex-row items-center">
+            <!-- Photo Container -->
+            <div class="mb-6 md:mb-0 md:mr-8 flex-shrink-0">
+                <div class="photo-frame rounded-full overflow-hidden border-4 border-white bg-gray-200 w-40 h-40 md:w-44 md:h-44 flex items-center justify-center">
+                    <!-- Placeholder for photo - replace src with your actual photo -->
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80" 
+                         alt="Abdullahi Hussein Mohamed" 
+                         class="w-full h-full object-cover">
+                </div>
+            </div>
+            
+            <!-- Text Content -->
+            <div class="text-center md:text-left">
+                <h1 class="text-4xl md:text-5xl font-bold text-slate-800">Abdullahi Hussein Mohamed</h1>
+                <p class="text-xl md:text-2xl text-blue-600 font-medium mt-2">Chemical Engineer</p>
+                
+                <!-- Mobile Contact Info -->
+                <div class="mt-4 md:hidden flex justify-center space-x-4">
+                    <a href="tel:+905013580340" class="text-blue-500 hover:text-blue-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                    </a>
+                    <a href="mailto:abdallahussein713@gmail.com" class="text-blue-500 hover:text-blue-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                        </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/abdalla-hussein-mohamed-99271020a/" target="_blank" class="text-blue-500 hover:text-blue-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                            <rect width="4" height="12" x="2" y="9"></rect>
+                            <circle cx="4" cy="4" r="2"></circle>
+                        </svg>
+                    </a>
+                </div>
+            </div>
         </header>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-x-12">
@@ -179,5 +228,22 @@
             </div>
         </div>
     </main>
+    
+    <script>
+        // Simple fade-in effect when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('.fade-in');
+            elements.forEach(el => {
+                el.style.opacity = '0';
+            });
+            
+            setTimeout(() => {
+                elements.forEach(el => {
+                    el.style.transition = 'opacity 0.6s ease-out';
+                    el.style.opacity = '1';
+                });
+            }, 100);
+        });
+    </script>
 </body>
 </html>
