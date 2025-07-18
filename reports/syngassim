@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Process Simulation Report</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e5799, #207cca);
+            color: white;
+            padding: 25px 30px;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .report-info {
+            text-align: right;
+        }
+
+        .report-date {
+            background-color: rgba(255, 255, 255, 0.15);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            display: inline-block;
+        }
+
+        .tabs {
+            display: flex;
+            background-color: #e9ecef;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .tab {
+            padding: 15px 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .tab.active {
+            background-color: white;
+            color: #1e5799;
+            border-top: 3px solid #1e5799;
+            border-right: 1px solid #dee2e6;
+            border-left: 1px solid #dee2e6;
+        }
+
+        .tab:not(.active):hover {
+            background-color: #dae0e5;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 25px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .section-title {
+            font-size: 22px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e9ecef;
+            color: #1e5799;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-right: 10px;
+            background-color: #e3f2fd;
+            padding: 8px;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            text-align: center;
+            line-height: 20px;
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e0e0e0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background-color: #2c7bbe;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .stream-name {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .stream-type {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+
+        .card-body {
+            padding: 0;
+        }
+
+        .property-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .property-table th {
+            background-color: #f1f8ff;
+            text-align: left;
+            padding: 12px 15px;
+            font-weight: 600;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .property-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .property-table tr:nth-child(even) {
+            background-color: #f8fafd;
+        }
+
+        .property-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .units-cell {
+            color: #6c757d;
+            font-size: 13px;
+        }
+
+        .empty-stream {
+            text-align: center;
+            padding: 30px;
+            color: #6c757d;
+            font-style: italic;
+        }
+
+        .empty-stream i {
+            font-size: 40px;
+            margin-bottom: 15px;
+            opacity: 0.5;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #6c757d;
+            font-size: 14px;
+            border-top: 1px solid #e9ecef;
+            background-color: #f8f9fa;
+        }
+
+        @media (max-width: 768px) {
+            .tabs {
+                flex-wrap: wrap;
+            }
+            
+            .tab {
+                flex: 1 0 33%;
+                text-align: center;
+                padding: 12px;
+                font-size: 14px;
+            }
+            
+            .cards-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .report-info {
+                text-align: center;
+                margin-top: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div>
+                    <h1>Process Simulation Report</h1>
+                    <div class="subtitle">Chemical Process Analysis - Steam Reforming System</div>
+                </div>
+                <div class="report-info">
+                    <div class="report-date">
+                        <i class="fas fa-calendar-alt"></i> Report Generated: July 18, 2025
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <div class="tabs">
+            <div class="tab active" data-tab="material"><i class="fas fa-water"></i> Material Streams</div>
+            <div class="tab" data-tab="energy"><i class="fas fa-bolt"></i> Energy Streams</div>
+            <div class="tab" data-tab="equipment"><i class="fas fa-cog"></i> Equipment</div>
+            <div class="tab" data-tab="reactors"><i class="fas fa-vial"></i> Reactors</div>
+            <div class="tab" data-tab="heat"><i class="fas fa-fire"></i> Heat Exchangers</div>
+        </div>
+        
+        <div class="tab-content active" id="material-tab">
+            <h2 class="section-title"><i class="fas fa-stream"></i> Material Stream Properties</h2>
+            
+            <div class="cards-container">
+                <!-- Stream 12 -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="stream-name">Stream 12</div>
+                        <div class="stream-type">Material Stream</div>
+                    </div>
+                    <div class="card-body">
+                        <table class="property-table">
+                            <tr>
+                                <th>Property</th>
+                                <th>Value</th>
+                                <th>Units</th>
+                            </tr>
+                            <tr>
+                                <td>Temperature</td>
+                                <td>1115</td>
+                                <td class="units-cell">C</td>
+                            </tr>
+                            <tr>
+                                <td>Pressure</td>
+                                <td>16</td>
+                                <td class="units-cell">bar</td>
+                            </tr>
+                            <tr>
+                                <td>Mass Flow</td>
+                                <td>11016</td>
+                                <td class="units-cell">kg/h</td>
+                            </tr>
+                            <tr>
+                                <td>Molar Flow</td>
+                                <td>611.481</td>
+                                <td class="units-cell">kmol/h</td>
+                            </tr>
+                            <tr>
+                                <td>Volumetric Flow</td>
+                                <td>4415.19</td>
+                                <td class="units-cell">m3/h</td>
+                            </tr>
+                            <tr>
+                                <td>Density (Mixture)</td>
+                                <td>2.49502</td>
+                                <td class="units-cell">kg/m3</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Stream 14 -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="stream-name">Stream 14</div>
+                        <div class="stream-type">Material Stream</div>
+                    </div>
+                    <div class="card-body">
+                        <table class="property-table">
+                            <tr>
+                                <th>Property</th>
+                                <th>Value</th>
+                                <th>Units</th>
+                            </tr>
+                            <tr>
+                                <td>Temperature</td>
+                                <td>25</td>
+                                <td class="units-cell">C</td>
+                            </tr>
+                            <tr>
+                                <td>Pressure</td>
+                                <td>1.01325</td>
+                                <td class="units-cell">bar</td>
+                            </tr>
+                            <tr>
+                                <td>Mass Flow</td>
+                                <td>8850</td>
+                                <td class="units-cell">kg/h</td>
+                            </tr>
+                            <tr>
+                                <td>Molar Flow</td>
+                                <td>491.25</td>
+                                <td class="units-cell">kmol/h</td>
+                            </tr>
+                            <tr>
+                                <td>Volumetric Flow</td>
+                                <td>8.88263</td>
+                                <td class="units-cell">m3/h</td>
+                            </tr>
+                            <tr>
+                                <td>Density (Mixture)</td>
+                                <td>996.327</td>
+                                <td class="units-cell">kg/m3</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Stream 15 -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="stream-name">Stream 15</div>
+                        <div class="stream-type">Material Stream</div>
+                    </div>
+                    <div class="card-body">
+                        <table class="property-table">
+                            <tr>
+                                <th>Property</th>
+                                <th>Value</th>
+                                <th>Units</th>
+                            </tr>
+                            <tr>
+                                <td>Temperature</td>
+                                <td>310.196</td>
+                                <td class="units-cell">C</td>
+                            </tr>
+                            <tr>
+                                <td>Pressure</td>
+                                <td>15.8604</td>
+                                <td class="units-cell">bar</td>
+                            </tr>
+                            <tr>
+                                <td>Mass Flow</td>
+                                <td>14688</td>
+                                <td class="units-cell">kg/h</td>
+                            </tr>
+                            <tr>
+                                <td>Molar Flow</td>
+                                <td>996.585</td>
+                                <td class="units-cell">kmol/h</td>
+                            </tr>
+                            <tr>
+                                <td>Composition</td>
+                                <td>Methane: 15.1%, Water: 47.4%, CO: 1.7%, CO₂: 6.1%, H₂: 29.6%</td>
+                                <td class="units-cell"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Stream 17 -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="stream-name">Stream 17</div>
+                        <div class="stream-type">Material Stream</div>
+                    </div>
+                    <div class="card-body">
+                        <table class="property-table">
+                            <tr>
+                                <th>Property</th>
+                                <th>Value</th>
+                                <th>Units</th>
+                            </tr>
+                            <tr>
+                                <td>Temperature</td>
+                                <td>1114.9</td>
+                                <td class="units-cell">C</td>
+                            </tr>
+                            <tr>
+                                <td>Pressure</td>
+                                <td>15.9804</td>
+                                <td class="units-cell">bar</td>
+                            </tr>
+                            <tr>
+                                <td>Mass Flow</td>
+                                <td>14688</td>
+                                <td class="units-cell">kg/h</td>
+                            </tr>
+                            <tr>
+                                <td>Composition</td>
+                                <td>Methane: 27.2%, Water: 72.8%</td>
+                                <td class="units-cell"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Additional streams would follow the same pattern -->
+            </div>
+        </div>
+        
+        <div class="tab-content" id="energy-tab">
+            <h2 class="section-title"><i class="fas fa-charging-station"></i> Energy Stream Properties</h2>
+            
+            <div class="cards-container">
+                <!-- Energy Stream E4 -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="stream-name">Energy Stream E4</div>
+                        <div class="stream-type">Energy Stream</div>
+                    </div>
+                    <div class="card-body">
+                        <table class="property-table">
+                            <tr>
+                                <th>Property</th>
+                                <th>Value</th>
+                                <th>Units</th>
+                            </tr>
+                            <tr>
+                                <td>Energy Flow</td>
+                                <td>15245.4</td>
+                                <td class="units-cell">kW</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Energy Stream E3 -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="stream-name">Energy Stream E3</div>
+                        <div class="stream-type">Energy Stream</div>
+                    </div>
+                    <div class="card-body">
+                        <table class="property-table">
+                            <tr>
+                                <th>Property</th>
+                                <th>Value</th>
+                                <th>Units</th>
+                            </tr>
+                            <tr>
+                                <td>Energy Flow</td>
+                                <td>3766.7</td>
+                                <td class="units-cell">kW</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Additional energy streams would follow the same pattern -->
+            </div>
+        </div>
+        
+        <div class="tab-content" id="equipment-tab">
+            <h2 class="section-title"><i class="fas fa-industry"></i> Process Equipment</h2>
+            
+            <div class="cards-container">
+                <!-- PUMP-1 -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="stream-name">PUMP-1</div>
+                        <div class="stream-type">Adiabatic Pump</div>
+                    </div>
+                    <div class="card-body">
+                        <table class="property-table">
+                            <tr>
+                                <th>Property</th>
+                                <th>Value</th>
+                                <th>Units</th>
+                            </tr>
+                            <tr>
+                                <td>Pressure Increase</td>
+                                <td>14.9868</td>
+                                <td class="units-cell">bar</td>
+                            </tr>
+                            <tr>
+                                <td>Efficiency</td>
+                                <td>75</td>
+                                <td class="units-cell">%</td>
+                            </tr>
+                            <tr>
+                                <td>Power Required</td>
+                                <td>6.13714</td>
+                                <td class="units-cell">kW</td>
+                            </tr>
+                            <tr>
+                                <td>Outlet Pressure</td>
+                                <td>16</td>
+                                <td class="units-cell">bar</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- C-1 -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="stream-name">C-1</div>
+                        <div class="stream-type">Adiabatic Compressor</div>
+                    </div>
+                    <div class="card-body">
+                        <table class="property-table">
+                            <tr>
+                                <th>Property</th>
+                                <th>Value</th>
+                                <th>Units</th>
+                            </tr>
+                            <tr>
+                                <td>Pressure Increase</td>
+                                <td>14.9868</td>
+                                <td class="units-cell">bar</td>
+                            </tr>
+                            <tr>
+                                <td>Adiabatic Efficiency</td>
+                                <td>75</td>
+                                <td class="units-cell">%</td>
+                            </tr>
+                            <tr>
+                                <td>Power Required</td>
+                                <td>789.619</td>
+                                <td class="units-cell">kW</td>
+                            </tr>
+                            <tr>
+                                <td>Outlet Pressure</td>
+                                <td>16</td>
+                                <td class="units-cell">bar</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="reactors-tab">
+            <h2 class="section-title"><i class="fas fa-flask"></i> Reactor Systems</h2>
+            
+            <div class="cards-container">
+                <!-- REQ-1 -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="stream-name">REQ-1</div>
+                        <div class="stream-type">Equilibrium Reactor</div>
+                    </div>
+                    <div class="card-body">
+                        <table class="property-table">
+                            <tr>
+                                <th>Property</th>
+                                <th>Value</th>
+                                <th>Units</th>
+                            </tr>
+                            <tr>
+                                <td>Outlet Temperature</td>
+                                <td>1067.53</td>
+                                <td class="units-cell">C</td>
+                            </tr>
+                            <tr>
+                                <td>Methane Conversion</td>
+                                <td>34.1233</td>
+                                <td class="units-cell">%</td>
+                            </tr>
+                            <tr>
+                                <td>Water Conversion</td>
+                                <td>22.7629</td>
+                                <td class="units-cell">%</td>
+                            </tr>
+                            <tr>
+                                <td>Initial Gibbs Energy</td>
+                                <td>-41932.4</td>
+                                <td class="units-cell">kW</td>
+                            </tr>
+                            <tr>
+                                <td>Final Gibbs Energy</td>
+                                <td>-51665.1</td>
+                                <td class="units-cell">kW</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- RGIBBS-1 -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="stream-name">RGIBBS-1</div>
+                        <div class="stream-type">Gibbs Reactor</div>
+                    </div>
+                    <div class="card-body">
+                        <table class="property-table">
+                            <tr>
+                                <th>Property</th>
+                                <th>Value</th>
+                                <th>Units</th>
+                            </tr>
+                            <tr>
+                                <td>Outlet Temperature</td>
+                                <td>326.294</td>
+                                <td class="units-cell">C</td>
+                            </tr>
+                            <tr>
+                                <td>CO Conversion</td>
+                                <td>89.0274</td>
+                                <td class="units-cell">%</td>
+                            </tr>
+                            <tr>
+                                <td>Water Conversion</td>
+                                <td>3.19229</td>
+                                <td class="units-cell">%</td>
+                            </tr>
+                            <tr>
+                                <td>Element Balance Residue</td>
+                                <td>1.89292E-07</td>
+                                <td class="units-cell"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="heat-tab">
+            <h2 class="section-title"><i class="fas fa-exchange-alt"></i> Heat Exchangers</h2>
+            
+            <div class="cards-container">
+                <!-- HX-2 -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="stream-name">HX-2</div>
+                        <div class="stream-type">Heat Exchanger</div>
+                    </div>
+                    <div class="card-body">
+                        <table class="property-table">
+                            <tr>
+                                <th>Property</th>
+                                <th>Value</th>
+                                <th>Units</th>
+                            </tr>
+                            <tr>
+                                <td>Heat Load</td>
+                                <td>8984.14</td>
+                                <td class="units-cell">kW</td>
+                            </tr>
+                            <tr>
+                                <td>Hot Outlet Temp</td>
+                                <td>310.196</td>
+                                <td class="units-cell">C</td>
+                            </tr>
+                            <tr>
+                                <td>Cold Outlet Temp</td>
+                                <td>550.12</td>
+                                <td class="units-cell">C</td>
+                            </tr>
+                            <tr>
+                                <td>U Value</td>
+                                <td>1536.37</td>
+                                <td class="units-cell">W/[m2.K]</td>
+                            </tr>
+                            <tr>
+                                <td>Area</td>
+                                <td>15</td>
+                                <td class="units-cell">m2</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- HX-1 -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="stream-name">HX-1</div>
+                        <div class="stream-type">Heat Exchanger</div>
+                    </div>
+                    <div class="card-body">
+                        <table class="property-table">
+                            <tr>
+                                <th>Property</th>
+                                <th>Value</th>
+                                <th>Units</th>
+                            </tr>
+                            <tr>
+                                <td>Heat Load</td>
+                                <td>3622.86</td>
+                                <td class="units-cell">kW</td>
+                            </tr>
+                            <tr>
+                                <td>Hot Outlet Temp</td>
+                                <td>950</td>
+                                <td class="units-cell">C</td>
+                            </tr>
+                            <tr>
+                                <td>Cold Outlet Temp</td>
+                                <td>1115.45</td>
+                                <td class="units-cell">C</td>
+                            </tr>
+                            <tr>
+                                <td>U Value</td>
+                                <td>602.127</td>
+                                <td class="units-cell">W/[m2.K]</td>
+                            </tr>
+                            <tr>
+                                <td>Area</td>
+                                <td>22.01</td>
+                                <td class="units-cell">m2</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Process Simulation Report | Generated on July 18, 2025</p>
+            <p>This report contains comprehensive process data for steam reforming system analysis</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remove active class from all tabs and contents
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    tab.classList.add('active');
+                    
+                    // Show corresponding content
+                    const tabId = tab.getAttribute('data-tab');
+                    document.getElementById(`${tabId}-tab`).classList.add('active');
+                });
+            });
+            
+            // Initialize first tab as active
+            document.querySelector('.tab[data-tab="material"]').classList.add('active');
+            document.getElementById('material-tab').classList.add('active');
+        });
+    </script>
+</body>
+</html>
