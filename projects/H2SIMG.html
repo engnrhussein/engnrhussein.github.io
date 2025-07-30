@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syngas Production and Hydrogen Separation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #343a40;
+        }
+        .container {
+            width: 85%;
+            margin: auto;
+            overflow: hidden;
+            padding: 30px;
+        }
+        header {
+            background: linear-gradient(135deg, #0056b3, #007bff);
+            color: #ffffff;
+            padding: 2.5rem 0;
+            text-align: center;
+            border-bottom: 5px solid #004085;
+        }
+        header h1 {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        header p {
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+        nav {
+            background: #343a40;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        nav ul {
+            padding: 0;
+            list-style: none;
+            text-align: center;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin: 0 25px;
+        }
+        nav a {
+            color: #f8f9fa;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 700;
+            transition: color 0.3s ease;
+        }
+        nav a:hover {
+            color: #007bff;
+        }
+        section {
+            padding: 40px 20px;
+            margin-bottom: 30px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        h2 {
+            color: #0056b3;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.2rem;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        #flowsheet-img {
+            width: 100%;
+            max-width: 1200px;
+            display: block;
+            margin: 30px auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 25px;
+        }
+        th, td {
+            padding: 15px;
+            border: 1px solid #dee2e6;
+            text-align: left;
+            font-size: 1rem;
+        }
+        th {
+            background-color: #007bff;
+            color: #ffffff;
+            font-weight: 700;
+        }
+        tbody tr:nth-child(odd) {
+            background-color: #f2f2f2;
+        }
+        tbody tr:hover {
+            background-color: #e9ecef;
+        }
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: #343a40;
+            color: #f8f9fa;
+        }
+        .emoji {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Syngas Production & Hydrogen Separation</h1>
+        <p>A DWSIM Simulation Analysis</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#introduction">Introduction</a></li>
+            <li><a href="#flowsheet">Process Flowsheet</a></li>
+            <li><a href="#streams">Stream Data</a></li>
+            <li><a href="#analysis">Analysis</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <section id="introduction">
+            <h2><span class="emoji">🌍</span>Introduction</h2>
+            <p>This report details a process simulation for the production of synthesis gas (syngas) and the subsequent separation of high-purity hydrogen. [cite_start]Syngas, a mixture primarily composed of hydrogen (H₂), carbon monoxide (CO), and some carbon dioxide (CO₂), is a crucial intermediate in the chemical industry[cite: 1]. It serves as a feedstock for producing a wide range of valuable products, including ammonia, methanol, and synthetic fuels. The hydrogen separated from syngas is a vital component in various industrial processes, such as hydrocracking, and is a clean energy carrier with immense potential for a sustainable future. [cite_start]This simulation, performed in DWSIM, models the key unit operations involved in this process, providing valuable insights into stream properties and equipment performance[cite: 1].</p>
+        </section>
+
+        <hr>
+
+        <section id="flowsheet">
+            <h2><span class="emoji">⚙️</span>Process Flowsheet</h2>
+            <p>The process begins with the reforming of a hydrocarbon feedstock to produce syngas. This is followed by a series of heat exchange and separation steps to purify the hydrogen. [cite_start]The flowsheet below illustrates the simulated process and its components[cite: 1].</p>
+            <img id="flowsheet-img" src="Full Sim Flowsheet.png" alt="Process Flowsheet">
+            <h3>Process Description</h3>
+            <p>The simulation includes the following key unit operations:</p>
+            <ul>
+                [cite_start]<li><strong>Reformer (PFR-1 & PFR-2):</strong> These plug flow reactors model the steam methane reforming process, where methane and water react at high temperatures to produce syngas[cite: 1, 28, 50].</li>
+                [cite_start]<li><strong>Heat Exchangers (HX-1, HX-2, etc.):</strong> These units are used for energy recovery and to bring the process streams to the required temperatures for reaction and separation[cite: 1, 24, 43].</li>
+                <li><strong>Separators (Flash V-L Separators, etc.):</strong> These vessels separate the different phases and components of the process streams. [cite_start]For example, to separate the purified hydrogen from the remaining syngas components[cite: 1].</li>
+                [cite_start]<li><strong>Compressors (C-1, C-2) and Pumps (PUMP-1):</strong> These are used to increase the pressure of the gas and liquid streams, respectively, to meet the process requirements[cite: 1, 17, 22, 38].</li>
+                 [cite_start]<li><strong>Mixer (MIX-1):</strong> This unit combines multiple process streams[cite: 1, 26].</li>
+                 [cite_start]<li><strong>Tank (TANK-1):</strong> This unit is for storage[cite: 1, 37].</li>
+            </ul>
+        </section>
+
+        <hr>
+
+        <section id="streams">
+            <h2><span class="emoji">📊</span>Stream Data</h2>
+            [cite_start]<p>The following table summarizes the properties of the key process streams from the DWSIM simulation[cite: 1].</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Stream No.</th>
+                        <th>Temperature (°C)</th>
+                        <th>Pressure (bar)</th>
+                        <th>Mass Flow (kg/h)</th>
+                        <th>Molar Flow (kmol/h)</th>
+                        <th>Composition (Molar Fractions)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2</td>
+                        <td>25</td>
+                        <td>1.01325</td>
+                        <td>15300</td>
+                        <td>849.279</td>
+                        <td>H₂O: 0.999999</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>950</td>
+                        <td>1.0113</td>
+                        <td>12716.9</td>
+                        <td>705.895</td>
+                        <td>CH₄: 0.0206, H₂: 0.7108, CO: 0.2213, CO₂: 0.0473</td>
+                    </tr>
+                     <tr>
+                        <td>11</td>
+                        <td>850.65</td>
+                        <td>20</td>
+                        <td>23688</td>
+                        <td>1339.95</td>
+                        <td>CH₄: 0.0113, H₂O: 0.3747, CO: 0.1160, CO₂: 0.4980, H₂: 0.2543</td>
+                    </tr>
+                     <tr>
+                        <td>14</td>
+                        <td>580.12</td>
+                        <td>19.9996</td>
+                        <td>23688</td>
+                        <td>1339.95</td>
+                        <td>CH₄: 0.0113, H₂O: 0.3742, CO: 0.1165, CO₂: 0.4985, H₂: 0.00098</td>
+                    </tr>
+                    <tr>
+                        <td>21</td>
+                        <td>220</td>
+                        <td>19.9994</td>
+                        <td>23688</td>
+                        <td>1797.73</td>
+                        <td>CH₄: 9.36E-07, H₂O: 0.9973, CO: 0.0108, CO₂: 0.0017, H₂: 0.4985</td>
+                    </tr>
+                     <tr>
+                        <td>29</td>
+                        [cite_start]<td>15 [cite: 3, 8]</td>
+                        [cite_start]<td>700 [cite: 4, 8]</td>
+                        [cite_start]<td>1716.08 [cite: 5, 9]</td>
+                        [cite_start]<td>851.279 [cite: 6]</td>
+                        <td>H₂: 0.9982, CH₄: 1.31E-05, H₂O: 5.16E-05</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <hr>
+
+        <section id="analysis">
+            <h2><span class="emoji">💡</span>Data Analysis and Interpretation</h2>
+            <p>The simulation results demonstrate a successful production of high-purity hydrogen. Key performance indicators include:</p>
+            <ul>
+                <li><strong>Hydrogen Purity:</strong> Stream 29, the final hydrogen product, achieves a purity of <strong>99.82% H₂</strong>. [cite_start]This is a high level of purity suitable for many industrial applications[cite: 1].</li>
+                [cite_start]<li><strong>Syngas Conversion:</strong> The high temperature in the reformers (PFR-1 at 1200°C) promotes the conversion of methane into syngas[cite: 1].</li>
+                <li><strong>Energy Management:</strong> The process incorporates several heat exchangers for energy recovery, which is crucial for the economic viability of such a high-temperature process. For instance, HX-1 cools the hot syngas from the reformer while preheating the reformer feed. [cite_start]The total energy consumption for the major equipment is substantial, with the heaters for the reformers consuming a significant amount of power[cite: 1, 30].</li>
+            </ul>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>This webpage was generated by Gemini and provides a summary of a DWSIM simulation for syngas production and hydrogen separation. The content is based on the provided flowsheet and data tables.</p>
+    </footer>
+
+</body>
+</html>
