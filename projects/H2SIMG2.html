@@ -3,47 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Syngas Production and Hydrogen Separation</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <title>Syngas Production and Hydrogen Separation | DWSIM Analysis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Roboto', sans-serif;
-            line-height: 1.8;
+            font-family: 'Lato', sans-serif;
+            line-height: 1.7;
             margin: 0;
             padding: 0;
-            background-color: #f8f9fa;
-            color: #343a40;
+            background-color: #eef1f5;
+            color: #333;
         }
         .container {
-            width: 85%;
+            width: 90%;
             margin: auto;
             overflow: hidden;
-            padding: 30px;
+            padding: 20px;
         }
         header {
-            background: linear-gradient(135deg, #0056b3, #007bff);
-            color: #ffffff;
-            padding: 2.5rem 0;
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 4rem 1rem;
             text-align: center;
-            border-bottom: 5px solid #004085;
         }
         header h1 {
             margin: 0;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 3rem;
-            letter-spacing: 2px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            font-family: 'Oswald', sans-serif;
+            font-size: 3.5rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
         }
         header p {
             font-size: 1.2rem;
             margin-top: 10px;
+            font-weight: 300;
         }
         nav {
-            background: #343a40;
+            background: #34495e;
             padding: 1rem;
             position: sticky;
             top: 0;
             z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
         nav ul {
             padding: 0;
@@ -53,76 +54,101 @@
         }
         nav ul li {
             display: inline;
-            margin: 0 25px;
+            margin: 0 30px;
         }
         nav a {
-            color: #f8f9fa;
+            color: #ecf0f1;
             text-decoration: none;
             font-size: 1.1rem;
             font-weight: 700;
-            transition: color 0.3s ease;
+            transition: color 0.4s ease;
+            text-transform: uppercase;
         }
         nav a:hover {
-            color: #007bff;
+            color: #3498db;
         }
         section {
-            padding: 40px 20px;
-            margin-bottom: 30px;
+            padding: 30px;
+            margin-top: 20px;
+            margin-bottom: 20px;
             background: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
         h2 {
-            color: #0056b3;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2.2rem;
-            border-bottom: 3px solid #007bff;
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.5rem;
+            color: #2c3e50;
+            border-bottom: 4px solid #3498db;
             padding-bottom: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+        }
+        h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.8rem;
+            color: #34495e;
+            margin-top: 30px;
         }
         #flowsheet-img {
             width: 100%;
             max-width: 1200px;
             display: block;
-            margin: 30px auto;
+            margin: 20px auto;
+            border: 1px solid #ddd;
             border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+        .table-responsive {
+            overflow-x: auto;
         }
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 25px;
+            margin-top: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
         th, td {
-            padding: 15px;
-            border: 1px solid #dee2e6;
-            text-align: left;
-            font-size: 1rem;
+            padding: 12px 15px;
+            border: 1px solid #ccc;
+            text-align: center;
+            font-size: 0.95rem;
         }
         th {
-            background-color: #007bff;
-            color: #ffffff;
+            background-color: #34495e;
+            color: #ecf0f1;
             font-weight: 700;
+            text-transform: uppercase;
         }
-        tbody tr:nth-child(odd) {
+        td:first-child {
+            font-weight: bold;
             background-color: #f2f2f2;
+            text-align: left;
+        }
+        tbody tr:nth-child(even) {
+            background-color: #f8f8f8;
         }
         tbody tr:hover {
-            background-color: #e9ecef;
+            background-color: #dbeaf5;
+            cursor: pointer;
         }
         ul {
-            list-style-type: disc;
-            padding-left: 20px;
+            list-style-type: none;
+            padding: 0;
+        }
+        ul li {
+            background: #f9f9f9;
+            margin-bottom: 10px;
+            padding: 15px;
+            border-left: 5px solid #3498db;
+            border-radius: 5px;
+        }
+        ul li strong {
+            color: #2c3e50;
         }
         footer {
             text-align: center;
-            padding: 30px;
-            background: #343a40;
-            color: #f8f9fa;
-        }
-        .emoji {
-            font-size: 1.5rem;
-            margin-right: 10px;
+            padding: 2rem;
+            background: #2c3e50;
+            color: #ecf0f1;
         }
     </style>
 </head>
@@ -130,121 +156,132 @@
 
     <header>
         <h1>Syngas Production & Hydrogen Separation</h1>
-        <p>A DWSIM Simulation Analysis</p>
+        <p>Comprehensive Analysis of a DWSIM Process Simulation</p>
     </header>
 
     <nav>
         <ul>
             <li><a href="#introduction">Introduction</a></li>
-            <li><a href="#flowsheet">Process Flowsheet</a></li>
-            <li><a href="#streams">Stream Data</a></li>
+            <li><a href="#flowsheet">Flowsheet</a></li>
+            <li><a href="#data">Stream Data</a></li>
             <li><a href="#analysis">Analysis</a></li>
         </ul>
     </nav>
 
     <div class="container">
         <section id="introduction">
-            <h2><span class="emoji">🌍</span>Introduction</h2>
-            <p>This report details a process simulation for the production of synthesis gas (syngas) and the subsequent separation of high-purity hydrogen. Syngas, a mixture primarily composed of hydrogen (H₂), carbon monoxide (CO), and some carbon dioxide (CO₂), is a crucial intermediate in the chemical industry. It serves as a feedstock for producing a wide range of valuable products, including ammonia, methanol, and synthetic fuels. The hydrogen separated from syngas is a vital component in various industrial processes, such as hydrocracking, and is a clean energy carrier with immense potential for a sustainable future. This simulation, performed in DWSIM, models the key unit operations involved in this process, providing valuable insights into stream properties and equipment performance.</p>
+            <h2>Process Overview</h2>
+            <p>This document provides a detailed examination of a chemical process simulated in DWSIM for the production of synthesis gas (syngas) and its subsequent purification to yield high-purity hydrogen. Syngas—a critical mixture of hydrogen (H₂), carbon monoxide (CO), and trace other gases—is a foundational building block in the modern chemical industry. Its applications range from the synthesis of methanol and ammonia to the production of clean, synthetic fuels. The separation of hydrogen from this mixture is paramount, as pure hydrogen is a vital reactant in industrial processes like hydrocracking and hydrodesulfurization, and a promising clean energy carrier for a sustainable future. The following sections present the process flowsheet, detailed stream data from the simulation, and an in-depth analysis of the process performance.</p>
         </section>
-
-        <hr>
 
         <section id="flowsheet">
-            <h2><span class="emoji">⚙️</span>Process Flowsheet</h2>
-            <p>The process begins with the reforming of a hydrocarbon feedstock to produce syngas. This is followed by a series of heat exchange and separation steps to purify the hydrogen. [cite_start]The flowsheet below illustrates the simulated process and its components[cite: 1].</p>
+            <h2>Process Flowsheet Diagram</h2>
+            <p>The core of the simulation is represented by the flowsheet below. It details the journey of reactants through various unit operations, including high-temperature reactors, heat exchangers for energy optimization, and separation units to achieve the final product purity. Each stream is numbered, corresponding to the data tables in the following section.</p>
             <img id="flowsheet-img" src="Full Sim Flowsheet.png" alt="Process Flowsheet of the syngas production and hydrogen separation simulation">
-            <h3>Process Description</h3>
-            [cite_start]<p>The simulation includes the following key unit operations shown on the flowsheet[cite: 1]:</p>
+            <h3>Unit Operation Description</h3>
             <ul>
-                [cite_start]<li><strong>Reactors (PFR-1, PFR-2):</strong> These plug flow reactors model the steam methane reforming process[cite: 28, 50], where methane and water react at high temperatures to produce syngas.</li>
-                [cite_start]<li><strong>Heat Exchangers (HX-1, HX-2, etc.):</strong> These units are used for energy recovery and to bring the process streams to the required temperatures for reaction and separation[cite: 1].</li>
-                [cite_start]<li><strong>Separators (FS-1, FS-2):</strong> These flash separators are used to separate the different phases and components of the process streams[cite: 1].</li>
-                [cite_start]<li><strong>Compressors (C-1, C-2) and Pumps (PUMP-1):</strong> These are used to increase the pressure of the gas and liquid streams, respectively[cite: 17, 38, 22].</li>
-                 [cite_start]<li><strong>Mixer (MIX-1):</strong> This unit combines multiple process streams[cite: 26].</li>
-                 [cite_start]<li><strong>Tank (TANK-1):</strong> This unit is used for storage[cite: 37].</li>
+                <li><strong>Reactors (PFR-1, PFR-2):</strong> These are modeled as Plug Flow Reactors where the steam-methane reforming (SMR) reaction occurs at elevated temperatures, converting methane and steam into syngas. PFR-1 operates at a very high temperature (1200 °C) to maximize conversion.</li>
+                <li><strong>Heat Exchangers (HX-1, HX-2, etc.):</strong> A network of heat exchangers is used to recover heat from hot process streams and use it to preheat colder streams. This is critical for improving the energy efficiency and economics of the process. For example, E4 is a major heater supplying 23,962.03 kW, while the cooler for PFR-1 removes 19,370.52 kW.</li>
+                <li><strong>Separators (FS-1, FS-2):</strong> These flash separator units are essential for separating vapor and liquid phases. FS-2, for instance, is crucial for separating the condensed water and other components from the hydrogen-rich gas stream.</li>
+                <li><strong>Compressors & Pumps (C-1, C-2, PUMP-1):</strong> These mechanical units increase the pressure of gas and liquid streams to meet the requirements for reactions and separations. Compressor C-2 significantly increases the pressure of the final hydrogen product stream, consuming 1,260.81 kW of power.</li>
+                <li><strong>Mixer (MIX-1):</strong> This unit combines the pre-heated methane feed with steam before it enters the reforming section.</li>
+                <li><strong>Storage (TANK-1):</strong> Represents a storage vessel for liquid streams, likely water, within the process.</li>
             </ul>
         </section>
 
-        <hr>
+        <section id="data">
+            <h2>Master Stream Properties Table</h2>
+            <p>The following tables provide a comprehensive breakdown of the thermodynamic and compositional properties for all major streams in the simulation. The data is segmented for easier interpretation.</p>
 
-        <section id="streams">
-            <h2><span class="emoji">📊</span>Stream Data</h2>
-            [cite_start]<p>The following table summarizes the properties of the key process streams from the DWSIM simulation[cite: 1].</p>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Stream No.</th>
-                        <th>Temperature (°C)</th>
-                        <th>Pressure (bar)</th>
-                        <th>Mass Flow (kg/h)</th>
-                        <th>Molar Flow (kmol/h)</th>
-                        <th>Composition (Molar Fractions)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>2</td>
-                        [cite_start]<td>25 [cite: 1]</td>
-                        [cite_start]<td>1.01325 [cite: 1]</td>
-                        [cite_start]<td>15300 [cite: 1]</td>
-                        [cite_start]<td>849.279 [cite: 1]</td>
-                        [cite_start]<td>H₂O: 0.999999 [cite: 1]</td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        [cite_start]<td>950 [cite: 1]</td>
-                        [cite_start]<td>1.0113 [cite: 1]</td>
-                        [cite_start]<td>12716.9 [cite: 1]</td>
-                        [cite_start]<td>705.895 [cite: 1]</td>
-                        [cite_start]<td>CH₄: 0.0205821, H₂: 0.710816, CO: 0.221259, CO₂: 0.0473392 [cite: 1]</td>
-                    </tr>
-                     <tr>
-                        <td>11</td>
-                        [cite_start]<td>850.65 [cite: 1]</td>
-                        [cite_start]<td>20 [cite: 1]</td>
-                        [cite_start]<td>23688 [cite: 1]</td>
-                        [cite_start]<td>1339.95 [cite: 1]</td>
-                        [cite_start]<td>CH₄: 0.0113596, H₂O: 0.374747, CO: 0.115963, CO₂: 0.497929, H₂: 0.254295 [cite: 1]</td>
-                    </tr>
-                     <tr>
-                        <td>14</td>
-                        [cite_start]<td>580.12 [cite: 1]</td>
-                        [cite_start]<td>19.9996 [cite: 1]</td>
-                        [cite_start]<td>23688 [cite: 1]</td>
-                        [cite_start]<td>1797.73 [cite: 1]</td>
-                        [cite_start]<td>CH₄: 9.36326E-07, H₂O: 0.997292, CO: 0.0108359, CO₂: 0.00170981, H₂: 0.498453 [cite: 1]</td>
-                    </tr>
-                    <tr>
-                        <td>21</td>
-                        [cite_start]<td>220 [cite: 1]</td>
-                        [cite_start]<td>19.9994 [cite: 1]</td>
-                        [cite_start]<td>1716.08 [cite: 1]</td>
-                        [cite_start]<td>851.279 [cite: 1]</td>
-                        [cite_start]<td>CH₄: 1.3057E-05, H₂O: 5.1597E-05, H₂: 0.998185 [cite: 1]</td>
-                    </tr>
-                     <tr>
-                        <td>29</td>
-                        [cite_start]<td>15 [cite: 3, 8]</td>
-                        [cite_start]<td>700 [cite: 4, 8]</td>
-                        [cite_start]<td>1716.08 [cite: 5, 9]</td>
-                        [cite_start]<td>851.279 [cite: 6]</td>
-                        [cite_start]<td>H₂: 0.998185, CH₄: 1.3057E-05, H₂O: 5.15971E-05 [cite: 1]</td>
-                    </tr>
-                </tbody>
-            </table>
+            <h3>General Stream Properties</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Property</th>
+                            <th>Stream 2</th>
+                            <th>Stream 7</th>
+                            <th>Stream 11</th>
+                            <th>Stream 12</th>
+                            <th>Stream 14</th>
+                            <th>Stream 21</th>
+                            <th>Stream 29</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Temperature (°C)</strong></td><td>25</td><td>950</td><td>850.65</td><td>359.73</td><td>580.12</td><td>220</td><td>15</td></tr>
+                        <tr><td><strong>Pressure (bar)</strong></td><td>1.01325</td><td>1.0113</td><td>20</td><td>19.9999</td><td>19.9996</td><td>19.9994</td><td>700</td></tr>
+                        <tr><td><strong>Mass Flow (kg/h)</strong></td><td>15300</td><td>12716.9</td><td>23688</td><td>3672</td><td>23688</td><td>1716.08</td><td>1716.08</td></tr>
+                        <tr><td><strong>Molar Flow (kmol/h)</strong></td><td>849.279</td><td>705.895</td><td>1797.73</td><td>228.893</td><td>1797.73</td><td>851.279</td><td>851.279</td></tr>
+                        <tr><td><strong>Volumetric Flow (m³/h)</strong></td><td>15.3564</td><td>70982.2</td><td>4719.32</td><td>573.988</td><td>3644.86</td><td>176.656</td><td>43.0845</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Vapor Phase Properties</h3>
+             <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Property</th>
+                            <th>Stream 2</th>
+                            <th>Stream 7</th>
+                            <th>Stream 11</th>
+                            <th>Stream 12</th>
+                            <th>Stream 14</th>
+                            <th>Stream 21</th>
+                            <th>Stream 29</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Molar Fraction (Vapor)</strong></td><td>0</td><td>1</td><td>1</td><td>1</td><td>0.988985</td><td>1</td><td>1</td></tr>
+                        <tr><td><strong>Density (kg/m³)</strong></td><td>0.656909</td><td>0.179156</td><td>5.01937</td><td>6.39735</td><td>6.49901</td><td>9.71425</td><td>39.8305</td></tr>
+                        <tr><td><strong>Molecular Weight (kg/kmol)</strong></td><td>18.0153</td><td>18.0153</td><td>13.1766</td><td>16.0425</td><td>13.1766</td><td>2.01588</td><td>2.01588</td></tr>
+                        <tr><td><strong>Heat Capacity (kJ/kg.K)</strong></td><td>2.23924</td><td>2.44501</td><td>2.6346</td><td>3.33814</td><td>2.58084</td><td>16.5669</td><td>14.7502</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Molar Fractions by Component (Vapor Phase)</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Stream 2</th>
+                            <th>Stream 7</th>
+                            <th>Stream 11</th>
+                            <th>Stream 12</th>
+                            <th>Stream 14</th>
+                            <th>Stream 21</th>
+                            <th>Stream 29</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Methane (CH₄)</strong></td><td>0</td><td>0.0205821</td><td>0.0113596</td><td>0.999999</td><td>0.0112711</td><td>1.7785E-06</td><td>1.3057E-05</td></tr>
+                        <tr><td><strong>Water (H₂O)</strong></td><td>0.999999</td><td>1.7082E-06</td><td>0.374747</td><td>1E-07</td><td>0.374658</td><td>9.3632E-07</td><td>5.1597E-05</td></tr>
+                        <tr><td><strong>Carbon Monoxide (CO)</strong></td><td>0</td><td>0.221259</td><td>0.115963</td><td>0</td><td>0.116051</td><td>0.00138688</td><td>0.0017469</td></tr>
+                        <tr><td><strong>Carbon Dioxide (CO₂)</strong></td><td>0</td><td>0.0473392</td><td>0.115963</td><td>0</td><td>0.116051</td><td>0.00138688</td><td>0.0017469</td></tr>
+                        <tr><td><strong>Hydrogen (H₂)</strong></td><td>0</td><td>0.710816</td><td>0.497929</td><td>0</td><td>0.498018</td><td>0.725461</td><td>0.998185</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </section>
-
-        <hr>
 
         <section id="analysis">
-            <h2><span class="emoji">💡</span>Data Analysis and Interpretation</h2>
-            <p>The simulation results demonstrate a successful production of high-purity hydrogen.</p>
+            <h2>Process Performance Analysis</h2>
+            <h3>Conversion and Selectivity</h3>
+            <p>The simulation demonstrates an effective conversion of methane feedstock into syngas. In Stream 7, leaving the initial high-temperature zone, the methane molar fraction is reduced to 0.02, with a high yield of hydrogen (0.71) and carbon monoxide (0.22). After further processing and reactions, the final product stream (Stream 29) contains a hydrogen molar fraction of <strong>0.9982</strong>, indicating a highly successful purification process. The remaining impurities are extremely low, with methane at just ~13 ppm and water at ~52 ppm.</p>
+
+            <h3>Energy Management and Integration</h3>
+            <p>Energy integration is a cornerstone of this process's design. The high energy demand of the reformers is partially offset by a network of heat exchangers that recover and reuse thermal energy.</p>
             <ul>
-                [cite_start]<li><strong>Hydrogen Purity:</strong> Stream 29, the final hydrogen product, achieves a molar fraction purity of <strong>0.998185 H₂</strong>[cite: 1]. [cite_start]This stream is at a temperature of 15 °C [cite: 3, 8] [cite_start]and a pressure of 700 bar[cite: 4, 8].</li>
-                [cite_start]<li><strong>Syngas Conversion:</strong> The high temperature in the first plug flow reactor (PFR-1), which reaches 1200 °C[cite: 1], promotes the conversion of methane into syngas.</li>
-                <li><strong>Energy Management:</strong> The process incorporates several heat exchangers for energy recovery, which is crucial for the economic viability of such a high-temperature process. [cite_start]For instance, heater E4 requires 23,962.03 kW [cite: 1] [cite_start]and the cooler for PFR-1 has a duty of 19,370.52 kW[cite: 1, 30]. [cite_start]The energy consumption for other major equipment includes 14.13 kW for pump PUMP-1 [cite: 21] [cite_start]and 1,260.81 kW for compressor C-2[cite: 39, 40].</li>
+                <li><strong>Major Energy Consumers:</strong> The primary energy input is Heater E4, which provides <strong>23,962.03 kW</strong> to preheat the feed. The compressors are also significant power users, with C-1 requiring 155.95 kW and C-2 needing <strong>1,260.81 kW</strong> to bring the hydrogen product to its final pressure of 700 bar.</li>
+                <li><strong>Major Energy Recovery:</strong> Significant heat is recovered from the hot reactor effluent. The cooler associated with PFR-1 (E6) has a duty of <strong>-19,370.52 kW</strong>, and the cooler HX-2 (E8) removes another <strong>-2,400.50 kW</strong>. This recovered energy is essential for preheating boiler feed water and the reformer feed, thus reducing the overall operating cost.</li>
             </ul>
+
+            <h3>Final Product State</h3>
+            <p>The final hydrogen product in Stream 29 is delivered at a temperature of <strong>15 °C</strong> and a very high pressure of <strong>700 bar</strong>. The state is a dense, supercritical fluid, which is typical for hydrogen storage and transportation. The molar flow is <strong>851.279 kmol/h</strong>, corresponding to a mass flow of <strong>1716.08 kg/h</strong>.</p>
         </section>
 
     </div>
