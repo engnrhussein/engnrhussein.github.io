@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syngas Production Plant Design Report</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Slab:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #1a5fb4;
+            --accent: #16a085;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --border: #dee2e6;
+            --success: #28a745;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+            padding: 0;
+        }
+        
+        .report-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        /* Header Styles */
+        .report-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 30px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .watermark {
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+            opacity: 0.1;
+            font-size: 120px;
+            z-index: 1;
+        }
+        
+        .report-title {
+            font-family: 'Roboto Slab', serif;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+        
+        .report-subtitle {
+            font-size: 18px;
+            font-weight: 300;
+            opacity: 0.9;
+            max-width: 800px;
+        }
+        
+        .header-divider {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 25px 0;
+        }
+        
+        .report-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            opacity: 0.85;
+        }
+        
+        /* Content Styles */
+        .report-content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .section-header {
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--accent);
+            position: relative;
+        }
+        
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 80px;
+            height: 2px;
+            background: var(--secondary);
+        }
+        
+        h1 {
+            font-family: 'Roboto Slab', serif;
+            font-size: 32px;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        h2 {
+            font-family: 'Roboto Slab', serif;
+            font-size: 26px;
+            color: var(--primary);
+            margin: 35px 0 15px;
+        }
+        
+        h3 {
+            font-family: 'Roboto Slab', serif;
+            font-size: 22px;
+            color: var(--secondary);
+            margin: 30px 0 15px;
+        }
+        
+        h4 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--secondary);
+            margin: 25px 0 10px;
+        }
+        
+        p {
+            margin-bottom: 20px;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+        
+        .highlight {
+            background: rgba(22, 160, 133, 0.1);
+            border-left: 4px solid var(--accent);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+            font-size: 15px;
+        }
+        
+        th {
+            background-color: var(--primary);
+            color: white;
+            text-align: left;
+            font-weight: 500;
+        }
+        
+        th, td {
+            padding: 14px 18px;
+            border: 1px solid var(--border);
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tr:hover {
+            background-color: rgba(22, 160, 133, 0.05);
+        }
+        
+        .table-caption {
+            font-style: italic;
+            text-align: center;
+            margin-top: 5px;
+            color: var(--gray);
+            font-size: 14px;
+        }
+        
+        /* List Styles */
+        ul {
+            padding-left: 30px;
+            margin: 20px 0;
+        }
+        
+        li {
+            margin-bottom: 10px;
+            position: relative;
+        }
+        
+        li::before {
+            content: "•";
+            color: var(--accent);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+        
+        /* Footer */
+        .report-footer {
+            background: var(--primary);
+            color: white;
+            padding: 25px 40px;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .footer-divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 18px;
+            font-weight: 500;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .report-header, .report-content {
+                padding: 25px;
+            }
+            
+            .report-title {
+                font-size: 28px;
+            }
+            
+            h1 {
+                font-size: 26px;
+            }
+            
+            h2 {
+                font-size: 22px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="report-container">
+        <header class="report-header">
+            <div class="header-content">
+                <div class="watermark">
+                    <i class="fas fa-industry"></i>
+                </div>
+                <h1 class="report-title">Comprehensive Report: Syngas Production from Cattle Manure</h1>
+                <p class="report-subtitle">Full Plant Design for Bolu, Türkiye - Technical Specifications & Economic Analysis</p>
+                <div class="header-divider"></div>
+                <div class="report-meta">
+                    <div><i class="fas fa-map-marker-alt"></i> Bolu, Türkiye</div>
+                    <div><i class="fas fa-calendar-alt"></i> August 13, 2025</div>
+                    <div><i class="fas fa-user-tie"></i> Chemical Engineering Design Team</div>
+                </div>
+            </div>
+        </header>
+        
+        <main class="report-content">
+            <div class="section">
+                <div class="section-header">
+                    <h1>Executive Summary</h1>
+                </div>
+                <p>This report presents a comprehensive design project for a syngas production plant, strategically located in Bolu, Türkiye, utilizing cattle manure as its primary feedstock. The initiative aligns with Türkiye's ambitious renewable energy targets and its broader objective of reducing reliance on imported fossil fuels.</p>
+                
+                <div class="highlight">
+                    <p>The proposed plant integrates anaerobic digestion for biogas generation, followed by a multi-stage thermochemical conversion process (Steam Methane Reforming, High-Temperature Shift, and Low-Temperature Shift reactors) to produce high-quality syngas.</p>
+                </div>
+                
+                <p>Key technical specifications indicate a robust design for the core processing units, including detailed heat exchanger parameters for efficient energy recovery and precise reactor designs to optimize syngas composition. The economic analysis reveals significant capital expenditures, particularly for the reactors and heat exchange systems, alongside substantial operational costs, with electricity being a major component.</p>
+                
+                <p>The project's viability is significantly bolstered by Türkiye's supportive renewable energy policies, including feed-in tariffs and expedited permitting processes. The conversion of a prevalent agricultural waste product into a valuable energy resource offers substantial environmental benefits, including reduced greenhouse gas emissions and improved waste management practices.</p>
+            </div>
+            
+            <div class="section">
+                <div class="section-header">
+                    <h1>1. Introduction</h1>
+                </div>
+                
+                <h2>1.1 Project Background and Objectives</h2>
+                <p>The global energy landscape is undergoing a profound transformation, driven by escalating energy demand, the imperative to mitigate climate change, and the pursuit of sustainable energy solutions. In this context, synthesis gas, commonly known as syngas, has emerged as a versatile intermediate that can be converted into various fuels and chemicals.</p>
+                
+                <p>This report details a comprehensive chemical engineering design project focused on the development of a full-scale plant for syngas production. The proposed facility will utilize cattle manure, an abundant agricultural byproduct, as its primary feedstock. The plant is envisioned for establishment in Bolu, Türkiye, a region with a significant agricultural footprint.</p>
+                
+                <h2>1.2 Importance of Syngas Production from Manure</h2>
+                <p>The valorization of cattle manure for syngas production offers multifaceted benefits, addressing critical environmental, energy security, and economic challenges.</p>
+                
+                <p>From an environmental perspective, utilizing cattle manure as a feedstock provides a sustainable solution to agricultural waste management. The decomposition of manure, particularly in uncontrolled environments, releases significant quantities of methane, a potent greenhouse gas. By channeling manure into an anaerobic digester, these emissions are captured and converted into biogas, which then serves as a precursor for syngas.</p>
+                
+                <div class="highlight">
+                    <p>This process directly contributes to reducing greenhouse gas emissions and supports a circular economy model by transforming a potential pollutant into a valuable resource. The digestate, a byproduct of anaerobic digestion, can also be used as an organic fertilizer, further enhancing soil health and reducing the need for synthetic alternatives.</p>
+                </div>
+                
+                <p>Regarding energy security and independence, Türkiye faces a substantial challenge due to its high reliance on imported fossil fuels, with approximately 75% external energy dependency. Domestic production of syngas from local waste streams, such as cattle manure, presents a strategic opportunity to diversify the national energy mix and enhance energy independence.</p>
+            </div>
+            
+            <div class="section">
+                <div class="section-header">
+                    <h1>2. Market Analysis and Project Justification</h1>
+                </div>
+                
+                <h2>2.1 Syngas and Natural Gas Demand in Türkiye</h2>
+                <p>Türkiye's energy landscape is characterized by a rapidly increasing demand for natural gas, driven by residential heating, industrial consumption, gas-fired power generation, and ongoing expansion of its grid infrastructure. Recent data indicates that Turkish gas consumption has reached unprecedented levels.</p>
+                
+                <p>Syngas, a versatile blend primarily of hydrogen and carbon monoxide, serves as a clean alternative to traditional fossil fuels. It can be processed into various energy outputs, including electricity, high-quality gaseous fuels, and liquid transportation fuels such as Power-to-Liquid (PtL) fuels, which are gaining traction for their potential to reduce greenhouse gas emissions in sectors like aviation.</p>
+                
+                <h2>2.2 Renewable Energy Policies and Incentives in Türkiye</h2>
+                <p>Türkiye has demonstrated a strong commitment to enhancing its energy efficiency and transitioning towards a net-zero carbon energy framework by 2053. This commitment is articulated through various national plans and strategic objectives.</p>
+                
+                <p>The Ministry of Energy and Natural Resources (MENR) projects a significant increase in the share of renewable energy in total electricity production, aiming for 50% by 2028, up from 45% in 2024. Furthermore, the 2022 National Energy Plan sets an ambitious target to expand the share of renewable energy sources within the total installed electrical energy capacity from 54% to 64.7% by 2035.</p>
+                
+                <div class="highlight">
+                    <p>To facilitate investment and accelerate the deployment of renewable energy, Türkiye has implemented several incentive mechanisms. The YEKDEM scheme provides a structured incentive system, offering a 10-year feed-in tariff for electricity generated from renewable sources, with an emphasis on encouraging the use of locally manufactured equipment.</p>
+                </div>
+                
+                <h2>2.3 Cattle Manure Availability and Potential in Bolu, Türkiye</h2>
+                <p>Türkiye possesses a substantial livestock population, including approximately 14 million cattle, which collectively generate an estimated 186.5 million tons of fresh manure annually. A significant portion, around 65%, of this manure is derived from cattle.</p>
+                
+                <p>Current manure management practices across various regions in Türkiye often involve inadequate storage, such as bulk storage in open fields or a lack of proper manure pits. Studies indicate that a large percentage of farms lack appropriate manure storage compartments, leading to uncontrolled disposal and associated environmental concerns.</p>
+                
+                <p>The valorization of these agricultural and livestock residues through anaerobic digestion for biogas production offers a significant pathway to reduce greenhouse gas emissions. While specific, granular data for cattle manure production in Bolu was not directly available in the provided materials, Bolu is widely recognized as an agricultural region with substantial cattle farming activities.</p>
+            </div>
+            
+            <div class="section">
+                <div class="section-header">
+                    <h1>3. Process Description and Plant Design</h1>
+                </div>
+                
+                <h2>3.1 Overall Process Flow Diagram (Conceptual)</h2>
+                <p>The proposed syngas production plant from cattle manure in Bolu, Türkiye, integrates several key processing stages to transform raw organic waste into a valuable gaseous fuel. The overall process begins with the collection and pre-treatment of raw cattle manure, which is then fed into an anaerobic digester.</p>
+                
+                <h2>3.2 Anaerobic Digester Design and Operation</h2>
+                <p>Anaerobic digestion (AD) is a biological process in which organic matter, such as cattle manure, is decomposed by microorganisms in the absence of oxygen. This process yields biogas, a mixture primarily of methane (CH4) and carbon dioxide (CO2), along with a nutrient-rich digestate. The biogas generated serves as the crucial feedstock for the subsequent syngas production via Steam Methane Reforming.</p>
+                
+                <h3>Inlets and Outlets Analysis</h3>
+                <p>The primary inlet stream to the anaerobic digester is the cattle manure slurry. The digester is designed to accommodate a continuous flow of this feedstock.</p>
+                
+                <p>The main outlet streams from the anaerobic digester are raw biogas and digestate. The biogas composition typically ranges from 50-75% methane and 25-50% carbon dioxide, along with trace amounts of hydrogen sulfide and other gases. The flow rate of biogas is directly proportional to the organic loading rate and the efficiency of the digestion process.</p>
+                
+                <h3>Operating Conditions</h3>
+                <p>Anaerobic digesters can operate under mesophilic (around 35°C) or thermophilic (around 45-55°C) conditions. Research indicates that maintaining an average pH of approximately 7.0 and temperatures between 46°C and 48.35°C can lead to optimal biogas production and chemical oxygen demand (COD) reduction for various organic feedstocks.</p>
+                
+                <table>
+                    <caption>Table 1: Anaerobic Digester Inlet and Outlet Stream Properties</caption>
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Inlet (Cattle Manure Slurry)</th>
+                            <th>Outlet (Raw Biogas)</th>
+                            <th>Outlet (Digestate)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Flow Rate</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Composition</td>
+                            <td>Total Solids (TS): [X]%<br>Volatile Solids (VS): [Y]%<br>Moisture Content: [Z]%<br>Organic Matter: High</td>
+                            <td>Methane (CH4): 50-75%<br>Carbon Dioxide (CO2): 25-50%<br>Hydrogen Sulfide (H2S): Trace<br>Other Gases: Trace</td>
+                            <td>Liquid Fraction<br>Solid Fraction<br>Nutrient-rich (N, P, K)</td>
+                        </tr>
+                        <tr>
+                            <td>Temperature</td>
+                            <td>Ambient</td>
+                            <td>Digester Temp (~46-48°C)</td>
+                            <td>Digester Temp (~46-48°C)</td>
+                        </tr>
+                        <tr>
+                            <td>pH</td>
+                            <td>~6.5-7.5</td>
+                            <td>N/A</td>
+                            <td>~7.0</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h2>3.3 Syngas Production Section</h2>
+                <p>The core of the syngas production facility involves a sequence of catalytic reactors designed to convert methane from the purified biogas into hydrogen and carbon monoxide, followed by further conversion to maximize hydrogen yield. This section comprises the Steam Methane Reformer (SMR), High-Temperature Shift (HTS) reactor, and Low-Temperature Shift (LTS) reactor.</p>
+                
+                <h3>3.3.1 Steam Methane Reforming (SMR) Reactor Design</h3>
+                <p>The Steam Methane Reformer (SMR) is the primary unit for syngas production. In this endothermic reaction, methane (CH4) reacts with steam (H2O) at high temperatures and pressures over a catalyst to produce hydrogen (H2) and carbon monoxide (CO).</p>
+                
+                <h3>3.3.2 High-Temperature Shift (HTS) Reactor Design</h3>
+                <p>Following the SMR, the syngas stream enters the High-Temperature Shift (HTS) reactor. The HTS reaction is an exothermic process where carbon monoxide (CO) reacts with steam (H2O) to produce additional hydrogen (H2) and carbon dioxide (CO2).</p>
+                
+                <h3>3.3.3 Low-Temperature Shift (LTS) Reactor Design</h3>
+                <p>The final catalytic conversion step in the syngas production train is the Low-Temperature Shift (LTS) reactor. This unit further reduces the carbon monoxide concentration to very low levels, maximizing hydrogen production and preparing the syngas for subsequent purification or utilization processes that are sensitive to CO.</p>
+                
+                <table>
+                    <caption>Table 4: SMR, HTS, and LTS Reactor Design Parameters</caption>
+                    <thead>
+                        <tr>
+                            <th>Reactor Type</th>
+                            <th>Length (m)</th>
+                            <th>Diameter (m)</th>
+                            <th>Inlet Temp (°C)</th>
+                            <th>Outlet Temp (°C)</th>
+                            <th>Operating Pressure (bar)</th>
+                            <th>Catalyst Type</th>
+                            <th>Key Performance Metric</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>SMR</td>
+                            <td>5.5</td>
+                            <td>0.6</td>
+                            <td>800</td>
+                            <td>850</td>
+                            <td>25</td>
+                            <td>Nickel-based</td>
+                            <td>Methane Conversion</td>
+                        </tr>
+                        <tr>
+                            <td>HTS</td>
+                            <td>3.5</td>
+                            <td>0.5</td>
+                            <td>400</td>
+                            <td>450</td>
+                            <td>20</td>
+                            <td>Iron-Chromium</td>
+                            <td>CO Conversion</td>
+                        </tr>
+                        <tr>
+                            <td>LTS</td>
+                            <td>2.5</td>
+                            <td>0.4</td>
+                            <td>200</td>
+                            <td>220</td>
+                            <td>18</td>
+                            <td>Copper-Zinc</td>
+                            <td>Final CO Reduction</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h2>3.4 Heat Exchanger Design</h2>
+                <p>Efficient heat management is crucial for the overall energy efficiency and economic viability of the syngas production plant. Heat exchangers play a vital role in recovering and transferring thermal energy within the process, reducing external utility demands.</p>
+                
+                <h3>3.4.1 Methane Cooling with Steam</h3>
+                <p>A critical heat exchanger in this plant design is dedicated to cooling the hot methane stream using steam as the cooling fluid. This unit serves a dual purpose: it cools the methane stream to an appropriate temperature for subsequent processing steps, and simultaneously, it generates or superheats steam using the recovered heat.</p>
+                
+                <table>
+                    <caption>Table 2: Heat Exchanger Design Specifications</caption>
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Value</th>
+                            <th>Unit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="3"><strong>General Design</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Heat Exchanger Type</td>
+                            <td>Shell & Tube HT</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Tube Passes</td>
+                            <td>2</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Shell Passes</td>
+                            <td>1</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"><strong>Gas (Methane, heating fluid)</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Inlet Temperature</td>
+                            <td>298.15</td>
+                            <td>K</td>
+                        </tr>
+                        <tr>
+                            <td>Outlet Temperature</td>
+                            <td>273.15</td>
+                            <td>K</td>
+                        </tr>
+                        <tr>
+                            <td>Inlet Pressure</td>
+                            <td>1600</td>
+                            <td>kPa</td>
+                        </tr>
+                        <tr>
+                            <td>Outlet Pressure</td>
+                            <td>1598.084</td>
+                            <td>kPa</td>
+                        </tr>
+                        <tr>
+                            <td>Flow Rate</td>
+                            <td>1.063660634</td>
+                            <td>kg/s</td>
+                        </tr>
+                        <tr>
+                            <td>Heat Capacity (Cp)</td>
+                            <td>2.228965</td>
+                            <td>kJ/kg.K</td>
+                        </tr>
+                        <tr>
+                            <td>Viscosity (μ)</td>
+                            <td>0.00001045</td>
+                            <td>Pa.s</td>
+                        </tr>
+                        <tr>
+                            <td>Thermal Conductivity (k)</td>
+                            <td>0.0345081</td>
+                            <td>W/m.K</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="section">
+                <div class="section-header">
+                    <h1>4. Economic Analysis</h1>
+                </div>
+                
+                <h2>4.1 Capital Expenditure (CAPEX) Analysis</h2>
+                <p>Capital expenditure (CAPEX) represents the initial investment required for the design, construction, and commissioning of the syngas production plant. This includes the costs of major equipment, installation, piping, instrumentation, engineering, and contingencies.</p>
+                
+                <h3>4.1.1 Heat Exchanger Cost Analysis</h3>
+                <p>The capital cost for the heat exchanger provides a specific breakdown of its contribution to the overall plant CAPEX:</p>
+                
+                <ul>
+                    <li><strong>Equipment Cost:</strong> $1,598.00</li>
+                    <li><strong>Installation:</strong> $40.00</li>
+                    <li><strong>Pressure/Temperature Related Costs:</strong> $36,348.7241</li>
+                    <li><strong>Piping/Instrumentation:</strong> $36,348.7241</li>
+                    <li><strong>Engineering:</strong> $4,500.00</li>
+                    <li><strong>Contingency:</strong> $4,500.00</li>
+                </ul>
+                
+                <div class="highlight">
+                    <p>The total CAPEX for this specific heat exchanger sums to <strong>$83,335.4482</strong>. It is notable that "Pressure/Temperature Related Costs" and "Piping/Instrumentation" constitute a significant portion of this total, suggesting that specific material requirements and complex instrumentation contribute substantially to the cost.</p>
+                </div>
+                
+                <h3>4.1.2 Reactor Cost Analysis (SMR, HTS, LTS)</h3>
+                <p>The reactors are central to the syngas production process and represent a major component of the plant's capital investment. Based on the data provided, the capital costs for the individual reactors are as follows:</p>
+                
+                <ul>
+                    <li><strong>SMR Reactor CAPEX:</strong> $1,500,000</li>
+                    <li><strong>HTS Reactor CAPEX:</strong> $500,000</li>
+                    <li><strong>LTS Reactor CAPEX:</strong> $250,000</li>
+                </ul>
+                
+                <p>The total CAPEX for the SMR, HTS, and LTS reactors combined amounts to <strong>$2,250,000</strong>. The Steam Methane Reformer (SMR) is clearly the most capital-intensive unit among the reactors, which is expected given its high operating temperatures and pressures, and the specialized materials and catalyst required.</p>
+                
+                <table>
+                    <caption>Table 6: Summary of Major Equipment Capital Costs</caption>
+                    <thead>
+                        <tr>
+                            <th>Equipment Category</th>
+                            <th>Capital Cost ($)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Heat Exchanger</td>
+                            <td>83,335.45</td>
+                        </tr>
+                        <tr>
+                            <td>SMR Reactor</td>
+                            <td>1,500,000.00</td>
+                        </tr>
+                        <tr>
+                            <td>HTS Reactor</td>
+                            <td>500,000.00</td>
+                        </tr>
+                        <tr>
+                            <td>LTS Reactor</td>
+                            <td>250,000.00</td>
+                        </tr>
+                        <tr>
+                            <td>Anaerobic Digester</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Piping Network</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Compressor(s)</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Total Major Equipment CAPEX</strong></td>
+                            <td><strong>~2,333,335.45 + Estimates</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h2>4.2 Operating Expenditure (OPEX) Analysis</h2>
+                <p>Operating expenditure (OPEX) encompasses the ongoing costs associated with running the syngas production plant on an annual basis. These costs include energy consumption, labor, maintenance, raw material procurement, and other overheads.</p>
+                
+                <p>Based on the heat exchanger's operational cost breakdown, an illustrative example of OPEX components is provided:</p>
+                
+                <ul>
+                    <li><strong>Energy Cost:</strong> $16,031.2438</li>
+                    <li><strong>Electricity Cost:</strong> $281,636.1948</li>
+                    <li><strong>Labor:</strong> $18,261.2274</li>
+                    <li><strong>Maintenance:</strong> $21,716.80008</li>
+                </ul>
+                
+                <div class="highlight">
+                    <p>The electricity cost is a dominant factor in the heat exchanger's operational expenditure, suggesting that the overall plant's energy efficiency, particularly the power consumption of all compressors, pumps, and heating elements, will heavily influence its profitability.</p>
+                </div>
+                
+                <table>
+                    <caption>Table 3: Heat Exchanger Capital and Operating Cost Breakdown</caption>
+                    <thead>
+                        <tr>
+                            <th>Cost Category</th>
+                            <th>Value ($)</th>
+                            <th>Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="3"><strong>Capital Expenditure</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Equipment Cost</td>
+                            <td>1,598.00</td>
+                            <td>CAPEX</td>
+                        </tr>
+                        <tr>
+                            <td>Installation</td>
+                            <td>40.00</td>
+                            <td>CAPEX</td>
+                        </tr>
+                        <tr>
+                            <td>Pressure/Temperature</td>
+                            <td>36,348.7241</td>
+                            <td>CAPEX</td>
+                        </tr>
+                        <tr>
+                            <td>Piping/Instrumentation</td>
+                            <td>36,348.7241</td>
+                            <td>CAPEX</td>
+                        </tr>
+                        <tr>
+                            <td>Engineering</td>
+                            <td>4,500.00</td>
+                            <td>CAPEX</td>
+                        </tr>
+                        <tr>
+                            <td>Contingency</td>
+                            <td>4,500.00</td>
+                            <td>CAPEX</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"><strong>Operating Expenditure</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Energy Cost</td>
+                            <td>16,031.2438</td>
+                            <td>OPEX (Annual)</td>
+                        </tr>
+                        <tr>
+                            <td>Electricity Cost</td>
+                            <td>281,636.1948</td>
+                            <td>OPEX (Annual)</td>
+                        </tr>
+                        <tr>
+                            <td>Labor</td>
+                            <td>18,261.2274</td>
+                            <td>OPEX (Annual)</td>
+                        </tr>
+                        <tr>
+                            <td>Maintenance</td>
+                            <td>21,716.80008</td>
+                            <td>OPEX (Annual)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="section">
+                <div class="section-header">
+                    <h1>5. Conclusion and Recommendations</h1>
+                </div>
+                
+                <h2>Summary of Findings</h2>
+                <p>This comprehensive design report for a syngas production plant from cattle manure in Bolu, Türkiye, demonstrates a technically feasible and strategically significant project. The analysis reveals a strong market demand for natural gas in Türkiye, with syngas offering a viable domestic alternative that contributes to energy security and diversification.</p>
+                
+                <div class="highlight">
+                    <p>The nation's robust renewable energy policies, including clear targets and financial incentives like feed-in tariffs and expedited permits, create a highly supportive environment for such investments. Furthermore, the abundance of cattle manure in Türkiye, coupled with existing waste management challenges, presents a compelling opportunity for a waste-to-value conversion.</p>
+                </div>
+                
+                <h2>Project Viability</h2>
+                <p>Based on the technical design and market analysis, establishing a syngas production plant from cattle manure in Bolu, Türkiye, is a viable undertaking. The project addresses critical national priorities related to energy independence, environmental sustainability, and rural development.</p>
+                
+                <h2>Recommendations for Future Work</h2>
+                <p>To advance this design project towards implementation, the following recommendations are put forth for future work:</p>
+                
+                <ol>
+                    <li><strong>Detailed Site-Specific Analysis:</strong> Conduct a granular analysis of cattle manure availability, collection logistics, and transportation costs within the Bolu region.</li>
+                    <li><strong>Comprehensive Techno-Economic Analysis:</strong> Perform a detailed financial modeling exercise, including Net Present Value (NPV), Internal Rate of Return (IRR), and Payback Period calculations.</li>
+                    <li><strong>Syngas Utilization Pathway Optimization:</strong> Investigate and optimize specific downstream utilization pathways for the produced syngas.</li>
+                    <li><strong>Advanced Biogas Purification and Upgrading:</strong> Explore advanced technologies for biogas purification and upgrading to further enhance the methane content and remove impurities.</li>
+                    <li><strong>Environmental Impact Assessment and Lifecycle Analysis:</strong> Conduct a comprehensive environmental impact assessment (EIA) and a detailed lifecycle analysis (LCA) of the entire process.</li>
+                    <li><strong>Risk Assessment and Mitigation Strategies:</strong> Develop a comprehensive risk assessment, identifying technical, operational, market, and regulatory risks, along with corresponding mitigation strategies.</li>
+                </ol>
+            </div>
+        </main>
+        
+        <footer class="report-footer">
+            <div class="footer-content">
+                <div class="logo">
+                    <i class="fas fa-leaf"></i>
+                    <span>Renewable Energy Solutions</span>
+                </div>
+                <div>Confidential - For Internal Use Only</div>
+            </div>
+            <div class="footer-divider"></div>
+            <div>© 2025 Chemical Engineering Design Group. All rights reserved.</div>
+        </footer>
+    </div>
+
+    <script>
+        // Simple script to add interactivity to tables
+        document.addEventListener('DOMContentLoaded', function() {
+            const tableRows = document.querySelectorAll('tbody tr');
+            
+            tableRows.forEach(row => {
+                row.addEventListener('click', function() {
+                    this.classList.toggle('highlight');
+                });
+            });
+            
+            // Add current year to footer
+            const yearSpan = document.querySelector('footer div:last-child');
+            yearSpan.textContent = `© ${new Date().getFullYear()} Chemical Engineering Design Group. All rights reserved.`;
+        });
+    </script>
+</body>
+</html>
