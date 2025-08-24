@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abdullahi Hussein Mohamed - English Teacher CV</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .cv-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #2c3e50, #4a6b8a);
+            color: white;
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+        
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .header-content {
+            flex: 1;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 5px;
+        }
+        
+        .title {
+            font-size: 1.3rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+            color: #e0e0e0;
+        }
+        
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+        }
+        
+        /* Main Content Layout */
+        .main-content {
+            display: flex;
+        }
+        
+        .left-column {
+            flex: 7;
+            padding: 25px;
+            border-right: 1px solid #eee;
+        }
+        
+        .right-column {
+            flex: 3;
+            padding: 25px;
+            background: #f9f9f9;
+        }
+        
+        /* Section Styles */
+        section {
+            margin-bottom: 30px;
+        }
+        
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #4a6b8a;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        h2 i {
+            color: #4a6b8a;
+        }
+        
+        h3 {
+            color: #3a506b;
+            margin-bottom: 5px;
+        }
+        
+        /* Experience Section */
+        .experience {
+            margin-bottom: 20px;
+        }
+        
+        .job {
+            margin-bottom: 25px;
+            padding-left: 10px;
+            border-left: 3px solid #e9ecef;
+            padding-left: 15px;
+        }
+        
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .company {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+        
+        .date {
+            color: #6c757d;
+            font-style: italic;
+            background: #f0f2f5;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        
+        .location {
+            color: #6c757d;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.95rem;
+        }
+        
+        ul {
+            list-style-type: circle;
+            padding-left: 20px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+            position: relative;
+        }
+        
+        /* Skills Section */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .skill {
+            background: #e9ecef;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .skill:hover {
+            background: #4a6b8a;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* Education Section */
+        .education {
+            margin-bottom: 20px;
+            padding-left: 10px;
+            border-left: 3px solid #e9ecef;
+            padding-left: 15px;
+        }
+        
+        /* Languages Section */
+        .language-bar {
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+        
+        .language-level {
+            height: 100%;
+            background: #4a6b8a;
+            border-radius: 4px;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #6c757d;
+            font-size: 0.9rem;
+            background: #f9f9f9;
+            border-top: 1px solid #eee;
+        }
+        
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .cv-container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+            
+            .skill:hover {
+                background: #e9ecef;
+                color: inherit;
+                transform: none;
+            }
+            
+            .no-print {
+                display: none;
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .left-column {
+                border-right: none;
+                border-bottom: 1px solid #eee;
+            }
+            
+            header {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+            
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .job-header {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .profile-img {
+                width: 120px;
+                height: 120px;
+            }
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            color: #4a6b8a;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+    <div class="cv-container">
+        <header>
+            <img src="https://raw.githubusercontent.com/engnrhussein/engnrhussein.github.io/main/pfp.jpg" alt="Abdullahi Hussein Mohamed" class="profile-img">
+            <div class="header-content">
+                <h1>Abdullahi Hussein Mohamed</h1>
+                <div class="title">Experienced English Teacher</div>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>abdallahussein713@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>213407039@ogrenci.ibu.edu.tr</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+90 501 358 0340</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Bolu, Turkey</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <div class="main-content">
+            <div class="left-column">
+                <section id="profile">
+                    <h2><i class="fas fa-user"></i> Professional Summary</h2>
+                    <p>Dedicated and enthusiastic English teacher with over 6 years of experience teaching diverse student groups across multiple educational institutions. Skilled in creating engaging lesson plans, improving student communication skills, and fostering a positive learning environment. Fluent English speaker with C1 level Turkish proficiency and 8 years of experience living in Turkey, providing unique cultural insights to students.</p>
+                </section>
+                
+                <section id="experience">
+                    <h2><i class="fas fa-briefcase"></i> Teaching Experience</h2>
+                    
+                    <div class="job">
+                        <div class="job-header">
+                            <span class="company">UFKUM College</span>
+                            <span class="date">July 2024 - June 2025</span>
+                        </div>
+                        <div class="location"><i class="fas fa-map-marker-alt"></i> Bolu, Turkey</div>
+                        <ul>
+                            <li>Teach English to college students using modern pedagogical approaches</li>
+                            <li>Develop curriculum materials tailored to student needs and proficiency levels</li>
+                            <li>Conduct language assessments and provide constructive feedback to students</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="job">
+                        <div class="job-header">
+                            <span class="company">Easy English</span>
+                            <span class="date">August 2022 - July 2024</span>
+                        </div>
+                        <div class="location"><i class="fas fa-map-marker-alt"></i> Bolu, Turkey</div>
+                        <ul>
+                            <li>Instructed diverse classes of adult learners in general and business English</li>
+                            <li>Implemented communicative language teaching methods to enhance student engagement</li>
+                            <li>Prepared students for international English examinations</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="job">
+                        <div class="job-header">
+                            <span class="company">Ankara English Time</span>
+                            <span class="date">February 2019 - January 2020</span>
+                        </div>
+                        <div class="location"><i class="fas fa-map-marker-alt"></i> Ankara, Turkey</div>
+                        <ul>
+                            <li>Taught English to students at various proficiency levels</li>
+                            <li>Created interactive lesson plans focusing on practical language use</li>
+                            <li>Organized and led conversational practice sessions</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="job">
+                        <div class="job-header">
+                            <span class="company">Private & Online Tutoring</span>
+                            <span class="date">2018 - Present</span>
+                        </div>
+                        <ul>
+                            <li>Provide one-on-one and small group English instruction to students of all ages</li>
+                            <li>Design customized learning programs based on individual student goals</li>
+                            <li>Utilize digital tools and platforms to facilitate remote learning</li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+            
+            <div class="right-column">
+                <section id="education">
+                    <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+                    <div class="education">
+                        <div class="job-header">
+                            <span class="company">Bolu Abant İzzet Baysal University</span>
+                        </div>
+                        <div class="date">2021 - 2026 (Expected)</div>
+                        <div>Bachelor of Science in Chemical Engineering</div>
+                    </div>
+                </section>
+                
+                <section id="skills">
+                    <h2><i class="fas fa-tools"></i> Skills & Qualifications</h2>
+                    <div class="skills-container">
+                        <div class="skill">English Teaching</div>
+                        <div class="skill">Curriculum Development</div>
+                        <div class="skill">Classroom Management</div>
+                        <div class="skill">Student Assessment</div>
+                        <div class="skill">Lesson Planning</div>
+                        <div class="skill">Turkish (C1 Level)</div>
+                        <div class="skill">Online Teaching</div>
+                        <div class="skill">Communication Skills</div>
+                        <div class="skill">Cultural Awareness</div>
+                        <div class="skill">Individual Tutoring</div>
+                    </div>
+                </section>
+                
+                <section id="languages">
+                    <h2><i class="fas fa-language"></i> Languages</h2>
+                    <div>
+                        <div><strong>English</strong> - Native Proficiency</div>
+                        <div class="language-bar"><div class="language-level" style="width: 100%;"></div></div>
+                        
+                        <div><strong>Turkish</strong> - Advanced (C1)</div>
+                        <div class="language-bar"><div class="language-level" style="width: 85%;"></div></div>
+                        
+                        <div><strong>Somali</strong> - Native Proficiency</div>
+                        <div class="language-bar"><div class="language-level" style="width: 100%;"></div></div>
+                        
+                        <div><strong>Arabic</strong> - Advanced</div>
+                        <div class="language-bar"><div class="language-level" style="width: 80%;"></div></div>
+                    </div>
+                </section>
+                
+                <section id="additional">
+                    <h2><i class="fas fa-info-circle"></i> Additional Information</h2>
+                    <ul>
+                        <li>8 years of residency in Turkey with deep understanding of Turkish culture</li>
+                        <li>Strong technical background from chemical engineering studies</li>
+                        <li>Experience teaching both online and in-person classes</li>
+                    </ul>
+                </section>
+
+                <section id="social">
+                    <h2><i class="fas fa-share-alt"></i> Connect</h2>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/engnrhussein/" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="mailto:abdallahussein713@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+                        <a href="tel:+905013580340" title="Call"><i class="fas fa-phone"></i></a>
+                    </div>
+                </section>
+            </div>
+        </div>
+        
+        <footer>
+            <p>References available upon request | <a href="https://www.linkedin.com/in/engnrhussein/">LinkedIn: linkedin.com/in/engnrhussein</a></p>
+            <p class="no-print">Download this CV as <a href="javascript:window.print()">PDF</a></p>
+        </footer>
+    </div>
+</body>
+</html>
