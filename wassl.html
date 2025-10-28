@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wassl - Your Trusted Service Provider in Bolu, Turkey</title>
+    <meta name="description" content="Wassl offers real estate sales, car rentals, house rentals, car sales, university admissions and more in Bolu, Turkey">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #f59e0b;
+            --dark: #1f2937;
+            --light: #f3f4f6;
+            --white: #ffffff;
+            --text: #374151;
+            --border: #e5e7eb;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            transition: all 0.3s ease;
+            /* 1. Geometric Background */
+            background-color: var(--light);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cg fill-rule='evenodd'%3E%3Cg id='hexagons' fill='%23bababa' fill-opacity='0.25' fill-rule='nonzero'%3E%3Cpath d='M13.99 9.25l13.99 8V33.5l-13.99 8-13.99-8V17.25zM14 0l14 8v25l-14 8L0 33V8z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            background-attachment: fixed;
+        }
+
+        [dir="rtl"] {
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+            margin-right: 100px; /* Space for the language button */
+        }
+
+        [dir="rtl"] .nav-links {
+            margin-right: 0;
+            margin-left: 100px; /* Space for the language button in RTL */
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Language button positioned absolutely */
+        .lang-switch {
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            min-width: 85px;
+            text-align: center;
+        }
+
+        [dir="rtl"] .lang-switch {
+            right: auto;
+            left: 0;
+        }
+
+        .lang-switch:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            animation: fadeInUp 1s 0.2s backwards;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--secondary);
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeInUp 1s 0.4s backwards;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.4);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 5rem 0;
+            /* 3. Make section transparent */
+            background: transparent;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 3rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+            /* 4. Make card clickable */
+            cursor: pointer; 
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            color: var(--dark);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .service-card p {
+            color: var(--text);
+            line-height: 1.8;
+        }
+
+        /* About Section */
+        .about {
+            padding: 5rem 0;
+            background: var(--white);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .about-image {
+            text-align: center;
+            font-size: 15rem;
+            color: var(--primary);
+            opacity: 0.1;
+        }
+
+        /* Appointments Section */
+        .appointments {
+            padding: 5rem 0;
+             /* 3. Make section transparent */
+            background: transparent;
+        }
+
+        .appointment-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: var(--primary);
+            color: var(--white);
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .success-message {
+            display: none;
+            background: #10b981;
+            color: var(--white);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 0;
+            background: var(--dark);
+            color: var(--white);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            text-align: center;
+        }
+
+        .contact-item {
+            padding: 2rem;
+        }
+
+        .contact-icon {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .contact-item h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .contact-item p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background: #111827;
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark);
+            cursor: pointer;
+        }
+        
+        /* 5. WhatsApp FAB */
+        .whatsapp-fab {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: #25D366;
+            color: var(--white);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 1001;
+            transition: transform 0.3s;
+        }
+        .whatsapp-fab:hover {
+            transform: scale(1.1);
+        }
+        
+        /* 6. Service Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.6);
+        }
+        .modal-content {
+            background-color: var(--white);
+            margin: 10% auto;
+            padding: 2.5rem;
+            border-radius: 15px;
+            max-width: 700px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: fadeInUp 0.5s;
+        }
+        .modal-close {
+            color: #aaa;
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .modal-close:hover,
+        .modal-close:focus {
+            color: var(--dark);
+        }
+        .modal-body h3 {
+            font-size: 2rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        .modal-body p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+        .modal-cta-button {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--white);
+            padding: 0.8rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        .modal-cta-button:hover {
+            background: var(--primary-dark);
+        }
+
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--white);
+                flex-direction: column;
+                padding: 2rem;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+                margin: 0 !important;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image {
+                display: none;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .whatsapp-fab {
+                width: 50px;
+                height: 50px;
+                font-size: 2rem;
+                bottom: 15px;
+                right: 15px;
+            }
+            
+            .modal-content {
+                margin: 20% auto;
+                padding: 1.5rem;
+            }
+            
+            /* Mobile language button */
+            .lang-switch {
+                position: static;
+                transform: none;
+                margin-top: 1rem;
+                width: 100%;
+            }
+            
+            [dir="rtl"] .lang-switch {
+                position: static;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">Wassl</a>
+                <button class="mobile-menu-btn" onclick="toggleMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#home" class="nav-home">Home</a></li>
+                    <li><a href="#services" class="nav-services">Services</a></li>
+                    <li><a href="#about" class="nav-about">About</a></li>
+                    <li><a href="#appointments" class="nav-appointments">Appointments</a></li>
+                    <li><a href="#contact" class="nav-contact">Contact</a></li>
+                </ul>
+                <!-- Language button moved outside of nav-links -->
+                <button class="lang-switch" onclick="toggleLanguage()">العربية</button>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="container">
+            <h1 class="hero-title">Welcome to Wassl</h1>
+            <p class="hero-subtitle">Your Trusted Partner for Real Estate, Car Rentals, University Admissions & More, based in Bolu and serving all of Turkey</p>
+            <a href="#appointments" class="cta-button cta-text">Book an Appointment</a>
+        </div>
+    </section>
+
+    <section class="services" id="services">
+        <div class="container">
+            <h2 class="section-title services-title">Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card" data-service="real-estate">
+                    <div class="service-icon"><i class="fas fa-building"></i></div>
+                    <h3 class="service1-title">Real Estate Sales</h3>
+                    <p class="service1-desc">Find your dream property in Bolu. We offer a wide range of residential and commercial properties for sale.</p>
+                </div>
+                <div class="service-card" data-service="house-rental">
+                    <div class="service-icon"><i class="fas fa-home"></i></div>
+                    <h3 class="service2-title">House Rentals</h3>
+                    <p class="service2-desc">Looking for a place to rent? Browse our extensive collection of apartments, houses, and villas in prime locations.</p>
+                </div>
+                <div class="service-card" data-service="car-rental">
+                    <div class="service-icon"><i class="fas fa-car"></i></div>
+                    <h3 class="service3-title">Car Rentals</h3>
+                    <p class="service3-desc">Rent reliable vehicles for your daily needs or special occasions. Flexible terms and competitive prices.</p>
+                </div>
+                <div class="service-card" data-service="car-sales">
+                    <div class="service-icon"><i class="fas fa-car-side"></i></div>
+                    <h3 class="service4-title">Car Sales</h3>
+                    <p class="service4-desc">Buy or sell quality used and new vehicles. We help you find the perfect car at the right price.</p>
+                </div>
+                <div class="service-card" data-service="university">
+                    <div class="service-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h3 class="service5-title">University Admissions</h3>
+                    <p class="service5-desc">Expert guidance for university applications in Turkey. We help you navigate the admission process seamlessly.</p>
+                </div>
+                <div class="service-card" data-service="consulting">
+                    <div class="service-icon"><i class="fas fa-handshake"></i></div>
+                    <h3 class="service6-title">Business Consulting</h3>
+                    <p class="service6-desc">Professional consulting services for starting or expanding your business in Bolu and throughout Turkey.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2 class="about-title">About Wassl</h2>
+                    <p class="about-p1">Wassl is your trusted service provider, based in Bolu, Turkey. With years of experience, we specialize in connecting people with the services they need most, nationwide.</p>
+                    <p class="about-p2">Whether you're looking to buy or rent property, need a reliable vehicle, or seeking university admission guidance, we're here to make the process smooth and hassle-free.</p>
+                    <p class="about-p3">Our team of dedicated professionals is committed to providing exceptional service and building lasting relationships with our clients.</p>
+                </div>
+                <div class="about-image">
+                    <i class="fas fa-users"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="appointments" id="appointments">
+        <div class="container">
+            <h2 class="section-title appointments-title">Book an Appointment</h2>
+            <form class="appointment-form" id="appointmentForm">
+                <div class="form-group">
+                    <label for="name" class="label-name">Full Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="label-email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone" class="label-phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="service" class="label-service">Service Needed</label>
+                    <select id="service" name="service" required>
+                        <option value="" class="option-select">Select a service...</option>
+                        <option value="real-estate" class="option1">Real Estate Sales</option>
+                        <option value="house-rental" class="option2">House Rentals</option>
+                        <option value="car-rental" class="option3">Car Rentals</option>
+                        <option value="car-sales" class="option4">Car Sales</option>
+                        <option value="university" class="option5">University Admissions</option>
+                        <option value="consulting" class="option6">Business Consulting</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="date" class="label-date">Preferred Date</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                <div class="form-group">
+                    <label for="message" class="label-message">Message</label>
+                    <textarea id="message" name="message" placeholder="Tell us more about your needs..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn btn-text">Submit Appointment</button>
+                <div class="success-message" id="successMessage">
+                    <span class="success-text">Thank you! Your appointment request has been received. We'll contact you soon.</span>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title contact-title">Contact Us</h2>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <h3 class="contact1-title">Location</h3>
+                    <p class="contact1-info">Bolu, Turkey</p>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                    <h3 class="contact2-title">Phone</h3>
+                    <p class="contact2-info">+90 538 213 6214</p> </div>
+                <div class="contact-item">
+                    <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                    <h3 class="contact3-title">Email</h3>
+                    <p class="contact3-info">wasslservices@gmail.com</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="serviceModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeServiceModal()">&times;</span>
+            <div class="modal-body" id="serviceModalBody">
+                <h3 id="modalServiceTitle"></h3>
+                <p id="modalServiceDesc"></p>
+                <button id="modalCtaButton" class="modal-cta-button">Book This Service</button>
+            </div>
+        </div>
+    </div>
+
+    <a href="https://wa.me/905382136214" target="_blank" class="whatsapp-fab" aria-label="Contact us on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <footer>
+        <div class="container">
+            <p class="footer-text">&copy; 2025 Wassl. All rights reserved. | Based in Bolu, Serving all of Turkey</p>
+        </div>
+    </footer>
+
+    <script>
+        const translations = {
+            en: {
+                navHome: "Home",
+                navServices: "Services",
+                navAbout: "About",
+                navAppointments: "Appointments",
+                navContact: "Contact",
+                langBtn: "العربية",
+                heroTitle: "Welcome to Wassl",
+                heroSubtitle: "Your Trusted Partner for Real Estate, Car Rentals, University Admissions & More, based in Bolu and serving all of Turkey",
+                ctaText: "Book an Appointment",
+                servicesTitle: "Our Services",
+                service1Title: "Real Estate Sales",
+                service1Desc: "Find your dream property in Bolu. We offer a wide range of residential and commercial properties for sale.",
+                service2Title: "House Rentals",
+                service2Desc: "Looking for a place to rent? Browse our extensive collection of apartments, houses, and villas in prime locations.",
+                service3Title: "Car Rentals",
+                service3Desc: "Rent reliable vehicles for your daily needs or special occasions. Flexible terms and competitive prices.",
+                service4Title: "Car Sales",
+                service4Desc: "Buy or sell quality used and new vehicles. We help you find the perfect car at the right price.",
+                service5Title: "University Admissions",
+                service5Desc: "Expert guidance for university applications in Turkey. We help you navigate the admission process seamlessly.",
+                service6Title: "Business Consulting",
+                service6Desc: "Professional consulting services for starting or expanding your business in Bolu and throughout Turkey.",
+                aboutTitle: "About Wassl",
+                aboutP1: "Wassl is your trusted service provider, based in Bolu, Turkey. With years of experience, we specialize in connecting people with the services they need most, nationwide.",
+                aboutP2: "Whether you're looking to buy or rent property, need a reliable vehicle, or seeking university admission guidance, we're here to make the process smooth and hassle-free.",
+                aboutP3: "Our team of dedicated professionals is committed to providing exceptional service and building lasting relationships with our clients.",
+                appointmentsTitle: "Book an Appointment",
+                labelName: "Full Name",
+                labelEmail: "Email",
+                labelPhone: "Phone Number",
+                labelService: "Service Needed",
+                labelDate: "Preferred Date",
+                labelMessage: "Message",
+                optionSelect: "Select a service...",
+                option1: "Real Estate Sales",
+                option2: "House Rentals",
+                option3: "Car Rentals",
+                option4: "Car Sales",
+                option5: "University Admissions",
+                option6: "Business Consulting",
+                btnText: "Submit Appointment",
+                successText: "Thank you! Your appointment request has been received. We'll contact you soon.",
+                contactTitle: "Contact Us",
+                contact1Title: "Location",
+                contact1Info: "Bolu, Turkey",
+                contact2Title: "Phone",
+                contact2Info: "+90 538 213 6214",
+                contact3Title: "Email",
+                contact3Info: "wasslservices@gmail.com",
+                footerText: "© 2025 Wassl. All rights reserved. | Based in Bolu, Serving all of Turkey"
+            },
+            ar: {
+                navHome: "الرئيسية",
+                navServices: "الخدمات",
+                navAbout: "من نحن",
+                navAppointments: "المواعيد",
+                navContact: "اتصل بنا",
+                langBtn: "English",
+                heroTitle: "مرحباً بكم في وصل",
+                heroSubtitle: "شريككم الموثوق للعقارات، تأجير السيارات، القبول الجامعي والمزيد، متمركزون في بولو ونخدم جميع أنحاء تركيا",
+                ctaText: "احجز موعداً",
+                servicesTitle: "خدماتنا",
+                service1Title: "بيع العقارات",
+                service1Desc: "اعثر على عقار أحلامك في بولو. نوفر مجموعة واسعة من العقارات السكنية والتجارية للبيع.",
+                service2Title: "تأجير المنازل",
+                service2Desc: "تبحث عن مكان للإيجار؟ تصفح مجموعتنا الواسعة من الشقق والمنازل والفيلات في مواقع مميزة.",
+                service3Title: "تأجير السيارات",
+                service3Desc: "استأجر مركبات موثوقة لاحتياجاتك اليومية أو المناسبات الخاصة. شروط مرنة وأسعار تنافسية.",
+                service4Title: "بيع السيارات",
+                service4Desc: "اشترِ أو بع سيارات مستعملة وجديدة عالية الجودة. نساعدك في إيجاد السيارة المثالية بالسعر المناسب.",
+                service5Title: "القبول الجامعي",
+                service5Desc: "إرشادات خبيرة لطلبات الجامعات في تركيا. نساعدك على التنقل في عملية القبول بسلاسة.",
+                service6Title: "استشارات الأعمال",
+                service6Desc: "خدمات استشارية احترافية لبدء أو توسيع عملك في بولو وفي جميع أنحاء تركيا.",
+                aboutTitle: "عن وصل",
+                aboutP1: "وصل هو مزود الخدمات الموثوق به، متمركز في بولو، تركيا. مع سنوات من الخبرة، نتخصص في ربط الناس بالخدمات التي يحتاجونها أكثر، في جميع أنحاء البلاد.",
+                aboutP2: "سواء كنت تبحث عن شراء أو استئجار عقار، أو تحتاج إلى مركبة موثوقة، أو تسعى للحصول على إرشادات القبول الجامعي، نحن هنا لجعل العملية سلسة وخالية من المتاعب.",
+                aboutP3: "فريقنا من المحترفين المتفانين ملتزم بتقديم خدمة استثنائية وبناء علاقات دائمة مع عملائنا.",
+                appointmentsTitle: "احجز موعداً",
+                labelName: "الاسم الكامل",
+                labelEmail: "البريد الإلكتروني",
+                labelPhone: "رقم الهاتف",
+                labelService: "الخدمة المطلوبة",
+                labelDate: "التاريخ المفضل",
+                labelMessage: "الرسالة",
+                optionSelect: "اختر خدمة...",
+                option1: "بيع العقارات",
+                option2: "تأجير المنازل",
+                option3: "تأجير السيارات",
+                option4: "بيع السيارات",
+                option5: "القبول الجامعي",
+                option6: "استشارات الأعمال",
+                btnText: "إرسال الموعد",
+                successText: "شكراً لك! تم استلام طلب موعدك. سنتصل بك قريباً.",
+                contactTitle: "اتصل بنا",
+                contact1Title: "الموقع",
+                contact1Info: "بولو، تركيا",
+                contact2Title: "الهاتف",
+                contact2Info: "+90 538 213 6214",
+                contact3Title: "البريد الإلكتروني",
+                contact3Info: "wasslservices@gmail.com",
+                footerText: "© 2025 وصل. جميع الحقوق محفوظة. | متمركزون في بولو، نخدم جميع أنحاء تركيا"
+            }
+        };
+
+        // NEW: Detailed descriptions for the modal
+        const serviceDetails = {
+            en: {
+                "real-estate": {
+                    title: "Comprehensive Real Estate Sales",
+                    desc: "Discover your perfect property with Wassl. We provide expert assistance for buying residential homes, commercial properties, and land. Our team guides you through every step, from viewing to negotiation and closing, ensuring a transparent and successful transaction. We serve clients both in Bolu and nationwide."
+                },
+                "house-rental": {
+                    title: "Effortless House Rentals",
+                    desc: "Find your next home with ease. We offer a vast portfolio of rental properties, including furnished and unfurnished apartments, family homes, and luxury villas. We assist tenants with finding the right match and landlords with managing their properties. Our services cover Bolu and other major cities across Turkey."
+                },
+                "car-rental": {
+                    title: "Flexible Car Rentals",
+                    desc: "Get on the road with our reliable car rental service. Choose from a wide range of vehicles, from economy cars for city driving to spacious SUVs for family trips. We offer competitive pricing, flexible rental terms (daily, weekly, monthly), and convenient pick-up/drop-off locations."
+                },
+                "car-sales": {
+                    title: "Trusted Car Sales",
+                    desc: "Buy and sell new or used vehicles with confidence. We meticulously inspect all cars for quality and provide transparent history reports. Whether you are looking for your first car or upgrading, our team will help you find the perfect vehicle that fits your budget and needs."
+                },
+                "university": {
+                    title: "University Admissions Guidance",
+                    desc: "Navigate the Turkish university admissions process with our expert team. We provide personalized counseling, help with document preparation, application submission, and follow-up for both public and private universities across Turkey. Let us help you achieve your academic goals."
+                },
+                "consulting": {
+                    title: "Expert Business Consulting",
+                    desc: "Launch or expand your business in Turkey with our professional consulting services. We offer guidance on company formation, legal requirements, market analysis, and strategic planning. Our expertise covers Bolu and the wider Turkish market, helping you build a solid foundation for success."
+                }
+            },
+            ar: {
+                "real-estate": {
+                    title: "خدمات بيع عقارات شاملة",
+                    desc: "اكتشف عقارك المثالي مع وصل. نقدم مساعدة متخصصة لشراء المنازل السكنية والعقارات التجارية والأراضي. يرشدك فريقنا في كل خطوة، من المعاينة إلى التفاوض والإغلاق، مما يضمن معاملة شفافة وناجحة. نخدم العملاء في بولو وجميع أنحاء البلاد."
+                },
+                "house-rental": {
+                    title: "تأجير منازل بدون عناء",
+                    desc: "اعثر على منزلك التالي بسهولة. نقدم مجموعة واسعة من العقارات للإيجار، بما في ذلك الشقق المفروشة وغير المفروشة، ومنازل العائلات، والفيلات الفاخرة. نساعد المستأجرين في العثور على ما يناسبهم وملاك العقارات في إدارة ممتلكاتهم. تغطي خدماتنا بولو والمدن الرئيسية الأخرى في جميع أنحاء تركيا."
+                },
+                "car-rental": {
+                    title: "تأجير سيارات مرن",
+                    desc: "انطلق على الطريق مع خدمة تأجير السيارات الموثوقة لدينا. اختر من بين مجموعة واسعة من المركبات، من السيارات الاقتصادية للقيادة في المدينة إلى سيارات الدفع الرباعي الواسعة لرحلات العائلة. نقدم أسعارًا تنافسية وشروط إيجار مرنة (يومية، أسبوعية، شهرية) ومواقع استلام وتسليم مريحة."
+                },
+                "car-sales": {
+                    title: "بيع سيارات موثوق به",
+                    desc: "اشتر وبع المركبات الجديدة أو المستعملة بثقة. نقوم بفحص جميع السيارات بدقة للتأكد من جودتها ونقدم تقارير تاريخية شفافة. سواء كنت تبحث عن سيارتك الأولى أو ترقية، سيساعدك فريقنا في العثور على السيارة المثالية التي تناسب ميزانيتك واحتياجاتك."
+                },
+                "university": {
+                    title: "إرشاد للقبول الجامعي",
+                    desc: "تنقل في عملية القبول بالجامعات التركية مع فريق الخبراء لدينا. نقدم استشارات شخصية، ونساعد في إعداد الوثائق، وتقديم الطلبات، والمتابعة للجامعات الحكومية والخاصة في جميع أنحاء تركيا. دعنا نساعدك على تحقيق أهدافك الأكاديمية."
+                },
+                "consulting": {
+                    title: "استشارات أعمال متخصصة",
+                    desc: "أطلق أو وسع نطاق عملك في تركيا مع خدماتنا الاستشارية المهنية. نقدم إرشادات حول تأسيس الشركات، والمتطلبات القانونية، وتحليل السوق، والتخطيط الاستراتيجي. تغطي خبرتنا بولو والسوق التركي الأوسع، مما يساعدك على بناء أساس متين للنجاح."
+                }
+            }
+        };
+
+        let currentLang = 'en';
+        
+        // --- NEW: Modal Variables ---
+        const modal = document.getElementById('serviceModal');
+        const modalTitleEl = document.getElementById('modalServiceTitle');
+        const modalDescEl = document.getElementById('modalServiceDesc');
+        const modalCtaBtn = document.getElementById('modalCtaButton');
+        let currentService = '';
+
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'ar' : 'en';
+            const html = document.documentElement;
+            const lang = translations[currentLang];
+
+            // Update language and direction
+            html.lang = currentLang;
+            html.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+
+            // Update all text content
+            document.querySelector('.nav-home').textContent = lang.navHome;
+            document.querySelector('.nav-services').textContent = lang.navServices;
+            document.querySelector('.nav-about').textContent = lang.navAbout;
+            document.querySelector('.nav-appointments').textContent = lang.navAppointments;
+            document.querySelector('.nav-contact').textContent = lang.navContact;
+            document.querySelector('.lang-switch').textContent = lang.langBtn;
+            document.querySelector('.hero-title').textContent = lang.heroTitle;
+            document.querySelector('.hero-subtitle').textContent = lang.heroSubtitle;
+            document.querySelector('.cta-text').textContent = lang.ctaText;
+            document.querySelector('.services-title').textContent = lang.servicesTitle;
+            document.querySelector('.service1-title').textContent = lang.service1Title;
+            document.querySelector('.service1-desc').textContent = lang.service1Desc;
+            document.querySelector('.service2-title').textContent = lang.service2Title;
+            document.querySelector('.service2-desc').textContent = lang.service2Desc;
+            document.querySelector('.service3-title').textContent = lang.service3Title;
+            document.querySelector('.service3-desc').textContent = lang.service3Desc;
+            document.querySelector('.service4-title').textContent = lang.service4Title;
+            document.querySelector('.service4-desc').textContent = lang.service4Desc;
+            document.querySelector('.service5-title').textContent = lang.service5Title;
+            document.querySelector('.service5-desc').textContent = lang.service5Desc;
+            document.querySelector('.service6-title').textContent = lang.service6Title;
+            document.querySelector('.service6-desc').textContent = lang.service6Desc;
+            document.querySelector('.about-title').textContent = lang.aboutTitle;
+            document.querySelector('.about-p1').textContent = lang.aboutP1;
+            document.querySelector('.about-p2').textContent = lang.aboutP2;
+            document.querySelector('.about-p3').textContent = lang.aboutP3;
+            document.querySelector('.appointments-title').textContent = lang.appointmentsTitle;
+            document.querySelector('.label-name').textContent = lang.labelName;
+            document.querySelector('.label-email').textContent = lang.labelEmail;
+            document.querySelector('.label-phone').textContent = lang.labelPhone;
+            document.querySelector('.label-service').textContent = lang.labelService;
+            document.querySelector('.label-date').textContent = lang.labelDate;
+            document.querySelector('.label-message').textContent = lang.labelMessage;
+            document.querySelector('.option-select').textContent = lang.optionSelect;
+            document.querySelector('.option1').textContent = lang.option1;
+            document.querySelector('.option2').textContent = lang.option2;
+            document.querySelector('.option3').textContent = lang.option3;
+            document.querySelector('.option4').textContent = lang.option4;
+            document.querySelector('.option5').textContent = lang.option5;
+            document.querySelector('.option6').textContent = lang.option6;
+            document.querySelector('.btn-text').textContent = lang.btnText;
+            document.querySelector('.success-text').textContent = lang.successText;
+            document.querySelector('.contact-title').textContent = lang.contactTitle;
+            document.querySelector('.contact1-title').textContent = lang.contact1Title;
+            document.querySelector('.contact1-info').textContent = lang.contact1Info;
+            document.querySelector('.contact2-title').textContent = lang.contact2Title;
+            document.querySelector('.contact2-info').textContent = lang.contact2Info;
+            document.querySelector('.contact3-title').textContent = lang.contact3Title;
+            document.querySelector('.contact3-info').textContent = lang.contact3Info;
+            document.querySelector('.footer-text').textContent = lang.footerText;
+            
+            // NEW: Re-populate modal if it's open
+            if (modal.style.display === 'block' && currentService) {
+                const details = serviceDetails[currentLang][currentService];
+                if (details) {
+                    modalTitleEl.textContent = details.title;
+                    modalDescEl.textContent = details.desc;
+                    modalCtaBtn.textContent = lang.ctaText;
+                }
+            }
+        }
+
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    // Close mobile menu if open
+                    document.getElementById('navLinks').classList.remove('active');
+                }
+            });
+        });
+
+        // Form submission
+        document.getElementById('appointmentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                service: document.getElementById('service').value,
+                date: document.getElementById('date').value,
+                message: document.getElementById('message').value,
+                timestamp: new Date().toISOString()
+            };
+
+            // Store in memory (you can add server-side processing later)
+            console.log('Appointment booked:', formData);
+
+            // Show success message
+            document.getElementById('successMessage').style.display = 'block';
+            
+            // Reset form
+            this.reset();
+
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+                document.getElementById('successMessage').style.display = 'none';
+            }, 5000);
+        });
+
+        // Set minimum date for appointment to today
+        document.getElementById('date').min = new Date().toISOString().split('T')[0];
+        
+        
+        // --- NEW: Service Modal Logic ---
+
+        // Add click listeners to all service cards
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const serviceName = card.getAttribute('data-service');
+                openServiceModal(serviceName);
+            });
+        });
+
+        function openServiceModal(serviceName) {
+            currentService = serviceName; // Store the service name
+            const lang = currentLang;
+            const details = serviceDetails[lang][serviceName];
+
+            if (details) {
+                modalTitleEl.textContent = details.title;
+                modalDescEl.textContent = details.desc;
+                // Update modal CTA text
+                modalCtaBtn.textContent = translations[lang].ctaText; 
+                modal.style.display = 'block';
+            }
+        }
+
+        function closeServiceModal() {
+            modal.style.display = 'none';
+        }
+
+        // Handle click on the modal's CTA button
+        modalCtaBtn.addEventListener('click', () => {
+            // Set the value of the main form's dropdown
+            document.getElementById('service').value = currentService;
+            
+            // Close the modal
+            closeServiceModal();
+
+            // Scroll to the appointments section
+            const appointmentsSection = document.getElementById('appointments');
+            if (appointmentsSection) {
+                appointmentsSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+
+        // Close modal if user clicks outside of it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeServiceModal();
+            }
+        }
+        // --- End of Service Modal Logic ---
+
+    </script>
+</body>
+</html>
