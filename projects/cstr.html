@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Process Control I - Jacketed CSTR Valve Sizing & Control Design</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #8e44ad;
+            --secondary: #9b59b6;
+            --accent: #3498db;
+            --light: #f8f9fa;
+            --dark: #2c3e50;
+            --gray: #7f8c8d;
+            --danger: #e74c3c;
+            --warning: #f39c12;
+            --success: #2ecc71;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+        
+        .project-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .info-item i {
+            color: var(--accent);
+        }
+        
+        .team-section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem auto;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            max-width: 800px;
+        }
+        
+        .section-title {
+            color: var(--primary);
+            border-bottom: 3px solid var(--accent);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+        
+        .team-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        
+        .team-table th {
+            background-color: var(--primary);
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .team-table td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .team-table tr:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .process-overview {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 3rem 0;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .process-diagram {
+            max-width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background-color: #f8f9fa;
+            text-align: center;
+            color: var(--gray);
+            font-style: italic;
+        }
+        
+        .process-specs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .spec-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            border-top: 4px solid var(--accent);
+        }
+        
+        .spec-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .spec-title {
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .spec-title i {
+            color: var(--accent);
+        }
+        
+        .spec-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 0.5rem 0;
+        }
+        
+        .spec-unit {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .spec-description {
+            color: #555;
+            font-size: 0.95rem;
+            margin-top: 0.5rem;
+        }
+        
+        .reaction-equation {
+            background-color: #f0f7ff;
+            border-left: 5px solid var(--accent);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+        
+        .design-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        
+        .design-table th, .design-table td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        
+        .design-table th {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .design-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .nav-tab {
+            background-color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-tab:hover, .nav-tab.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .valve-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid var(--secondary);
+        }
+        
+        .valve-title {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .valve-title i {
+            color: var(--accent);
+        }
+        
+        .valve-tag {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+        
+        .valve-specs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .valve-spec-item {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 4px;
+        }
+        
+        .valve-spec-label {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-bottom: 0.3rem;
+        }
+        
+        .valve-spec-value {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .control-loop {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid var(--accent);
+        }
+        
+        .loop-title {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .loop-title i {
+            color: var(--accent);
+        }
+        
+        .loop-tag {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+        
+        .loop-specs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .loop-spec-item {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 4px;
+        }
+        
+        .loop-spec-label {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-bottom: 0.3rem;
+        }
+        
+        .loop-spec-value {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .transfer-function {
+            background-color: #f0f7ff;
+            border-left: 5px solid var(--accent);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            overflow-x: auto;
+        }
+        
+        .math-equation {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 4px;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+        
+        .alarm-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        
+        .alarm-table th, .alarm-table td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        
+        .alarm-table th {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .alarm-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .alarm-tag {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .alarm-high {
+            background-color: var(--warning);
+            color: white;
+        }
+        
+        .alarm-low {
+            background-color: var(--accent);
+            color: white;
+        }
+        
+        .alarm-safety {
+            background-color: var(--danger);
+            color: white;
+        }
+        
+        .conclusion {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 3rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .conclusion-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #444;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .github-link {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        .github-link:hover {
+            background-color: #2980b9;
+        }
+        
+        .copyright {
+            margin-top: 2rem;
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .project-info {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            
+            .process-specs, .valve-specs, .loop-specs {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+        
+        .badge-success {
+            background-color: var(--success);
+            color: white;
+        }
+        
+        .badge-warning {
+            background-color: var(--warning);
+            color: white;
+        }
+        
+        .badge-danger {
+            background-color: var(--danger);
+            color: white;
+        }
+        
+        .badge-info {
+            background-color: var(--accent);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1>Jacketed CSTR Valve Sizing & Control Design</h1>
+                <p class="subtitle">Process Control I - Complete Automated Control System for Ethyl Acetate Production</p>
+                
+                <div class="project-info">
+                    <div class="info-item">
+                        <i class="fas fa-user-graduate"></i>
+                        <span>Process Control I - Group 4</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Academic Project</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-flask"></i>
+                        <span>Ethyl Acetate Production</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <section class="team-section">
+            <h2 class="section-title">Project Team</h2>
+            <table class="team-table">
+                <thead>
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Student ID</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Abdullahi Hussein Mohamed</td>
+                        <td>213407039</td>
+                    </tr>
+                    <tr>
+                        <td>İlayda Yener</td>
+                        <td>213407037</td>
+                    </tr>
+                    <tr>
+                        <td>Zeynep Karakuş</td>
+                        <td>213407029</td>
+                    </tr>
+                    <tr>
+                        <td>Cem Bağrıyanık</td>
+                        <td>213407010</td>
+                    </tr>
+                    <tr>
+                        <td>Yağmur Başak Işık</td>
+                        <td>213407023</td>
+                    </tr>
+                    <tr>
+                        <td>Yalkın Bayer</td>
+                        <td>213407011</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="margin-top: 1rem; text-align: center; color: var(--gray);">
+                <i class="fas fa-chalkboard-teacher"></i> Instructor: Prof. Dr. Turgay Pekdemir
+            </p>
+        </section>
+        
+        <div class="nav-tabs">
+            <div class="nav-tab active" onclick="showTab('overview')">Overview</div>
+            <div class="nav-tab" onclick="showTab('reaction')">Reaction System</div>
+            <div class="nav-tab" onclick="showTab('valves')">Valve Sizing</div>
+            <div class="nav-tab" onclick="showTab('control')">Control Strategy</div>
+            <div class="nav-tab" onclick="showTab('safety')">Safety & Alarms</div>
+            <div class="nav-tab" onclick="showTab('dynamics')">Process Dynamics</div>
+        </div>
+        
+        <div id="overview" class="tab-content active">
+            <section class="process-overview">
+                <h2 class="section-title">Process Overview</h2>
+                <p style="text-align: center; margin-bottom: 1.5rem;">Complete automated control system for a Jacketed Continuous Stirred Tank Reactor (CSTR) producing Ethyl Acetate at 300 L/min with 56% conversion.</p>
+                
+                <div class="process-diagram">
+                    <i class="fas fa-industry fa-3x" style="color: var(--gray); margin-bottom: 1rem;"></i><br>
+                    Complete P&ID of Jacketed CSTR Reactor with Automated Control System
+                </div>
+                
+                <div class="reaction-equation">
+                    CH₃COOH + C₂H₅OH ⇌ CH₃COOC₂H₅ + H₂O
+                </div>
+                
+                <div class="process-specs">
+                    <div class="spec-card">
+                        <h3 class="spec-title"><i class="fas fa-temperature-high"></i> Operating Temperature</h3>
+                        <div class="spec-value">80°C</div>
+                        <div class="spec-description">Optimal for reaction kinetics ±2°C control</div>
+                    </div>
+                    
+                    <div class="spec-card">
+                        <h3 class="spec-title"><i class="fas fa-tachometer-alt"></i> Operating Pressure</h3>
+                        <div class="spec-value">1.5 bar</div>
+                        <div class="spec-description">Atmospheric with small overpressure</div>
+                    </div>
+                    
+                    <div class="spec-card">
+                        <h3 class="spec-title"><i class="fas fa-flask"></i> Conversion Rate</h3>
+                        <div class="spec-value">56%</div>
+                        <div class="spec-description">Single-pass equilibrium conversion</div>
+                    </div>
+                    
+                    <div class="spec-card">
+                        <h3 class="spec-title"><i class="fas fa-weight-hanging"></i> Production Rate</h3>
+                        <div class="spec-value">300 L/min</div>
+                        <div class="spec-description">Total feed flow rate</div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="conclusion">
+                <h2 class="section-title">Executive Summary</h2>
+                <div class="conclusion-text">
+                    <p>The objective of this design project was to develop a complete automated control system for a Jacketed Continuous Stirred Tank Reactor (CSTR) producing Ethyl Acetate. The design ensures a production rate of 300 L/min at 56% conversion while maintaining strict safety and quality standards.</p>
+                    
+                    <p style="margin-top: 1rem;">The reaction kinetics were modeled as a second-order reversible esterification. A linear stability analysis determined the process time constants (τₜ = 13.3 min) and process gains, which were used to tune the controllers. The final control strategy utilizes a Feedback PID loop for temperature control, Ratio Control for feed stoichiometry, and fail-safe interlocks for pressure and level.</p>
+                    
+                    <p style="margin-top: 1rem;">The proposed design meets all operational requirements (80°C, 70% Level, 1.5 bar) and includes comprehensive safety layers to prevent thermal runaway or vessel overpressure.</p>
+                </div>
+            </section>
+        </div>
+        
+        <div id="reaction" class="tab-content">
+            <section class="process-overview">
+                <h2 class="section-title">Reaction System & Kinetics</h2>
+                
+                <div class="reaction-equation">
+                    CH₃COOH + C₂H₅OH ⇌ CH₃COOC₂H₅ + H₂O
+                </div>
+                
+                <div class="spec-card">
+                    <h3 class="spec-title"><i class="fas fa-cogs"></i> Reaction Characteristics</h3>
+                    <ul style="padding-left: 1.5rem; margin-top: 1rem;">
+                        <li>Type: 2nd order, reversible esterification</li>
+                        <li>Catalyst: Premixed Sulfuric Acid (2 wt% in Feed A)</li>
+                        <li>Reactor: Jacketed Continuous Stirred Tank Reactor (CSTR)</li>
+                        <li>Liquid Volume: 4000 L (70% full operation)</li>
+                    </ul>
+                </div>
+                
+                <h3 class="section-title" style="margin-top: 2rem;">Kinetic Parameters</h3>
+                <table class="design-table">
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Symbol</th>
+                            <th>Value</th>
+                            <th>Unit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Activation Energy</td>
+                            <td>E<sub>a</sub></td>
+                            <td>58,600</td>
+                            <td>J/mol</td>
+                        </tr>
+                        <tr>
+                            <td>Frequency Factor</td>
+                            <td>A</td>
+                            <td>1.7 × 10<sup>7</sup></td>
+                            <td>L/(mol·min)</td>
+                        </tr>
+                        <tr>
+                            <td>Equilibrium Constant</td>
+                            <td>K<sub>eq</sub></td>
+                            <td>2.93</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Rate Constant (80°C)</td>
+                            <td>k<sub>1</sub></td>
+                            <td>0.0244</td>
+                            <td>L/(mol·min)</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="math-equation">
+                    Rate Law: -r<sub>A</sub> = kC<sub>A</sub>C<sub>B</sub>
+                </div>
+                
+                <div class="math-equation">
+                    Arrhenius Equation: k(T) = A exp(-E<sub>a</sub>/RT)
+                </div>
+                
+                <h3 class="section-title" style="margin-top: 2rem;">Mass Balance Calculations</h3>
+                <table class="design-table">
+                    <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Moles In</th>
+                            <th>Moles Out</th>
+                            <th>Mass Out (g)</th>
+                            <th>Mass Fraction</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Acetic Acid (CH₃COOH)</td>
+                            <td>50</td>
+                            <td>22.0</td>
+                            <td>1,320</td>
+                            <td>0.249</td>
+                        </tr>
+                        <tr>
+                            <td>Ethanol (C₂H₅OH)</td>
+                            <td>50</td>
+                            <td>22.0</td>
+                            <td>1,012</td>
+                            <td>0.191</td>
+                        </tr>
+                        <tr>
+                            <td>Ethyl Acetate (CH₃COOC₂H₅)</td>
+                            <td>0</td>
+                            <td>28.0</td>
+                            <td>2,464</td>
+                            <td>0.465</td>
+                        </tr>
+                        <tr>
+                            <td>Water (H₂O)</td>
+                            <td>0</td>
+                            <td>28.0</td>
+                            <td>504</td>
+                            <td>0.095</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Total</strong></td>
+                            <td><strong>100</strong></td>
+                            <td><strong>100</strong></td>
+                            <td><strong>5,300</strong></td>
+                            <td><strong>1.000</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="math-equation" style="margin-top: 1.5rem;">
+                    Damköhler Number: Da = τk₁C<sub>A0</sub> = 13.33 × 0.0244 × 8.75 = 2.85
+                </div>
+                
+                <div class="math-equation">
+                    CSTR Design Equation: Da = X/(1-X)² → 2.85 = X/(1-X)² → X = 56%
+                </div>
+            </section>
+        </div>
+        
+        <div id="valves" class="tab-content">
+            <section class="process-overview">
+                <h2 class="section-title">Valve Sizing Results</h2>
+                
+                <div class="valve-card">
+                    <h3 class="valve-title">
+                        <span class="valve-tag">TV-201</span>
+                        <i class="fas fa-fire"></i> Steam Inlet Valve
+                    </h3>
+                    <p>Primary function: Control reactor temperature by regulating steam flow to jacket</p>
+                    
+                    <div class="valve-specs">
+                        <div class="valve-spec-item">
+                            <div class="valve-spec-label">Design C<sub>v</sub></div>
+                            <div class="valve-spec-value">32.6</div>
+                        </div>
+                        <div class="valve-spec-item">
+                            <div class="valve-spec-label">Selected Size</div>
+                            <div class="valve-spec-value">2-inch</div>
+                        </div>
+                        <div class="valve-spec-item">
+                            <div class="valve-spec-label">Characteristic</div>
+                            <div class="valve-spec-value">Equal Percentage</div>
+                        </div>
+                        <div class="valve-spec-item">
+                            <div class="valve-spec-label">Fail Mode</div>
+                            <div class="valve-spec-value">Fail-Closed (FC/AO)</div>
+                        </div>
+                        <div class="valve-spec-item">
+                            <div class="valve-spec-label">Flow Rate</div>
+                            <div class="valve-spec-value">1,100 kg/hr</div>
+                        </div>
+                        <div class="valve-spec-item">
+                            <div class="valve-spec-label">Valve Gain</div>
+                            <div class="valve-spec-value">94.8 lb/hr/%CO</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="valve-card">
+                    <h3 class="valve-title">
+                        <span class="valve-tag">LV-101</span>
+                        <i class="fas fa-faucet"></i> Product Outlet Valve
+                    </h3>
+                    <p>Primary function: Maintain reactor level by controlling product flow rate</p>
+                    
+                    <div class="valve-specs">
+                        <div class="valve-spec-item">
+                            <div class="valve-spec-label">Design C<sub>v</sub></div>
+                            <div class="valve-spec-value">24.0</div>
+                        </div>
+                        <div class="valve-spec-item">
+                            <div class="valve-spec-label">Selected Size</div>
+                            <div class="valve-spec-value">1.5-inch</div>
+                        </div>
+                        <div class="valve-spec-item">
+                            <div class="valve-spec-label">Characteristic</div>
+                            <div class="valve-spec-value">Linear</div>
+                        </div>
+                        <div class="valve-spec-item">
+                            <div class="valve-spec-label">Fail Mode</div>
+                            <div class="valve-spec-value">Fail-Closed (FC/AO)</div>
+                        </div>
+                        <div class="valve-spec-item">
+                            <div class="valve-spec-label">Flow Rate</div>
+                            <div class="valve-spec-value">300 L/min (79.3 GPM)</div>
+                        </div>
+                        <div class="valve-spec-item">
+                            <div class="valve-spec-label">Valve Gain</div>
+                            <div class="valve-spec-value">1.19 GPM/%CO</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="valve-card">
+                    <h3 class="valve-title">
+                        <span class="valve-tag">FV-105</span>
+                        <i class="fas fa-tint"></i> Acetic Acid Feed Valve
+                    </h3>
+                    <p>Primary function: Control acetic acid feed flow for stoichiometric ratio</p>
+                    
+                    <div class="valve-specs">
+                        <div class="valve-spec-item">
+                            <div class="valve-spec-label">Design C<sub>v</sub></div>
+                            <div class="valve-spec-value">12.8</div>
+                        </div>
+                        <div class="valve-spec-item">
+                            <div class="valve-spec-label">Selected Size</div>
+                            <div class="valve-spec-value">1-inch</div>
+                        </div>
+                        <div class="valve-spec-item">
+                            <div class="valve-spec-label">Characteristic</div>
+                            <div class="valve-spec-value">Linear</div>
+                        </div>
+                        <div class="valve-spec-item">
+                            <div class="valve-spec-label">Fail Mode</div>
+                            <div class="valve-spec-value">Fail-Closed (FC/AO)</div>
+                        </div>
+                        <div class="valve-spec-item">
+                            <div class="valve-spec-label">Flow Rate</div>
+                            <div class="valve-spec-value">150 L/min (39.6 GPM)</div>
+                        </div>
+                        <div class="valve-spec-item">
+                            <div class="valve-spec-label">Valve Gain</div>
+                            <div class="valve-spec-value">0.59 GPM/%CO</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="valve-card">
+                    <h3 class="valve-title">
+                        <span class="valve-tag">FV-102</span>
+                        <i class="fas fa-wine-bottle"></i> Ethanol Feed Valve
+                    </h3>
+                    <p>Primary function: Control ethanol feed flow for stoichiometric ratio</p>
+                    
+                    <div class="valve-specs">
+                        <div class="valve-spec-item">
+                            <div class="valve-spec-label">Design C<sub>v</sub></div>
+                            <div class="valve-spec-value">11.1</div>
+                        </div>
+                        <div class="valve-spec-item">
+                            <div class="valve-spec-label">Selected Size</div>
+                            <div class="valve-spec-value">1-inch</div>
+                        </div>
+                        <div class="valve-spec-item">
+                            <div class="valve-spec-label">Characteristic</div>
+                            <div class="valve-spec-value">Linear</div>
+                        </div>
+                        <div class="valve-spec-item">
+                            <div class="valve-spec-label">Fail Mode</div>
+                            <div class="valve-spec-value">Fail-Closed (FC/AO)</div>
+                        </div>
+                        <div class="valve-spec-item">
+                            <div class="valve-spec-label">Flow Rate</div>
+                            <div class="valve-spec-value">150 L/min (39.6 GPM)</div>
+                        </div>
+                        <div class="valve-spec-item">
+                            <div class="valve-spec-label">Valve Gain</div>
+                            <div class="valve-spec-value">0.59 GPM/%CO</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="valve-card">
+                    <h3 class="valve-title">
+                        <span class="valve-tag">PSV-104</span>
+                        <i class="fas fa-shield-alt"></i> Pressure Safety Valve
+                    </h3>
+                    <p>Primary function: Mechanical overpressure protection</p>
+                    
+                    <div class="valve-specs">
+                        <div class="valve-spec-item">
+                            <div class="valve-spec-label">Orifice Size</div>
+                            <div class="valve-spec-value">J (1.287 in²)</div>
+                        </div>
+                        <div class="valve-spec-item">
+                            <div class="valve-spec-label">Valve Size</div>
+                            <div class="valve-spec-value">2" × 3" (inlet × outlet)</div>
+                        </div>
+                        <div class="valve-spec-item">
+                            <div class="valve-spec-label">Set Pressure</div>
+                            <div class="valve-spec-value">5.0 bar (72.5 psig)</div>
+                        </div>
+                        <div class="valve-spec-item">
+                            <div class="valve-spec-label">Relief Capacity</div>
+                            <div class="valve-spec-value">12,287 lb/hr</div>
+                        </div>
+                        <div class="valve-spec-item">
+                            <div class="valve-spec-label">Operation</div>
+                            <div class="valve-spec-value">Mechanical spring</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <div id="control" class="tab-content">
+            <section class="process-overview">
+                <h2 class="section-title">Control Strategy</h2>
+                
+                <div class="control-loop">
+                    <h3 class="loop-title">
+                        <span class="loop-tag">TIC-103</span>
+                        <i class="fas fa-thermometer-half"></i> Reactor Temperature Control
+                    </h3>
+                    <p>Maintain reactor temperature at 80°C ±2°C by manipulating steam flow to jacket</p>
+                    
+                    <div class="loop-specs">
+                        <div class="loop-spec-item">
+                            <div class="loop-spec-label">Controller Type</div>
+                            <div class="loop-spec-value">PID</div>
+                        </div>
+                        <div class="loop-spec-item">
+                            <div class="loop-spec-label">Control Action</div>
+                            <div class="loop-spec-value">Reverse</div>
+                        </div>
+                        <div class="loop-spec-item">
+                            <div class="loop-spec-label">Manipulated Variable</div>
+                            <div class="loop-spec-value">Steam Flow (TV-201)</div>
+                        </div>
+                        <div class="loop-spec-item">
+                            <div class="loop-spec-label">Process Time Constant</div>
+                            <div class="loop-spec-value">13.33 min</div>
+                        </div>
+                    </div>
+                    
+                    <div class="transfer-function">
+                        T(s)/m<sub>steam</sub>(s) = 3.37 / (13.33s + 1) [°C·min/kg]
+                    </div>
+                </div>
+                
+                <div class="control-loop">
+                    <h3 class="loop-title">
+                        <span class="loop-tag">LIC-101</span>
+                        <i class="fas fa-ruler-vertical"></i> Reactor Level Control
+                    </h3>
+                    <p>Maintain liquid level at 70% by manipulating product outlet flow</p>
+                    
+                    <div class="loop-specs">
+                        <div class="loop-spec-item">
+                            <div class="loop-spec-label">Controller Type</div>
+                            <div class="loop-spec-value">PI</div>
+                        </div>
+                        <div class="loop-spec-item">
+                            <div class="loop-spec-label">Control Action</div>
+                            <div class="loop-spec-value">Direct</div>
+                        </div>
+                        <div class="loop-spec-item">
+                            <div class="loop-spec-label">Manipulated Variable</div>
+                            <div class="loop-spec-value">Product Flow (LV-101)</div>
+                        </div>
+                        <div class="loop-spec-item">
+                            <div class="loop-spec-label">Process Type</div>
+                            <div class="loop-spec-value">Integrating</div>
+                        </div>
+                    </div>
+                    
+                    <div class="transfer-function">
+                        h(s)/F<sub>out</sub>(s) = -4.41 × 10<sup>-4</sup> / s [m/(L/min)]
+                    </div>
+                </div>
+                
+                <div class="control-loop">
+                    <h3 class="loop-title">
+                        <span class="loop-tag">FIC-105 & FIC-102</span>
+                        <i class="fas fa-balance-scale"></i> Feed Ratio Control
+                    </h3>
+                    <p>Maintain strict 1:1 molar ratio between Acetic Acid and Ethanol feeds</p>
+                    
+                    <div class="loop-specs">
+                        <div class="loop-spec-item">
+                            <div class="loop-spec-label">Controller Type</div>
+                            <div class="loop-spec-value">PI (Ratio Control)</div>
+                        </div>
+                        <div class="loop-spec-item">
+                            <div class="loop-spec-label">Control Action</div>
+                            <div class="loop-spec-value">Reverse</div>
+                        </div>
+                        <div class="loop-spec-item">
+                            <div class="loop-spec-label">Ratio Architecture</div>
+                            <div class="loop-spec-value">FIC-105 (wild), FIC-102 (slave)</div>
+                        </div>
+                        <div class="loop-spec-item">
+                            <div class="loop-spec-label">Process Time Constant</div>
+                            <div class="loop-spec-value">0.02 min</div>
+                        </div>
+                    </div>
+                    
+                    <div class="transfer-function">
+                        F(s)/u(s) = 2.23 / (0.02s + 1) [L/min·%CO]
+                    </div>
+                </div>
+                
+                <div class="control-loop">
+                    <h3 class="loop-title">
+                        <span class="loop-tag">PIC-104</span>
+                        <i class="fas fa-tachometer-alt"></i> Reactor Pressure Control
+                    </h3>
+                    <p>Maintain reactor pressure at 1.5 bar by venting non-condensable gases</p>
+                    
+                    <div class="loop-specs">
+                        <div class="loop-spec-item">
+                            <div class="loop-spec-label">Controller Type</div>
+                            <div class="loop-spec-value">PI</div>
+                        </div>
+                        <div class="loop-spec-item">
+                            <div class="loop-spec-label">Control Action</div>
+                            <div class="loop-spec-value">Reverse</div>
+                        </div>
+                        <div class="loop-spec-item">
+                            <div class="loop-spec-label">Manipulated Variable</div>
+                            <div class="loop-spec-value">Vent Flow (PV-104)</div>
+                        </div>
+                        <div class="loop-spec-item">
+                            <div class="loop-spec-label">Process Type</div>
+                            <div class="loop-spec-value">Integrating</div>
+                        </div>
+                    </div>
+                    
+                    <div class="transfer-function">
+                        P(s)/F<sub>vent</sub>(s) = -1.47 / s [bar/(mol/min)]
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <div id="safety" class="tab-content">
+            <section class="process-overview">
+                <h2 class="section-title">Safety Systems & Alarms</h2>
+                
+                <div class="spec-card">
+                    <h3 class="spec-title"><i class="fas fa-exclamation-triangle"></i> Safety Interlocks</h3>
+                    <p>Critical safety systems to prevent hazardous conditions</p>
+                    
+                    <table class="alarm-table">
+                        <thead>
+                            <tr>
+                                <th>Tag</th>
+                                <th>Variable</th>
+                                <th>Setpoint</th>
+                                <th>Action on Trip</th>
+                                <th>Classification</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="alarm-tag alarm-high">LSH-101</span></td>
+                                <td>Level High</td>
+                                <td>85% (3.2 m)</td>
+                                <td>Close FV-105 & FV-102</td>
+                                <td>Equipment protection</td>
+                            </tr>
+                            <tr>
+                                <td><span class="alarm-tag alarm-low">LSL-101</span></td>
+                                <td>Level Low</td>
+                                <td>15% (0.6 m)</td>
+                                <td>Close LV-101</td>
+                                <td>Pump protection</td>
+                            </tr>
+                            <tr>
+                                <td><span class="alarm-tag alarm-safety">TSH-103</span></td>
+                                <td>Temperature High</td>
+                                <td>90°C</td>
+                                <td>Close TV-201</td>
+                                <td>Runaway prevention</td>
+                            </tr>
+                            <tr>
+                                <td><span class="alarm-tag alarm-high">PSH-104</span></td>
+                                <td>Pressure High</td>
+                                <td>1.3 bar</td>
+                                <td>Open PV-104 fully</td>
+                                <td>Overpressure prevention</td>
+                            </tr>
+                            <tr>
+                                <td><span class="alarm-tag alarm-safety">PSV-104</span></td>
+                                <td>Safety Relief</td>
+                                <td>5.0 bar</td>
+                                <td>Mechanical pop</td>
+                                <td>Vessel integrity</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="spec-card" style="margin-top: 2rem;">
+                    <h3 class="spec-title"><i class="fas fa-shield-alt"></i> Valve Failure Modes</h3>
+                    <p>Safety-optimized valve configurations for fail-safe operation</p>
+                    
+                    <table class="design-table">
+                        <thead>
+                            <tr>
+                                <th>Valve Tag</th>
+                                <th>Valve Type</th>
+                                <th>Characteristic</th>
+                                <th>Fail Mode</th>
+                                <th>Safety Justification</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>TV-201</td>
+                                <td>Control valve</td>
+                                <td>Equal percentage</td>
+                                <td>Fail-Closed (FC/AO)</td>
+                                <td>Prevents reactor overheating</td>
+                            </tr>
+                            <tr>
+                                <td>LV-101</td>
+                                <td>Control valve</td>
+                                <td>Linear</td>
+                                <td>Fail-Closed (FC/AO)</td>
+                                <td>Prevents vessel overflow</td>
+                            </tr>
+                            <tr>
+                                <td>FV-105</td>
+                                <td>Control valve</td>
+                                <td>Linear</td>
+                                <td>Fail-Closed (FC/AO)</td>
+                                <td>Stops acid feed, prevents composition upset</td>
+                            </tr>
+                            <tr>
+                                <td>FV-102</td>
+                                <td>Control valve</td>
+                                <td>Linear</td>
+                                <td>Fail-Closed (FC/AO)</td>
+                                <td>Stops ethanol feed, prevents composition upset</td>
+                            </tr>
+                            <tr>
+                                <td>PV-104</td>
+                                <td>Control valve</td>
+                                <td>Equal percentage</td>
+                                <td>Fail-Open (FO/AC)</td>
+                                <td>Allows pressure relief, prevents overpressure</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+        
+        <div id="dynamics" class="tab-content">
+            <section class="process-overview">
+                <h2 class="section-title">Process Dynamics Analysis</h2>
+                
+                <div class="spec-card">
+                    <h3 class="spec-title"><i class="fas fa-wave-square"></i> Process Dynamics Classification</h3>
+                    
+                    <table class="design-table">
+                        <thead>
+                            <tr>
+                                <th>Process</th>
+                                <th>Time Constant</th>
+                                <th>Dynamic Type</th>
+                                <th>Classification</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Temperature Control</td>
+                                <td>13.33 min</td>
+                                <td>First-order + dead time</td>
+                                <td><span class="badge badge-warning">Slow Dynamics</span></td>
+                            </tr>
+                            <tr>
+                                <td>Flow Control</td>
+                                <td>0.02 min (1.2 s)</td>
+                                <td>First-order</td>
+                                <td><span class="badge badge-success">Fast Dynamics</span></td>
+                            </tr>
+                            <tr>
+                                <td>Concentration Response</td>
+                                <td>4.2 min</td>
+                                <td>First-order</td>
+                                <td><span class="badge badge-info">Medium Dynamics</span></td>
+                            </tr>
+                            <tr>
+                                <td>Level Control</td>
+                                <td>N/A</td>
+                                <td>Pure integrator</td>
+                                <td><span class="badge badge-danger">Integrating Process</span></td>
+                            </tr>
+                            <tr>
+                                <td>Pressure Control</td>
+                                <td>N/A</td>
+                                <td>Pure integrator</td>
+                                <td><span class="badge badge-danger">Integrating Process</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="spec-card" style="margin-top: 2rem;">
+                    <h3 class="spec-title"><i class="fas fa-link"></i> Control Loop Interactions</h3>
+                    
+                    <div style="margin-top: 1rem;">
+                        <h4>Primary Coupling Effects:</h4>
+                        <ul style="padding-left: 1.5rem; margin-top: 0.5rem;">
+                            <li><strong>Temperature-Concentration Coupling:</strong> Temperature affects reaction rate via Arrhenius equation (k ∝ e⁻ᴱᵃ/ᴿᵀ)</li>
+                            <li><strong>Level-Residence Time Coupling:</strong> τ = V/Q = Ah/Q → Level changes affect residence time</li>
+                            <li><strong>Pressure-Temperature Coupling:</strong> Temperature affects vapor pressure (Antoine equation)</li>
+                            <li><strong>Feed Flow Interactions:</strong> Acid and ethanol flows must maintain 1:1 stoichiometric ratio</li>
+                            <li><strong>Steam-Jacket Interactions:</strong> Steam flow directly controls reactor temperature</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="spec-card" style="margin-top: 2rem;">
+                    <h3 class="spec-title"><i class="fas fa-calculator"></i> Complete Transfer Functions</h3>
+                    
+                    <table class="design-table">
+                        <thead>
+                            <tr>
+                                <th>Process</th>
+                                <th>Transfer Function</th>
+                                <th>Gain</th>
+                                <th>Time Constant</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Temperature Control</td>
+                                <td>T(s)/m<sub>steam</sub>(s) = 3.37/(13.33s+1)</td>
+                                <td>3.37 °C·min/kg</td>
+                                <td>13.33 min</td>
+                            </tr>
+                            <tr>
+                                <td>Level Control</td>
+                                <td>h(s)/F<sub>out</sub>(s) = -4.41×10⁻⁴/s</td>
+                                <td>-4.41×10⁻⁴ m·min/L</td>
+                                <td>Integrating</td>
+                            </tr>
+                            <tr>
+                                <td>Pressure Control</td>
+                                <td>P(s)/F<sub>vent</sub>(s) = -1.47/s</td>
+                                <td>-1.47 bar·min/mol</td>
+                                <td>Integrating</td>
+                            </tr>
+                            <tr>
+                                <td>Flow Control</td>
+                                <td>F(s)/u(s) = 2.23/(0.02s+1)</td>
+                                <td>2.23 L/min·%CO</td>
+                                <td>0.02 min</td>
+                            </tr>
+                            <tr>
+                                <td>Concentration Response</td>
+                                <td>C<sub>A</sub>(s)/T(s) = -0.12/(4.2s+1)</td>
+                                <td>-0.12 mol/L·°C</td>
+                                <td>4.2 min</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+        
+        <section class="conclusion">
+            <h2 class="section-title">Design Validation</h2>
+            <div class="conclusion-text">
+                <p>The proposed control system design successfully addresses all process requirements:</p>
+                
+                <ul style="padding-left: 1.5rem; margin-top: 1rem;">
+                    <li><strong>Production Quality:</strong> Temperature control at 80°C ±2°C optimizes reaction kinetics without triggering side reactions</li>
+                    <li><strong>Stoichiometric Efficiency:</strong> Ratio control maintains 1:1 molar feed ratio within ±2%</li>
+                    <li><strong>Process Stability:</strong> Level control maintains 70% liquid level for constant residence time (τ = 13.3 min)</li>
+                    <li><strong>Equipment Safety:</strong> Pressure control limits reactor to 1.5 bar with mechanical relief at 5.0 bar</li>
+                </ul>
+                
+                <p style="margin-top: 1.5rem;">The design incorporates comprehensive safety layers including fail-safe valve configurations, alarm interlocks, and mechanical relief protection to prevent thermal runaway or vessel overpressure. All control loops are tuned based on linearized process models derived from first principles, ensuring robust performance under normal operating conditions.</p>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <h3>Process Control I - Control Design Project</h3>
+                <p>Group 4 - Complete Valve Sizing & Control Design for Jacketed CSTR</p>
+                <p>Academic Project - Process Control Course</p>
+                
+                <a href="https://github.com" class="github-link" target="_blank">
+                    <i class="fab fa-github"></i> View on GitHub
+                </a>
+                
+                <div class="copyright">
+                    <p>© 2025 Process Control I - Group 4. All design calculations and specifications are based on academic project requirements.</p>
+                    <p>For more information about this project, please contact the project team members.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        function showTab(tabId) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.nav-tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabId).classList.add('active');
+            
+            // Activate clicked tab
+            event.target.classList.add('active');
+        }
+        
+        // Add interactivity to cards
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.spec-card, .valve-card, .control-loop');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
