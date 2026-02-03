@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemical Engineering Design II - Hydrogen Purification Plant</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a5276;
+            --secondary: #2e86c1;
+            --accent: #17a589;
+            --light: #f8f9fa;
+            --dark: #2c3e50;
+            --gray: #7f8c8d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+        
+        .project-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .info-item i {
+            color: var(--accent);
+        }
+        
+        .team-section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem auto;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            max-width: 800px;
+        }
+        
+        .section-title {
+            color: var(--primary);
+            border-bottom: 3px solid var(--accent);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+        
+        .team-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        
+        .team-table th {
+            background-color: var(--primary);
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .team-table td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .team-table tr:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .process-flow {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 3rem 0;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .process-diagram {
+            max-width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background-color: #f8f9fa;
+        }
+        
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .process-step {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .process-step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .step-number {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 36px;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .step-title {
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .metric-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            border-top: 4px solid var(--accent);
+        }
+        
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 0.5rem 0;
+        }
+        
+        .metric-unit {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .metric-description {
+            color: #555;
+            font-size: 0.95rem;
+            margin-top: 0.5rem;
+        }
+        
+        .design-innovation {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .innovation-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .innovation-list li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .innovation-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .innovation-list i {
+            color: var(--accent);
+            margin-right: 10px;
+            margin-top: 3px;
+        }
+        
+        .economic-highlights {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .economic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .economic-item {
+            text-align: center;
+            padding: 1.5rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+        }
+        
+        .economic-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 0.5rem 0;
+        }
+        
+        .economic-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .unit-details {
+            margin: 3rem 0;
+        }
+        
+        .unit-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid var(--secondary);
+        }
+        
+        .unit-title {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .unit-title i {
+            color: var(--accent);
+        }
+        
+        .conclusion {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 3rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .conclusion-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #444;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .github-link {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        .github-link:hover {
+            background-color: #148f77;
+        }
+        
+        .copyright {
+            margin-top: 2rem;
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .project-info {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            
+            .process-steps, .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .math-equation {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 4px;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+        
+        .design-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        
+        .design-table th, .design-table td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        
+        .design-table th {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .design-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .nav-tab {
+            background-color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-tab:hover, .nav-tab.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1>Hydrogen Purification Plant Design</h1>
+                <p class="subtitle">Complete Hydrogen Separation and Purification Plant: From Syngas Cooling to Ultra-Pure Hydrogen Storage</p>
+                
+                <div class="project-info">
+                    <div class="info-item">
+                        <i class="fas fa-user-graduate"></i>
+                        <span>Chemical Engineering Design II - Group 8</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>December 29, 2025</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Bolu Province, Turkey</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <section class="team-section">
+            <h2 class="section-title">Project Team</h2>
+            <table class="team-table">
+                <thead>
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Student ID</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Abdullahi Hussein Mohamed</td>
+                        <td>213407039</td>
+                    </tr>
+                    <tr>
+                        <td>Hüma Melis Geyik</td>
+                        <td>213407022</td>
+                    </tr>
+                    <tr>
+                        <td>İlayda Yener</td>
+                        <td>213407037</td>
+                    </tr>
+                    <tr>
+                        <td>Malak Ashker</td>
+                        <td>213407003</td>
+                    </tr>
+                    <tr>
+                        <td>Seray Tuban</td>
+                        <td>213407034</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="margin-top: 1rem; text-align: center; color: var(--gray);">
+                <i class="fas fa-chalkboard-teacher"></i> Lecturer: Prof. Dr. Musa BÜYÜKADA
+            </p>
+        </section>
+        
+        <div class="nav-tabs">
+            <div class="nav-tab active" onclick="showTab('overview')">Overview</div>
+            <div class="nav-tab" onclick="showTab('cooling')">Cooling System</div>
+            <div class="nav-tab" onclick="showTab('agr')">AGR Unit</div>
+            <div class="nav-tab" onclick="showTab('psa')">PSA Unit</div>
+            <div class="nav-tab" onclick="showTab('polishing')">Polishing & Conditioning</div>
+            <div class="nav-tab" onclick="showTab('economics')">Economics</div>
+        </div>
+        
+        <div id="overview" class="tab-content active">
+            <section class="process-flow">
+                <h2 class="section-title">Process Flow Overview</h2>
+                <p style="text-align: center; margin-bottom: 1.5rem;">Four-stage purification process converting biomass-derived syngas to ultra-pure hydrogen</p>
+                
+                <div class="process-steps">
+                    <div class="process-step">
+                        <div class="step-number">1</div>
+                        <h3 class="step-title">Three-Stage Syngas Cooling</h3>
+                        <p>Cools syngas from 514K to 313K while recovering 5.34 MW of waste heat for steam generation and boiler feedwater preheating.</p>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-number">2</div>
+                        <h3 class="step-title">Acid Gas Removal (AGR)</h3>
+                        <p>Removes 89.6% of CO₂ via activated MDEA absorption with innovative "Bulk Removal" strategy optimized for downstream PSA processing.</p>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-number">3</div>
+                        <h3 class="step-title">Pressure Swing Adsorption (PSA)</h3>
+                        <p>Purifies hydrogen to 99.999% purity with 88% recovery using a four-bed, three-layer polybed system.</p>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-number">4</div>
+                        <h3 class="step-title">Polishing & Conditioning</h3>
+                        <p>Ensures final product safety through methanation, deep drying, and compression to 350 bar storage pressure.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="metrics-grid">
+                <h2 class="section-title" style="grid-column: 1/-1;">Key Plant Performance Metrics</h2>
+                
+                <div class="metric-card">
+                    <div class="metric-value">1.548</div>
+                    <div class="metric-unit">kg/s</div>
+                    <div class="metric-description">Hydrogen Production Rate</div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-value">99.9999+%</div>
+                    <div class="metric-unit">Purity</div>
+                    <div class="metric-description">Hydrogen Purity</div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-value">&lt;0.1</div>
+                    <div class="metric-unit">ppmv</div>
+                    <div class="metric-description">CO Content (Final Product)</div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-value">-70°C</div>
+                    <div class="metric-unit">Dew Point</div>
+                    <div class="metric-description">Final Product Moisture</div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-value">350</div>
+                    <div class="metric-unit">bar</div>
+                    <div class="metric-description">Final Storage Pressure</div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-value">88%</div>
+                    <div class="metric-unit">Recovery</div>
+                    <div class="metric-description">Overall Hydrogen Recovery</div>
+                </div>
+            </section>
+            
+            <section class="design-innovation">
+                <h2 class="section-title">Design Innovations</h2>
+                <ul class="innovation-list">
+                    <li><i class="fas fa-lightbulb"></i> <strong>Integrated Bulk Removal Strategy:</strong> AGR optimized for 2.0% CO₂ slip reduces column height by 70% and reboiler duty by 60% compared to conventional designs.</li>
+                    <li><i class="fas fa-lightbulb"></i> <strong>Energy Integration:</strong> 7.88 MW heat recovery in AGR interchanger and 1.48 MW in polishing train thermal management.</li>
+                    <li><i class="fas fa-lightbulb"></i> <strong>Layered PSA Architecture:</strong> Three adsorbent layers handle dehydration, bulk CO₂/CH₄ removal, and CO polishing in a single vessel.</li>
+                    <li><i class="fas fa-lightbulb"></i> <strong>Safety Chain Approach:</strong> Methanation reactor provides final CO elimination barrier, ensuring product safety for fuel cell applications.</li>
+                </ul>
+            </section>
+        </div>
+        
+        <div id="cooling" class="tab-content">
+            <section class="unit-details">
+                <h2 class="section-title">Three-Stage Syngas Cooling System</h2>
+                
+                <div class="unit-card">
+                    <h3 class="unit-title"><i class="fas fa-temperature-low"></i> Stage 1: Steam Generator (E-301)</h3>
+                    <p>Primary function: Steam generation from waste heat</p>
+                    
+                    <table class="design-table">
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Value</th>
+                            <th>Unit</th>
+                        </tr>
+                        <tr>
+                            <td>Heat Duty</td>
+                            <td>876.54</td>
+                            <td>kW</td>
+                        </tr>
+                        <tr>
+                            <td>LMTD</td>
+                            <td>34.22</td>
+                            <td>K</td>
+                        </tr>
+                        <tr>
+                            <td>Overall U</td>
+                            <td>432.40</td>
+                            <td>W/m²K</td>
+                        </tr>
+                        <tr>
+                            <td>Heat Transfer Area</td>
+                            <td>59.24</td>
+                            <td>m²</td>
+                        </tr>
+                        <tr>
+                            <td>Steam Generated</td>
+                            <td>0.3508</td>
+                            <td>kg/s</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="unit-card">
+                    <h3 class="unit-title"><i class="fas fa-water"></i> Stage 2: Feedwater Preheater (E-302)</h3>
+                    <p>Primary function: Feedwater preheating</p>
+                    
+                    <table class="design-table">
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Value</th>
+                            <th>Unit</th>
+                        </tr>
+                        <tr>
+                            <td>Heat Duty</td>
+                            <td>79.09</td>
+                            <td>kW</td>
+                        </tr>
+                        <tr>
+                            <td>LMTD</td>
+                            <td>34.76</td>
+                            <td>K</td>
+                        </tr>
+                        <tr>
+                            <td>Heat Transfer Area</td>
+                            <td>5.61</td>
+                            <td>m²</td>
+                        </tr>
+                        <tr>
+                            <td>Number of Tubes</td>
+                            <td>350</td>
+                            <td>-</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="unit-card">
+                    <h3 class="unit-title"><i class="fas fa-snowflake"></i> Stage 3: Condenser/Cooler (E-303)</h3>
+                    <p>Primary function: Final cooling and condensation</p>
+                    
+                    <table class="design-table">
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Value</th>
+                            <th>Unit</th>
+                        </tr>
+                        <tr>
+                            <td>Heat Duty</td>
+                            <td>4379.94</td>
+                            <td>kW</td>
+                        </tr>
+                        <tr>
+                            <td>Water Condensed</td>
+                            <td>1.263</td>
+                            <td>kg/s</td>
+                        </tr>
+                        <tr>
+                            <td>Heat Transfer Area</td>
+                            <td>241.07</td>
+                            <td>m²</td>
+                        </tr>
+                        <tr>
+                            <td>Cooling Water Flow</td>
+                            <td>89.17</td>
+                            <td>kg/s</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="unit-card">
+                    <h3 class="unit-title"><i class="fas fa-drum"></i> Knockout Drum (V-301)</h3>
+                    <p>Primary function: Liquid-vapor separation and condensate removal</p>
+                    
+                    <table class="design-table">
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Value</th>
+                            <th>Unit</th>
+                        </tr>
+                        <tr>
+                            <td>Diameter</td>
+                            <td>0.9</td>
+                            <td>m</td>
+                        </tr>
+                        <tr>
+                            <td>Height</td>
+                            <td>2.5</td>
+                            <td>m</td>
+                        </tr>
+                        <tr>
+                            <td>Design Velocity</td>
+                            <td>0.866</td>
+                            <td>m/s</td>
+                        </tr>
+                        <tr>
+                            <td>Surge Time</td>
+                            <td>300</td>
+                            <td>s</td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+        </div>
+        
+        <div id="agr" class="tab-content">
+            <section class="unit-details">
+                <h2 class="section-title">Acid Gas Removal (AGR) Unit</h2>
+                
+                <div class="unit-card">
+                    <h3 class="unit-title"><i class="fas fa-filter"></i> CO₂ Absorber Column (T-101)</h3>
+                    <p>Primary function: Bulk CO₂ removal from syngas</p>
+                    
+                    <table class="design-table">
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Value</th>
+                            <th>Unit</th>
+                        </tr>
+                        <tr>
+                            <td>Column Diameter</td>
+                            <td>0.9</td>
+                            <td>m</td>
+                        </tr>
+                        <tr>
+                            <td>Packed Height</td>
+                            <td>2.6</td>
+                            <td>m</td>
+                        </tr>
+                        <tr>
+                            <td>Solvent Circulation</td>
+                            <td>37.5</td>
+                            <td>kg/s</td>
+                        </tr>
+                        <tr>
+                            <td>CO₂ Removal Efficiency</td>
+                            <td>89.6%</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Outlet CO₂ Concentration</td>
+                            <td>2.0%</td>
+                            <td>(20,000 ppmv)</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="unit-card">
+                    <h3 class="unit-title"><i class="fas fa-gas-pump"></i> Rich Amine Flash Drum (V-101)</h3>
+                    <p>Primary function: Hydrogen recovery from rich amine</p>
+                    
+                    <table class="design-table">
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Value</th>
+                        </tr>
+                        <tr>
+                            <td>Vessel Orientation</td>
+                            <td>Horizontal</td>
+                        </tr>
+                        <tr>
+                            <td>Dimensions</td>
+                            <td>2.1 m diameter × 6.5 m length</td>
+                        </tr>
+                        <tr>
+                            <td>Retention Time</td>
+                            <td>5 min (300 s)</td>
+                        </tr>
+                        <tr>
+                            <td>Hydrogen Recovery</td>
+                            <td>>90% of dissolved H₂</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="unit-card">
+                    <h3 class="unit-title"><i class="fas fa-exchange-alt"></i> Lean/Rich Heat Exchanger (E-101)</h3>
+                    <p>Primary function: Energy recovery via heat integration</p>
+                    
+                    <table class="design-table">
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Value</th>
+                            <th>Unit</th>
+                        </tr>
+                        <tr>
+                            <td>Heat Duty</td>
+                            <td>7,880</td>
+                            <td>kW</td>
+                        </tr>
+                        <tr>
+                            <td>Energy Recovery</td>
+                            <td>7.88</td>
+                            <td>MW</td>
+                        </tr>
+                        <tr>
+                            <td>Heat Transfer Area</td>
+                            <td>1,600</td>
+                            <td>m²</td>
+                        </tr>
+                        <tr>
+                            <td>Approach Temperature</td>
+                            <td>10</td>
+                            <td>K</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="unit-card">
+                    <h3 class="unit-title"><i class="fas fa-fire"></i> Regenerator (Stripper) (T-102)</h3>
+                    <p>Primary function: Solvent regeneration via thermal stripping</p>
+                    
+                    <table class="design-table">
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Value</th>
+                            <th>Unit</th>
+                        </tr>
+                        <tr>
+                            <td>Reboiler Duty</td>
+                            <td>6.67</td>
+                            <td>MW</td>
+                        </tr>
+                        <tr>
+                            <td>Column Diameter</td>
+                            <td>1.0</td>
+                            <td>m</td>
+                        </tr>
+                        <tr>
+                            <td>Column Height</td>
+                            <td>15.0</td>
+                            <td>m</td>
+                        </tr>
+                        <tr>
+                            <td>Number of Trays</td>
+                            <td>25</td>
+                            <td>-</td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+        </div>
+        
+        <div id="psa" class="tab-content">
+            <section class="unit-details">
+                <h2 class="section-title">Pressure Swing Adsorption (PSA) Unit</h2>
+                
+                <div class="unit-card">
+                    <h3 class="unit-title"><i class="fas fa-layer-group"></i> Adsorbent System Architecture</h3>
+                    <p>Three-layer stratified bed design in a four-bed polybed configuration</p>
+                    
+                    <table class="design-table">
+                        <tr>
+                            <th>Layer</th>
+                            <th>Material</th>
+                            <th>Primary Function</th>
+                            <th>Capacity</th>
+                        </tr>
+                        <tr>
+                            <td>Layer 1</td>
+                            <td>Silica Gel</td>
+                            <td>Dehydration (H₂O removal)</td>
+                            <td>12%</td>
+                        </tr>
+                        <tr>
+                            <td>Layer 2</td>
+                            <td>Activated Carbon</td>
+                            <td>CO₂ & CH₄ removal</td>
+                            <td>8.5%</td>
+                        </tr>
+                        <tr>
+                            <td>Layer 3</td>
+                            <td>Zeolite 5A</td>
+                            <td>CO polishing</td>
+                            <td>3.5%</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="unit-card">
+                    <h3 class="unit-title"><i class="fas fa-cogs"></i> Mechanical Design</h3>
+                    
+                    <table class="design-table">
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Value</th>
+                            <th>Unit</th>
+                        </tr>
+                        <tr>
+                            <td>Vessel Diameter</td>
+                            <td>2.0</td>
+                            <td>m</td>
+                        </tr>
+                        <tr>
+                            <td>Vessel Height</td>
+                            <td>6.1</td>
+                            <td>m</td>
+                        </tr>
+                        <tr>
+                            <td>Bed Height</td>
+                            <td>4.6</td>
+                            <td>m</td>
+                        </tr>
+                        <tr>
+                            <td>Aspect Ratio (L/D)</td>
+                            <td>3.05</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Pressure Drop</td>
+                            <td>0.0608</td>
+                            <td>bar</td>
+                        </tr>
+                        <tr>
+                            <td>Wall Thickness</td>
+                            <td>18</td>
+                            <td>mm</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="unit-card">
+                    <h3 class="unit-title"><i class="fas fa-chart-line"></i> Performance Predictions</h3>
+                    
+                    <table class="design-table">
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Value</th>
+                        </tr>
+                        <tr>
+                            <td>Hydrogen Purity</td>
+                            <td>99.999%</td>
+                        </tr>
+                        <tr>
+                            <td>Hydrogen Recovery</td>
+                            <td>88%</td>
+                        </tr>
+                        <tr>
+                            <td>CO Content (Outlet)</td>
+                            <td>&lt;1 ppmv</td>
+                        </tr>
+                        <tr>
+                            <td>CO₂ Content (Outlet)</td>
+                            <td>&lt;1 ppmv</td>
+                        </tr>
+                        <tr>
+                            <td>H₂O Content (Outlet)</td>
+                            <td>&lt;10 ppmv</td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+        </div>
+        
+        <div id="polishing" class="tab-content">
+            <section class="unit-details">
+                <h2 class="section-title">Polishing & Conditioning Train</h2>
+                
+                <div class="unit-card">
+                    <h3 class="unit-title"><i class="fas fa-vial"></i> Methanation Reactor (R-300)</h3>
+                    <p>Primary function: CO/CO₂ methanation (safety barrier)</p>
+                    
+                    <table class="design-table">
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Value</th>
+                        </tr>
+                        <tr>
+                            <td>Type</td>
+                            <td>Fixed-Bed Catalytic Reactor</td>
+                        </tr>
+                        <tr>
+                            <td>Dimensions</td>
+                            <td>0.4 m ID × 1.5 m T/T</td>
+                        </tr>
+                        <tr>
+                            <td>Catalyst Type</td>
+                            <td>Nickel/Alumina (15-25 wt% Ni)</td>
+                        </tr>
+                        <tr>
+                            <td>CO Conversion</td>
+                            <td>99.998% (50 ppmv → 1 ppmv)</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="unit-card">
+                    <h3 class="unit-title"><i class="fas fa-tint"></i> Final Dryer - TSA (V-350)</h3>
+                    <p>Primary function: Final dehydration to -70°C dew point</p>
+                    
+                    <table class="design-table">
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Value</th>
+                        </tr>
+                        <tr>
+                            <td>Type</td>
+                            <td>Twin-Bed Temperature Swing Adsorption</td>
+                        </tr>
+                        <tr>
+                            <td>Desiccant Type</td>
+                            <td>Molecular Sieve 4A (4 Å)</td>
+                        </tr>
+                        <tr>
+                            <td>Dew Point Achievement</td>
+                            <td>-70°C (1 ppmv H₂O)</td>
+                        </tr>
+                        <tr>
+                            <td>Adsorption Cycle</td>
+                            <td>24 hours</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="unit-card">
+                    <h3 class="unit-title"><i class="fas fa-compress-arrows-alt"></i> Compression System (C-400)</h3>
+                    <p>Primary function: Hydrogen compression to storage pressure</p>
+                    
+                    <table class="design-table">
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Value</th>
+                        </tr>
+                        <tr>
+                            <td>Type</td>
+                            <td>3-Stage Reciprocating Compressor</td>
+                        </tr>
+                        <tr>
+                            <td>Compression Ratio</td>
+                            <td>14.5 bar → 350 bar (24:1 overall)</td>
+                        </tr>
+                        <tr>
+                            <td>Power Requirement</td>
+                            <td>10.5 MW (including motor efficiency)</td>
+                        </tr>
+                        <tr>
+                            <td>Motor</td>
+                            <td>10,000 kW synchronous, 3600 RPM</td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+        </div>
+        
+        <div id="economics" class="tab-content">
+            <section class="economic-highlights">
+                <h2 class="section-title" style="color: white;">Economic Highlights</h2>
+                
+                <div class="economic-grid">
+                    <div class="economic-item">
+                        <div class="economic-value">$10.1M</div>
+                        <div class="economic-label">Total CAPEX</div>
+                    </div>
+                    
+                    <div class="economic-item">
+                        <div class="economic-value">$8.3M/year</div>
+                        <div class="economic-label">Annual OPEX</div>
+                    </div>
+                    
+                    <div class="economic-item">
+                        <div class="economic-value">$122M/year</div>
+                        <div class="economic-label">Hydrogen Product Value</div>
+                    </div>
+                    
+                    <div class="economic-item">
+                        <div class="economic-value">&lt;3 months</div>
+                        <div class="economic-label">Payback Period</div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="design-innovation">
+                <h2 class="section-title">Detailed Economic Analysis</h2>
+                
+                <h3 style="color: var(--primary); margin: 1.5rem 0 1rem 0;">Capital Expenditure (CAPEX) Breakdown</h3>
+                <table class="design-table">
+                    <tr>
+                        <th>Item</th>
+                        <th>Cost (USD)</th>
+                    </tr>
+                    <tr>
+                        <td>Three-Stage Cooling System</td>
+                        <td>$3,466,252.70</td>
+                    </tr>
+                    <tr>
+                        <td>AGR Unit</td>
+                        <td>$2,100,000.00 (estimated)</td>
+                    </tr>
+                    <tr>
+                        <td>PSA Unit</td>
+                        <td>$1,447,880.00</td>
+                    </tr>
+                    <tr>
+                        <td>Polishing & Conditioning Train</td>
+                        <td>$4,725,000.00</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Total CAPEX</strong></td>
+                        <td><strong>$10,139,132.70</strong></td>
+                    </tr>
+                </table>
+                
+                <h3 style="color: var(--primary); margin: 1.5rem 0 1rem 0;">Operating Expenditure (OPEX) Analysis</h3>
+                <table class="design-table">
+                    <tr>
+                        <th>Item</th>
+                        <th>Annual Cost (USD)</th>
+                    </tr>
+                    <tr>
+                        <td>Cooling System OPEX</td>
+                        <td>$414,325</td>
+                    </tr>
+                    <tr>
+                        <td>PSA OPEX</td>
+                        <td>$149,525</td>
+                    </tr>
+                    <tr>
+                        <td>Polishing & Conditioning OPEX</td>
+                        <td>$7,357,500</td>
+                    </tr>
+                    <tr>
+                        <td>AGR OPEX (estimated)</td>
+                        <td>$400,000</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Total Annual OPEX</strong></td>
+                        <td><strong>$8,321,350</strong></td>
+                    </tr>
+                </table>
+            </section>
+        </div>
+        
+        <section class="conclusion">
+            <h2 class="section-title">Design Conclusions</h2>
+            <div class="conclusion-text">
+                <p>This integrated design demonstrates a technically robust and economically viable pathway for converting biomass-derived syngas to high-purity hydrogen, suitable for emerging clean energy applications. The complete plant delivers:</p>
+                
+                <ul class="innovation-list" style="margin-top: 1rem;">
+                    <li><i class="fas fa-check-circle" style="color: var(--accent);"></i> <strong>Capacity:</strong> 1.548 kg/s (5,573 kg/h) ultra-pure hydrogen</li>
+                    <li><i class="fas fa-check-circle" style="color: var(--accent);"></i> <strong>Purity:</strong> 99.9999% with CO &lt; 0.1 ppmv</li>
+                    <li><i class="fas fa-check-circle" style="color: var(--accent);"></i> <strong>Conditions:</strong> 350 bar, -70°C dew point</li>
+                    <li><i class="fas fa-check-circle" style="color: var(--accent);"></i> <strong>Economic Value:</strong> $122 million/year at current market prices</li>
+                </ul>
+                
+                <p style="margin-top: 1.5rem;">The design represents a state-of-the-art hydrogen purification facility integrating advanced separation technologies with rigorous safety systems and energy optimization, making it suitable for commercial implementation in Bolu Province based on local biomass resources.</p>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <h3>Chemical Engineering Design II Project</h3>
+                <p>Group 8 - Hydrogen Purification Plant Design</p>
+                <p>Bolu Abant İzzet Baysal University</p>
+                
+                <a href="https://github.com" class="github-link" target="_blank">
+                    <i class="fab fa-github"></i> View on GitHub
+                </a>
+                
+                <div class="copyright">
+                    <p>© 2025 Chemical Engineering Design II - Group 8. All design calculations and specifications are based on academic project requirements.</p>
+                    <p>For more information about this project, please contact the project team members.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        function showTab(tabId) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.nav-tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabId).classList.add('active');
+            
+            // Activate clicked tab
+            event.target.classList.add('active');
+        }
+        
+        // Add interactivity to process steps
+        document.addEventListener('DOMContentLoaded', function() {
+            const processSteps = document.querySelectorAll('.process-step');
+            processSteps.forEach(step => {
+                step.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+                
+                step.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
